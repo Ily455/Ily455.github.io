@@ -1,9 +1,12 @@
 ---
-layout: $ whoami;
-icon: fas fa-info-circle
-order: 4
+permalink: /
+title: "$ whoami;"
+excerpt: "$ whoami;"
+author_profile: true
+redirect_from: 
+  - /whoami/
+  - /whoami.html
 ---
-
 > ## **<strong><font color="Brown">About</font></strong>**
 > * <font color="DarkGray">My name is Ilyass Elannid, and I am a Cybersecurity Student at the <strong>National School of Applied Sciences, Oujda, Morocco.</strong></font>
 > * <font color="DarkGray">I'm computer science enthusiast, especially cybersecurity and infosec. I enjoy learning new things and putting the effort and the time to understand concepts and build skills.</font>
