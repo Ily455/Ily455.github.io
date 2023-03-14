@@ -16,7 +16,7 @@ redirect_from:
 
 <script src="https://tryhackme.com/badge/742046"></script>  
 
-<img src="https://www.hackthebox.eu/badge/image/815745" alt= “HackTheBox" height="60">
+![HTB badge]("https://www.hackthebox.eu/badge/image/815745")
  
 > ## **<strong><font color="Brown">Skills</font></strong>**
 >> ### **<strong><font color="DarkCyan">Programming Languages</font></strong>**
