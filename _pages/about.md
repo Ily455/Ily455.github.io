@@ -6,13 +6,17 @@ author_profile: true
 redirect_from: 
   - /whoami/
   - /whoami.html
+  - /about
+  - /about.html
 ---
 > ## **<strong><font color="Brown">About</font></strong>**
 > * <font color="DarkGray">My name is Ilyass Elannid, and I am a Cybersecurity Student at the <strong>National School of Applied Sciences, Oujda, Morocco.</strong></font>
 > * <font color="DarkGray">I'm computer science enthusiast, especially cybersecurity and infosec. I enjoy learning new things and putting the effort and the time to understand concepts and build skills.</font>
 > * <font color="DarkGray">I'm passionate about <strong><em>Blue teaming, forensics, malware analysis and reverse engineering. </em></strong></font>
 
-<script src="https://tryhackme.com/badge/742046"></script>  <img src="https://www.hackthebox.eu/badge/image/815745" alt= “HackTheBox” height="60">
+<script src="https://tryhackme.com/badge/742046"></script>  
+
+<img src="https://www.hackthebox.eu/badge/image/815745" alt= “HackTheBox" height="60">
  
 > ## **<strong><font color="Brown">Skills</font></strong>**
 >> ### **<strong><font color="DarkCyan">Programming Languages</font></strong>**
