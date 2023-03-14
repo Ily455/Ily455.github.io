@@ -9,7 +9,7 @@ redirect_from:
   - /about
   - /about.html
 ---
-> ## **<strong><font color="Brown">About</font></strong>**
+> ## **<strong><font color="Grey">About</font></strong>**
 > * <font color="DarkGray">My name is Ilyass Elannid, and I am a Cybersecurity Student at the <strong>National School of Applied Sciences, Oujda, Morocco.</strong></font>
 > * <font color="DarkGray">I'm computer science enthusiast, especially cybersecurity and infosec. I enjoy learning new things and putting the effort and the time to understand concepts and build skills.</font>
 > * <font color="DarkGray">I'm passionate about <strong><em>Blue teaming, forensics, malware analysis and reverse engineering. </em></strong></font>
@@ -18,7 +18,7 @@ redirect_from:
 
 ![HTB badge](https://www.hackthebox.eu/badge/image/815745)
  
-> ## **<strong><font color="Brown">Skills</font></strong>**
+> ## **<strong><font color="Grey">Skills</font></strong>**
 >> ### **<strong><font color="DarkCyan">Programming Languages</font></strong>**
 >> * <font color="DarkGray"><em><strong>Python, C, PHP, JavaScript, Bash, SQL</strong></em>
 >
@@ -35,11 +35,11 @@ redirect_from:
 >> * <font color="DarkGray"><em><strong>TCP/IP, TLS/SSL, DHCP, DNS, FTP, SSH, Telnet, HTTP, SMTP, POP, IMAP, ICMP</strong></em>
 >
 
-> ## **<strong><font color="Brown">Licenses & Certifications</font></strong>**
->>### **<strong><font color="Brown">TryHackMe learning paths</font></strong>**
+> ## **<strong><font color="Grey">Licenses & Certifications</font></strong>**
+>>### **<strong><font color="Grey">TryHackMe learning paths</font></strong>**
 > * <a href="https://tryhackme-certificates.s3-eu-west-1.amazonaws.com/THM-IVMY2PLHQ3.png" target="_blank">Jr. Penetration Tester</a>
 >
->>### **<strong><font color="Brown">Online courses</font></strong>**
+>>### **<strong><font color="Grey">Online courses</font></strong>**
 >>  <bold>Cisco Networking Academy</bold>
 > * <a href="https://www.credly.com/badges/16865949-5454-4173-a5c2-2ecb78787660/linked_in_profile" target="_blank">Cybersecurity Essentials</a>
 > * <a href="https://www.credly.com/badges/7add1fc0-583e-4c3d-948d-a95fa95da048/linked_in_profile" target="_blank">Introduction to Cybersecurity</a>
@@ -53,12 +53,12 @@ redirect_from:
 >>  <bold>SoloLearn</bold>
 > * <a href="https://www.sololearn.com/certificates/CT-JXBQGCSG" target="_blank">SQL</a>
 
-> ## **<strong><font color="Brown">CTF platforms profiles</font></strong>**
+> ## **<strong><font color="Grey">CTF platforms profiles</font></strong>**
 > * <a href="https://tryhackme.com/p/Ily455" target="_blank">TryHackMe's Profile</a>
 > * <a href="https://app.hackthebox.com/users/815745" target="_blank">HackTheBox's Profile</a>
 
 
-> ## **<strong><font color="Brown">Socials</font></strong>**
+> ## **<strong><font color="Grey">Socials</font></strong>**
 > * <font color="DarkGray">Find me on : </font>
 >   * <a href="https://www.linkedin.com/in/ilyass-elannid/" target="_blank">Linkedin</a>
 >   * <a href="https://twitter.com/YounesTasra" target="_blank">Twitter</a>
