@@ -10,29 +10,27 @@ redirect_from:
   - /about.html
 ---
 > ## **<strong><font color="Brown">About</font></strong>**
-> * <font color="DarkGray">My name is Ilyass Elannid, and I am a Cybersecurity Student at the <strong>National School of Applied Sciences, Oujda, Morocco.</strong></font>
-> * <font color="DarkGray">I'm computer science enthusiast, especially cybersecurity and infosec. I enjoy learning new things and putting the effort and the time to understand concepts and build skills.</font>
-> * <font color="DarkGray">I'm passionate about <strong><em>Blue teaming, forensics, malware analysis and reverse engineering. </em></strong></font>
-
-<script src="https://tryhackme.com/badge/742046"></script>  
-
-![HTB badge](https://www.hackthebox.eu/badge/image/815745)
+> * <font color="#423644">My name is Ilyass Elannid, and I am a Cybersecurity Student at the <strong>National School of Applied Sciences, Oujda, Morocco.</strong></font>
+> * <font color="#423644">I'm computer science enthusiast, especially cybersecurity and infosec. I enjoy learning new things and putting the effort and the time to understand concepts and build skills.</font>
+> * <font color="#423644">I'm passionate about <strong><em>Blue teaming, forensics, malware analysis and reverse engineering. </em></strong></font>
+>
+><script src="https://tryhackme.com/badge/742046"></script>   ![HTB badge](https://www.hackthebox.eu/badge/image/815745)
  
 > ## **<strong><font color="Brown">Skills</font></strong>**
 >> ### **<strong><font color="DarkCyan">Programming Languages</font></strong>**
->> * <font color="DarkGray"><em><strong>Python, C, PHP, JavaScript, Bash, SQL</strong></em>
+>> * <font color="#423644"><em><strong>Python, C, PHP, JavaScript, Bash, SQL</strong></em>
 >
 >>### **<strong><font color="DarkCyan">Markup Languages</font></strong>**
->> * <font color="DarkGray"><em><strong>HTML, XML, MarkDown</strong></em>
+>> * <font color="#423644"><em><strong>HTML, XML, MarkDown</strong></em>
 >
 >> ### **<strong><font color="DarkCyan">Blue teaming tools</font></strong>**
->> * <font color="DarkGray"><em><strong>Wireshark, Ghidra, Yara, Autopsy, Redline, MITRE Framework, Splunk, Snort, ELK, Zeek, Volatility</strong></em>
+>> * <font color="#423644"><em><strong>Wireshark, Ghidra, Yara, Autopsy, Redline, MITRE Framework, Splunk, Snort, ELK, Zeek, Volatility</strong></em>
 >
 >> ### **<strong><font color="DarkCyan">Penetration Testing</font></strong>**
->> * <font color="DarkGray"><em><strong>BurpSuite, Nmap, Metasploit, GoBuster, SQLMap, JohnTheRipper, Hashcat, Hydra, Aircrack-ng </strong></em>
+>> * <font color="#423644"><em><strong>BurpSuite, Nmap, Metasploit, GoBuster, SQLMap, JohnTheRipper, Hashcat, Hydra, Aircrack-ng </strong></em>
 >
 >> ### **<strong><font color="DarkCyan">Network Protocols & Services</font></strong>**
->> * <font color="DarkGray"><em><strong>TCP/IP, TLS/SSL, DHCP, DNS, FTP, SSH, Telnet, HTTP, SMTP, POP, IMAP, ICMP</strong></em>
+>> * <font color="#423644"><em><strong>TCP/IP, TLS/SSL, DHCP, DNS, FTP, SSH, Telnet, HTTP, SMTP, POP, IMAP, ICMP</strong></em>
 >
 
 > ## **<strong><font color="Brown">Licenses & Certifications</font></strong>**
@@ -59,8 +57,8 @@ redirect_from:
 
 
 > ## **<strong><font color="Brown">Socials</font></strong>**
-> * <font color="DarkGray">Find me on : </font>
+> * <font color="#423644">Find me on : </font>
 >   * <a href="https://www.linkedin.com/in/ilyass-elannid/" target="_blank">Linkedin</a>
 >   * <a href="https://twitter.com/YounesTasra" target="_blank">Twitter</a>
 >   * <a href="https://github.com/Ily455" target="_blank">GitHub</a>
-> * <font color="DarkGray">Email : <em><strong>ielannid@gmail.com</strong></em></font>
+> * <font color="#423644">Email : <em><strong>ielannid@gmail.com</strong></em></font>
