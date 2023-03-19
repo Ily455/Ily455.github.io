@@ -53,59 +53,77 @@ From the above output we can see that ports, **22** and **80** are the ports ope
 ## Nikto
 
 ```console
-$ nmap -A 10.10.11.203 -T4        
-Starting Nmap 7.93 ( https://nmap.org ) at 2023-03-16 09:43 EDT
-Nmap scan report for superpass.htb (10.10.11.203)
-Host is up (0.19s latency).
-Not shown: 998 closed tcp ports (conn-refused)
-PORT   STATE SERVICE VERSION
-22/tcp open  ssh     OpenSSH 8.9p1 Ubuntu 3ubuntu0.1 (Ubuntu Linux; protocol 2.0)
-| ssh-hostkey: 
-|   256 f4bcee21d71f1aa26572212d5ba6f700 (ECDSA)
-|_  256 65c1480d88cbb975a02ca5e6377e5106 (ED25519)
-80/tcp open  http    nginx 1.18.0 (Ubuntu)
-|_http-server-header: nginx/1.18.0 (Ubuntu)
-|_http-title: SuperPassword \xF0\x9F\xA6\xB8
-Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+$ nikto -host 10.10.11.203                                                                                   1 ⨯
+- Nikto v2.5.0
+---------------------------------------------------------------------------
++ Target IP:          10.10.11.203
++ Target Hostname:    10.10.11.203
++ Target Port:        80
++ Start Time:         2023-03-16 09:55:02 (GMT-4)
+---------------------------------------------------------------------------
++ Server: nginx/1.18.0 (Ubuntu)
++ /: The anti-clickjacking X-Frame-Options header is not present. See: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options
++ /: The X-Content-Type-Options header is not set. This could allow the user agent to render the content of the site in a different fashion to the MIME type. See: https://www.netsparker.com/web-vulnerability-scanner/vulnerabilities/missing-content-type-header/
++ Root page / redirects to: http://superpass.htb
++ No CGI Directories found (use '-C all' to force check all possible dirs)
++ nginx/1.18.0 appears to be outdated (current is at least 1.20.1).
++ 8074 requests: 0 error(s) and 3 item(s) reported on remote host
++ End Time:           2023-03-16 10:17:43 (GMT-4) (1361 seconds)
+---------------------------------------------------------------------------
++ 1 host(s) tested
 
-Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
-Nmap done: 1 IP address (1 host up) scanned in 32.42 seconds
 ```
-From the above output we can see that ports, **22** and **80** are the ports open.
+Nothing interesting except that the server uses an outdated version of nginx.
 
 ## Gobuster
 ### Subdirectories:
 Since we have a website then we scan the target for subdirectories.
 
 ```console
-$ nmap -A 10.10.11.203 -T4        
-Starting Nmap 7.93 ( https://nmap.org ) at 2023-03-16 09:43 EDT
-Nmap scan report for superpass.htb (10.10.11.203)
-Host is up (0.19s latency).
-Not shown: 998 closed tcp ports (conn-refused)
-PORT   STATE SERVICE VERSION
-22/tcp open  ssh     OpenSSH 8.9p1 Ubuntu 3ubuntu0.1 (Ubuntu Linux; protocol 2.0)
-| ssh-hostkey: 
-|   256 f4bcee21d71f1aa26572212d5ba6f700 (ECDSA)
-|_  256 65c1480d88cbb975a02ca5e6377e5106 (ED25519)
-80/tcp open  http    nginx 1.18.0 (Ubuntu)
-|_http-server-header: nginx/1.18.0 (Ubuntu)
-|_http-title: SuperPassword \xF0\x9F\xA6\xB8
-Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+$ gobuster dir -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -u superpass.htb -t 80
+===============================================================
+Gobuster v3.5
+by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
+===============================================================
+[+] Url:                     http://superpass.htb
+[+] Method:                  GET
+[+] Threads:                 80
+[+] Wordlist:                /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt
+[+] Negative Status codes:   404
+[+] User Agent:              gobuster/3.5
+[+] Timeout:                 10s
+===============================================================
+2023/03/16 09:59:28 Starting gobuster in directory enumeration mode
+===============================================================
+/download             (Status: 302) [Size: 249] [--> /account/login?next=%2Fdownload]
+/static               (Status: 301) [Size: 178] [--> http://superpass.htb/static/]
+/vault                (Status: 302) [Size: 243] [--> /account/login?next=%2Fvault]
+Progress: 220470 / 220561 (99.96%)
+===============================================================
+2023/03/16 10:12:55 Finished
+===============================================================
 
-Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
-Nmap done: 1 IP address (1 host up) scanned in 32.42 seconds
 ```
-From the above output we can see that ports, **22** and **80** are the ports open.
+We found 3 subdirectories for the moment, none of whoch seems interesting as they all redirect to a login page or lead to an error, we can re-check those which require a login later if we succeed to do so.
 
-Look  here's an image of my website, this is how you format an image.
+Let's surf the website.
 
-![My Website](./images/ryankozak.com.png)
+![My Website](../images/agile1.png)
+
 \ **Figure 1:** My Website
 
+After some clicking and navigation I found a page that allows to register a new user, store some passwords and then export those to a downloadable pdf file.
 
-![Github](./images/github.png)
+![Github](../images/agile2.png)
+
 \ **Figure 2:** Github Profile
+
+
+![Github](../images/agile3.png)
+
+\ **Figure 2:** Github Profile
+
+The first normal reaction that would come to anyones mind is to intercept the download request and mess a little bit with its content in order to achieve an LFI attack. But Let's not rush that and do more reconnaissance. We'll run gobuster again to see if there are any hidden pages we can access.
 
 Maybe we want to show some python code too, to let's take a look at a snipped from [codewars](https://www.codewars.com) to format time as human readable.
 

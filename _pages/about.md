@@ -59,6 +59,5 @@ redirect_from:
 > ## **<strong><font color="Brown">Socials</font></strong>**
 > * <font color="#423644">Find me on : </font>
 >   * <a href="https://www.linkedin.com/in/ilyass-elannid/" target="_blank">Linkedin</a>
->   * <a href="https://twitter.com/YounesTasra" target="_blank">Twitter</a>
 >   * <a href="https://github.com/Ily455" target="_blank">GitHub</a>
 > * <font color="#423644">Email : <em><strong>ielannid@gmail.com</strong></em></font>
