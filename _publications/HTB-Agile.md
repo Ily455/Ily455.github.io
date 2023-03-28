@@ -19,7 +19,7 @@ excerpt: 'This is a free boot2root machine on HackTheBox.'
 
 ![header](/images/agile.png)
 
-**Link to the machine:** [Agile](https://app.hackthebox.com/machines/532)
+**Link to the machine:** [Agile](https://app.hackthebox.com/machines/agile)
 
 ---
 
