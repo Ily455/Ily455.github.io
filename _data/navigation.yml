@@ -15,8 +15,8 @@ main:
   #   url: /portfolio/
         
     
-  # - title: "CV"
-  #   url: /cv/
+  - title: "Resume"
+    url: /resume/
     
   # - title: "Guide"
   #   url: /markdown/
