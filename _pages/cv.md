@@ -27,52 +27,56 @@ Portfolio:  ily455.github.io
 
 
 >Cycle d’ingénieur-Sécurité informatique et cybersécurité 2021-Présent
-Ecole Nationale des Sciences Appliqu ́ees d’Oujda
+>
+>Ecole Nationale des Sciences Appliqu ́ees d’Oujda
 
 
->Cycle préparatoire-2ème année 2020-
-Ecole Nationale des Sciences Appliquées d’Oujda
+>Cycle préparatoire-2ème année 2020-2021
+>
+>Ecole Nationale des Sciences Appliquées d’Oujda
 
 
->Cycle préparatoire-1ère année 2019-
-Ecole Nationale des Sciences Appliquées d’Al-Hoceima
+>Cycle préparatoire-1ère année 2019-2020
+>
+>Ecole Nationale des Sciences Appliquées d’Al-Hoceima
+
+
+>Baccalauréat-Sciences mathématiques B option français 2018-2019
+>
+>Lycée technique Mehdi Ben Barka
 
 ## PROJETS ACADEMIQUES 
 
 -PFA: Implémentation d’une architecture sécurité informatique en utilisant Elastic Stack, Wazuh et TheHive
 
 ```
-Mars 2023-
-Présent
+Mars 2023-Présent
 ```
 -FSParser: Script python pour analyser des images EXT et FAT32. 
 
 ```
-Mars 2023-
-Avril 2023
+Mars 2023-Avril 2023
 ```
 
 -Andoid fuzzing: Comprendre le fuzzing Android et configurer un environnement de test
 
 ```
-Octobre 2022-
-Janvier 2023
+Octobre 2022-Janvier 2023
 ```
 -Système de gestion de base de données: SGBD Oracle permet la
 gestion des comptes des ́etudiants
 
 ```
-Févvrier 2022-
-Juin 2022
+Février 2022-Juin 2022
 ```
 ## COMPETANCES
 
 
 >Langues: 
 >>-Arabe (Langue maternelle)
->
+>>
 >>-Français (Compétence professionnelle)
->
+>>
 >>-Anglais (Compétence professionnelle)
 >
 >Programmation/Scripting: Python, C, Bash
@@ -86,16 +90,16 @@ Juin 2022
 ## CERTIFICATIONS
 
 >-Cisco Networking Devices and Initial Configuration
-
+>
 >-NDG Linux Essentials
-
+>
 >-TryHackMe Jr. Penetration Tester learning path
-
+>
 >-TryHackMe SOC level 1 learning path
-
+>
 >-TCM Security Linux Privilege Escalation for Beginners
 
-## CENTRES D’INTER ́ ETˆ
+## CENTRES D’INTÉRÊT
 
 
 >CTFs, Echecs

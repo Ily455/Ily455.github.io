@@ -10,7 +10,7 @@ redirect_from:
   - /about.html
 ---
 > ## **<strong><font color="Brown">About</font></strong>**
-> * <font color="#423644">My name is Ilyass Elannid, and I am a Cybersecurity Student at the <strong>National School of Applied Sciences, Oujda, Morocco.</strong></font>
+> * <font color="#423644">My name is Ilyass Elannid and I am a Cybersecurity Student at the <strong>National School of Applied Sciences, Oujda, Morocco.</strong></font>
 > * <font color="#423644">I'm computer science enthusiast, especially cybersecurity and infosec. I enjoy learning new things and putting the effort and the time to understand concepts and build skills.</font>
 > * <font color="#423644">I'm passionate about <strong><em>Blue teaming, forensics, malware analysis and reverse engineering. </em></strong></font>
 >
