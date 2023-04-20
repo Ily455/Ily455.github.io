@@ -9,17 +9,13 @@ redirect_from:
 
 <!-- {% include base_path %} -->
 
-# [Download the resume in PDF format](/files/cv.pdf)
-
 # ELANNID Ilyass
 
 ## Elève ingénieur en sécurité informatique et cybersécurité
 ## PROFIL
 
 ```
-Téléphone:  (212) 624-809-3355
 Mail:       ilyass.elannid@ump.ac.ma
-Adresse:    H12 N14 Hay Riadi, Oujda
 LinkedIn:   ilyass-elannid
 Portfolio:  ily455.github.io
 ```
