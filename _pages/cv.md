@@ -9,79 +9,72 @@ redirect_from:
 
 <!-- {% include base_path %} -->
 
-# ELANNID Ilyass
+## Ilyass ELANNID
 
-## Elève ingénieur en sécurité informatique et cybersécurité
-## PROFIL
+### Cybersecurity student
 
-```
-Mail:       ilyass.elannid@ump.ac.ma
-LinkedIn:   ilyass-elannid
-Portfolio:  ily455.github.io
-```
-## FORMATION
+**PERSONAL DETAILS**
 
+Mail : ilyass.elannid@ump.ac.ma 
 
->Cycle d’ingénieur-Sécurité informatique et cybersécurité 2021-Présent
+LinkedIn : ilyass-elannid
+
+Portfolio : ily455.github.io
+
+**EDUCATION**
+
+>Engineering curriculum-Computer security and cybersecurity 2021-Present
 >
->Ecole Nationale des Sciences Appliqu ́ees d’Oujda
+>National school of applied sciences Oujda
 
-
->Cycle préparatoire-2ème année 2020-2021
+>Preparatory curriculum-2nd year 2020-2021
 >
->Ecole Nationale des Sciences Appliquées d’Oujda
+>National school of applied sciences Oujda
 
-
->Cycle préparatoire-1ère année 2019-2020
+>Preparatory curriculum-1st year 2019-2020
 >
->Ecole Nationale des Sciences Appliquées d’Al-Hoceima
+>National school of applied sciences Al-Hoceima
 
+**ACADEMIC PROJECTS**
 
->Baccalauréat-Sciences mathématiques B option français 2018-2019
+-End of year project: Implementation of an IT security architecture using Elastic Stack, Wazuh and TheHive. 
+
+March 2023-Present
+
+-FSParser: Python script to analyze and parse EXT and FAT32 images.
+
+March 2023-April 2023
+
+-Andoid fuzzing: Understanding Android fuzzing and setting up a test environment. 
+
+October 2022-January 2023
+
+-Database management system: Oracle DBMS allowing the management of student accounts.
+
+February 2022-June 2022
+
+**SKILLS**
+
+Languages
+
+>-Arabic (Native language)
 >
->Lycée technique Mehdi Ben Barka
-
-## PROJETS ACADEMIQUES 
-
--PFA: Implémentation d’une architecture sécurité informatique en utilisant Elastic Stack, Wazuh et TheHive
-
-```
-Mars 2023-Présent
-```
--FSParser: Script python pour analyser des images EXT et FAT32. 
-
-```
-Mars 2023-Avril 2023
-```
-
--Andoid fuzzing: Comprendre le fuzzing Android et configurer un environnement de test
-
-```
-Octobre 2022-Janvier 2023
-```
--Système de gestion de base de données: SGBD Oracle permet la
-gestion des comptes des ́etudiants
-
-```
-Février 2022-Juin 2022
-```
-## COMPETANCES
-
-
->Langues: 
->>-Arabe (Langue maternelle)
->>
->>-Français (Compétence professionnelle)
->>
->>-Anglais (Compétence professionnelle)
+>-English (Professional proficiency)
 >
->Programmation/Scripting: Python, C, Bash
+>-French (Professional proficiency)
 >
->Network Security: Wazuh, Wireshark, Snort, Zeek
->
->Penetration testing: Metasploit, Burp Suite, Nmap, Hydra, GoBuster
->
->Digital forensics Autopsy, FTKimager, Volatility
+Programming/Scripting 
+>Python, C, Bash
+
+Network Security 
+>Wazuh, Wireshark, Snort, Zeek
+
+Penetration testing 
+>Metasploit, Burp Suite, Nmap, Hydra, GoBuster 
+
+Digital forensics
+>Autopsy, FTKimager, Volatility
+
 
 ## CERTIFICATIONS
 
@@ -95,10 +88,10 @@ Février 2022-Juin 2022
 >
 >-TCM Security Linux Privilege Escalation for Beginners
 
-## CENTRES D’INTÉRÊT
+## Hobbies
 
 
->CTFs, Echecs
+>CTFs, Chess, Sports
 
 
 
