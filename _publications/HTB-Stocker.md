@@ -159,6 +159,8 @@ I'll need to adjust the dimensions of the frame for a better view.
 
 Now that I can read files, I tried to read some that contains sensitive informations or credentials:
 
+![Figure](../images/stocker9.png)
+
 
 
 
