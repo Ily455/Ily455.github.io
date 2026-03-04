@@ -1,0 +1,39 @@
+[[experience]]
+  role = "Cybersecurity Governance & Compliance Engineer"
+  company = "Enedis"
+  company_link = "https://www.enedis.fr"
+  period = "Apr 2025 - Sept 2025"
+  country = "France"
+  responsibilities = [
+    "Performed a mapping between NIST CSF v2 and ISO 27002:2013",
+    "Developed a NIST maturity simulator from ISO assessments",
+    "Contributed to audits, monitoring, and regional cybersecurity management"
+  ]
+  technologies = ["NIST CSF v2", "ISO 27002", "EBIOS RM"]
+
+[[experience]]
+  role = "Cybersecurity R&D Engineer"
+  company = "Secure-IC"
+  company_link = "https://www.secure-ic.com"
+  period = "Feb 2024 - Jul 2024"
+  country = "Morocco"
+  responsibilities = [
+    "Studied code obfuscation techniques and their impact on performance (RISC-V, ARM)",
+    "Reviewed LLVM-based obfuscation tools and related academic literature",
+    "Integrated an obfuscation pass into the LLVM compilation chain",
+    "Implemented a PoC on embedded code and conducted FPGA testing"
+  ]
+  technologies = ["LLVM", "RISC-V", "ARM", "C", "FPGA"]
+
+[[experience]]
+  role = "Malware Analyst"
+  company = "Techso Group"
+  company_link = "https://techsogroup.com"
+  period = "Jul 2023 - Aug 2023"
+  country = "Morocco"
+  responsibilities = [
+    "Studied static and dynamic malware analysis methods",
+    "Performed in-depth analysis of Cerber ransomware using Flare-VM",
+    "Installed and configured Cuckoo Sandbox for automated malware analysis"
+  ]
+  technologies = ["Flare-VM", "Cuckoo Sandbox", "Ghidra", "Volatility"]

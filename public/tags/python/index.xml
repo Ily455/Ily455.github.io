@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Python on Ilyass El Annid</title>
+    <link>http://localhost:1313/tags/python/</link>
+    <description>Recent content in Python on Ilyass El Annid</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 01 Jun 2024 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/python/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Py-C-obfuscator</title>
+      <link>http://localhost:1313/projects/py-c-obfuscator/</link>
+      <pubDate>Sat, 01 Jun 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/projects/py-c-obfuscator/</guid>
+      <description>&lt;p&gt;A source-to-source C obfuscator written in Python. Takes C source code as input and outputs a functionally equivalent but obfuscated version.&lt;/p&gt;&#xA;&lt;h2 id=&#34;what-it-does&#34;&gt;What it does&lt;/h2&gt;&#xA;&lt;p&gt;Applies a set of obfuscation transformations at the source code level before compilation — making the code harder to read and analyze without affecting its behavior.&lt;/p&gt;&#xA;&lt;h2 id=&#34;why-i-built-it&#34;&gt;Why I built it&lt;/h2&gt;&#xA;&lt;p&gt;As part of my research on obfuscation at Secure-IC, I wanted to explore source-level obfuscation as a complement to compiler-level approaches. Python was a natural choice for rapid prototyping of AST transformations.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>FSParser</title>
+      <link>http://localhost:1313/projects/fsparser/</link>
+      <pubDate>Thu, 01 Jun 2023 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/projects/fsparser/</guid>
+      <description>&lt;p&gt;A filesystem parser for FAT32 and EXT filesystems written in Python.&lt;/p&gt;&#xA;&lt;h2 id=&#34;what-it-does&#34;&gt;What it does&lt;/h2&gt;&#xA;&lt;p&gt;Parses raw disk images and extracts filesystem structures — directory entries, inodes, file allocation tables — without relying on the OS to mount the filesystem.&lt;/p&gt;&#xA;&lt;h2 id=&#34;why-i-built-it&#34;&gt;Why I built it&lt;/h2&gt;&#xA;&lt;p&gt;Understanding how filesystems work at the raw byte level is useful for both forensic analysis and reverse engineering stored data. Built this to go deeper than what tools like Autopsy expose to the analyst.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

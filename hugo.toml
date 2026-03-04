@@ -1,0 +1,39 @@
+baseURL = "https://ily455.github.io/"
+languageCode = "en-us"
+title = "Ilyass El Annid"
+theme = "hugo-noir"
+
+defaultContentLanguage = "en"
+
+[languages]
+  [languages.en]
+    languageName = "English"
+    title = "Ilyass El Annid"
+    weight = 1
+    contentDir = "content/en"
+    [languages.en.menu]
+      [[languages.en.menu.main]]
+        name = "About"
+        pageRef = "/about"
+        weight = 1
+      [[languages.en.menu.main]]
+        name = "Projects"
+        pageRef = "/projects"
+        weight = 2
+      [[languages.en.menu.main]]
+        name = "Write-ups"
+        pageRef = "/writeups"
+        weight = 3
+
+[params]
+  name = "Ilyass El Annid"
+  location = "Marseille, France"
+  description = "Cybersecurity Engineer interested in low-level security, reverse engineering, and embedded systems."
+  github = "https://github.com/Ily455"
+  linkedin = "https://linkedin.com/in/ilyass-elannid"
+  email = "ilyass.elannid@gmail.com"
+
+[markup]
+  [markup.highlight]
+    style = "monokai"
+    lineNos = true
