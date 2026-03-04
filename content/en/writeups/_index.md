@@ -4,4 +4,4 @@ date: 2025-01-01
 draft: false
 ---
 
-Write-ups coming soon.
+A selection of practical notes from my reverse engineering and security experiments.
