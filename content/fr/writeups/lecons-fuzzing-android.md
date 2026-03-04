@@ -1,6 +1,6 @@
 ---
 title: "Fuzzing Android : retours pratiques après des résultats négatifs (Bientôt)"
-date: 2025-04-02
+date: 2026-04-02
 draft: false
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: "Cerber Ransomware Analysis Lab (Coming soon)"
-date: 2025-04-01
+date: 2026-04-01
 draft: false
 ---
 
