@@ -25,6 +25,26 @@ defaultContentLanguage = "en"
         pageRef = "/writeups"
         weight = 3
 
+
+  [languages.fr]
+    languageName = "Français"
+    title = "Ilyass El Annid"
+    weight = 2
+    contentDir = "content/fr"
+    [languages.fr.menu]
+      [[languages.fr.menu.main]]
+        name = "À propos"
+        pageRef = "/about"
+        weight = 1
+      [[languages.fr.menu.main]]
+        name = "Projets"
+        pageRef = "/projects"
+        weight = 2
+      [[languages.fr.menu.main]]
+        name = "Notes"
+        pageRef = "/writeups"
+        weight = 3
+
 [params]
   name = "Ilyass El Annid"
   location = "Marseille, France"
