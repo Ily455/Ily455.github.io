@@ -1,0 +1,39 @@
+[[experience]]
+  role = "Ingénieur cybersécurité Gouvernance & Conformité"
+  company = "Enedis"
+  company_link = "https://www.enedis.fr"
+  period = "Avr 2025 - Sept 2025"
+  country = "France"
+  responsibilities = [
+    "Réalisation d’une cartographie entre NIST CSF v2 et ISO 27002:2013",
+    "Développement d’un simulateur de maturité NIST à partir d’évaluations ISO",
+    "Contribution aux audits, au suivi et à la gestion cybersécurité régionale"
+  ]
+  technologies = ["NIST CSF v2", "ISO 27002", "EBIOS RM"]
+
+[[experience]]
+  role = "Ingénieur cybersécurité R&D"
+  company = "Secure-IC"
+  company_link = "https://www.secure-ic.com"
+  period = "Fév 2024 - Juil 2024"
+  country = "Maroc"
+  responsibilities = [
+    "Étude de techniques d’obfuscation de code et de leur impact performance (RISC-V, ARM)",
+    "Revue d’outils d’obfuscation basés sur LLVM et de la littérature académique associée",
+    "Intégration d’un pass d’obfuscation dans la chaîne de compilation LLVM",
+    "Implémentation d’une preuve de concept sur code embarqué et tests sur FPGA"
+  ]
+  technologies = ["LLVM", "RISC-V", "ARM", "C", "FPGA"]
+
+[[experience]]
+  role = "Analyste Malware"
+  company = "Techso Group"
+  company_link = "https://techsogroup.com"
+  period = "Juil 2023 - Août 2023"
+  country = "Maroc"
+  responsibilities = [
+    "Étude de méthodes d’analyse malware statique et dynamique",
+    "Analyse approfondie du ransomware Cerber avec Flare-VM",
+    "Installation et configuration de Cuckoo Sandbox pour l’analyse malware automatisée"
+  ]
+  technologies = ["Flare-VM", "Cuckoo Sandbox", "Ghidra", "Volatility"]
