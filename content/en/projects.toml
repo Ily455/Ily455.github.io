@@ -1,0 +1,41 @@
+[[projects]]
+  title = "IM-LLVM-Pass"
+  description = "An LLVM compiler pass that performs identifier mangling — randomizing function names, global variable names, and structure names at compile time to hinder reverse engineering."
+  tech = "LLVM, C++, Assembly"
+  image = "https://placehold.co/800x450/1a1a2e/00d4ff?text=IM-LLVM-Pass"
+  link = "https://github.com/Ily455/IM-LLVM-Pass"
+
+[[projects]]
+  title = "Py-C-obfuscator"
+  description = "A source-to-source C obfuscator written in Python. Takes C source code and produces a functionally equivalent but obfuscated version by transforming the AST before compilation."
+  tech = "Python, C, AST"
+  image = "https://placehold.co/800x450/1a1a2e/00d4ff?text=Py-C-obfuscator"
+  link = "https://github.com/Ily455/Py-C-obfuscator"
+
+[[projects]]
+  title = "FSParser"
+  description = "A FAT32 and EXT filesystem parser written in Python. Parses raw disk images and extracts filesystem structures without relying on the OS to mount them."
+  tech = "Python, FAT32, EXT"
+  image = "https://placehold.co/800x450/1a1a2e/00d4ff?text=FSParser"
+  link = "https://github.com/Ily455/FSParser"
+
+[[projects]]
+  title = "Android Fuzzing Study"
+  description = "A 3-month study on fuzzing Android systems. Evaluated AFL and Droid-FF, set up a two-VM environment, and attempted to reproduce a known multimedia vulnerability. Documented real infrastructure limitations."
+  tech = "AFL, Python, ADB, Android"
+  image = "https://placehold.co/800x450/1a1a2e/00d4ff?text=Android+Fuzzing"
+  link = ""
+
+[[projects]]
+  title = "Full SIEM Deployment"
+  description = "A complete SOC-oriented monitoring stack: Elastic Stack, Wazuh, Suricata, MISP, and TheHive. Detection rules, event correlation, and IoC-driven investigation workflows."
+  tech = "Elastic, Wazuh, Suricata, MISP, TheHive"
+  image = "https://placehold.co/800x450/1a1a2e/00d4ff?text=SIEM+Deployment"
+  link = ""
+
+[[projects]]
+  title = "Secure Network Architecture on ESXi"
+  description = "Design and implementation of a segmented lab network on ESXi. Routing, firewalling with PfSense/OPNsense, VPN, DMZ, and monitoring with Zabbix. Full technical documentation."
+  tech = "ESXi, PfSense, OPNsense, Zabbix"
+  image = "https://placehold.co/800x450/1a1a2e/00d4ff?text=Network+Architecture"
+  link = ""
