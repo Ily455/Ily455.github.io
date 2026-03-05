@@ -1,0 +1,6 @@
+public/
+resources/
+.hugo_build.lock
+claude_code_briefing.md
+.DS_Store
+Thumbs.db

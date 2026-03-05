@@ -4,6 +4,7 @@ title = "Ilyass El Annid"
 theme = "hugo-noir"
 
 defaultContentLanguage = "en"
+defaultContentLanguageInSubdir = false
 
 [languages]
   [languages.en]

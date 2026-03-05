@@ -3,15 +3,15 @@ row1 = [
   { icon = "devicon-c-plain", name = "C" },
   { icon = "devicon-bash-plain", name = "Bash" },
   { icon = "devicon-linux-plain", name = "Linux" },
-  { icon = "devicon-docker-plain", name = "Docker" },
-  { icon = "devicon-git-plain", name = "Git" }
+  { icon = "devicon-git-plain", name = "Git" },
+  { icon = "devicon-github-original", name = "GitHub" }
 ]
 
 row2 = [
-  { icon = "devicon-vim-plain", name = "Vim" },
-  { icon = "devicon-vscode-plain", name = "VSCode" },
-  { icon = "devicon-github-original", name = "GitHub" },
-  { icon = "devicon-windows8-original", name = "Windows" },
   { icon = "devicon-debian-plain", name = "Debian" },
+  { icon = "devicon-windows8-original", name = "Windows" },
+  { icon = "devicon-docker-plain", name = "Docker" },
+  { icon = "devicon-gitlab-plain", name = "GitLab" },
+  { icon = "devicon-vscode-plain", name = "VSCode" },
   { icon = "devicon-java-plain", name = "Java" }
 ]
