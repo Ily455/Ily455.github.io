@@ -4,14 +4,14 @@ row1 = [
   { icon = "devicon-bash-plain", name = "Bash" },
   { icon = "devicon-linux-plain", name = "Linux" },
   { icon = "devicon-git-plain", name = "Git" },
-  { icon = "devicon-github-original", name = "GitHub" }
+  { icon = "devicon-llvm-plain", name = "LLVM" }
 ]
 
 row2 = [
   { icon = "devicon-debian-plain", name = "Debian" },
   { icon = "devicon-windows8-original", name = "Windows" },
   { icon = "devicon-docker-plain", name = "Docker" },
-  { icon = "devicon-gitlab-plain", name = "GitLab" },
-  { icon = "devicon-vscode-plain", name = "VSCode" },
-  { icon = "devicon-java-plain", name = "Java" }
+  { icon = "devicon-elasticsearch-plain", name = "Elasticsearch" },
+  { icon = "devicon-github-original", name = "GitHub" },
+  { icon = "devicon-gcc-plain", name = "GCC" }
 ]
