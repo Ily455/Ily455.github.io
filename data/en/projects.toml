@@ -4,6 +4,7 @@
   tech = "LLVM, C++, Assembly"
   image = "https://placehold.co/800x450/1a1a2e/00d4ff?text=IM-LLVM-Pass"
   link = "https://github.com/Ily455/IM-LLVM-Pass"
+  slug = "/projects/im-llvm-pass/"
 
 [[projects]]
   title = "Py-C-obfuscator"
@@ -11,6 +12,7 @@
   tech = "Python, C, AST"
   image = "https://placehold.co/800x450/1a1a2e/00d4ff?text=Py-C-obfuscator"
   link = "https://github.com/Ily455/Py-C-obfuscator"
+  slug = "/projects/py-c-obfuscator/"
 
 [[projects]]
   title = "FSParser"
@@ -18,6 +20,7 @@
   tech = "Python, FAT32, EXT"
   image = "https://placehold.co/800x450/1a1a2e/00d4ff?text=FSParser"
   link = "https://github.com/Ily455/FSParser"
+  slug = "/projects/fsparser/"
 
 [[projects]]
   title = "Android Fuzzing Study"
@@ -25,6 +28,7 @@
   tech = "AFL, Python, ADB, Android"
   image = "https://placehold.co/800x450/1a1a2e/00d4ff?text=Android+Fuzzing"
   link = ""
+  slug = "/projects/android-fuzzing/"
 
 [[projects]]
   title = "Full SIEM Deployment"
@@ -32,6 +36,7 @@
   tech = "Elastic, Wazuh, Suricata, MISP, TheHive"
   image = "https://placehold.co/800x450/1a1a2e/00d4ff?text=SIEM+Deployment"
   link = ""
+  slug = ""
 
 [[projects]]
   title = "Secure Network Architecture on ESXi"
@@ -39,3 +44,4 @@
   tech = "ESXi, PfSense, OPNsense, Zabbix"
   image = "https://placehold.co/800x450/1a1a2e/00d4ff?text=Network+Architecture"
   link = ""
+  slug = ""

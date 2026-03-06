@@ -4,38 +4,44 @@
   tech = "LLVM, C++, Assembly"
   image = "https://placehold.co/800x450/1a1a2e/00d4ff?text=IM-LLVM-Pass"
   link = "https://github.com/Ily455/IM-LLVM-Pass"
+  slug = "/projects/im-llvm-pass/"
 
 [[projects]]
   title = "Py-C-obfuscator"
-  description = "Un obfuscateur C source-à-source écrit en Python. Prend du code C en entrée et produit une version fonctionnellement équivalente mais obfusquée par transformation de l'AST avant compilation."
+  description = "Un obfuscateur C source-à-source écrit en Python. Produit une version fonctionnellement équivalente mais obfusquée par transformation de l'AST avant compilation."
   tech = "Python, C, AST"
   image = "https://placehold.co/800x450/1a1a2e/00d4ff?text=Py-C-obfuscator"
   link = "https://github.com/Ily455/Py-C-obfuscator"
+  slug = "/projects/py-c-obfuscator/"
 
 [[projects]]
   title = "FSParser"
-  description = "Un parseur de systèmes de fichiers FAT32 et EXT écrit en Python. Parse des images disque brutes et extrait les structures sans s'appuyer sur l'OS pour monter le système de fichiers."
+  description = "Un parseur de systèmes de fichiers FAT32 et EXT écrit en Python. Parse des images disque brutes sans s'appuyer sur l'OS pour monter le système de fichiers."
   tech = "Python, FAT32, EXT"
   image = "https://placehold.co/800x450/1a1a2e/00d4ff?text=FSParser"
   link = "https://github.com/Ily455/FSParser"
+  slug = "/projects/fsparser/"
 
 [[projects]]
-  title = "Étude de Fuzzing Android"
-  description = "Étude de 3 mois sur le fuzzing Android. Évaluation de AFL et Droid-FF, environnement deux VMs, tentative de reproduction d'une vulnérabilité multimédia connue. Limites d'infrastructure documentées."
+  title = "Android Fuzzing Study"
+  description = "Étude de 3 mois sur le fuzzing Android. Évaluation d'AFL et Droid-FF, environnement deux VMs, tentative de reproduction d'une vulnérabilité multimédia connue. Limites d'infrastructure documentées honnêtement."
   tech = "AFL, Python, ADB, Android"
-  image = "https://placehold.co/800x450/1a1a2e/00d4ff?text=Fuzzing+Android"
+  image = "https://placehold.co/800x450/1a1a2e/00d4ff?text=Android+Fuzzing"
   link = ""
+  slug = "/projects/android-fuzzing/"
 
 [[projects]]
-  title = "Déploiement SIEM Complet"
+  title = "Full SIEM Deployment"
   description = "Stack de monitoring SOC complet : Elastic Stack, Wazuh, Suricata, MISP et TheHive. Règles de détection, corrélation d'événements et workflows d'investigation par IoC."
   tech = "Elastic, Wazuh, Suricata, MISP, TheHive"
   image = "https://placehold.co/800x450/1a1a2e/00d4ff?text=SIEM+Deployment"
   link = ""
+  slug = ""
 
 [[projects]]
-  title = "Architecture Réseau Sécurisée sur ESXi"
-  description = "Conception et implémentation d'un réseau lab segmenté sur ESXi. Routing, pare-feux PfSense/OPNsense, VPN, DMZ et supervision avec Zabbix. Documentation technique complète."
+  title = "Secure Network Architecture on ESXi"
+  description = "Conception et implémentation d'un réseau lab segmenté sur ESXi. Routing, pare-feux PfSense/OPNsense, VPN, DMZ et supervision Zabbix. Documentation technique complète."
   tech = "ESXi, PfSense, OPNsense, Zabbix"
-  image = "https://placehold.co/800x450/1a1a2e/00d4ff?text=Architecture+Reseau"
+  image = "https://placehold.co/800x450/1a1a2e/00d4ff?text=Network+Architecture"
   link = ""
+  slug = ""

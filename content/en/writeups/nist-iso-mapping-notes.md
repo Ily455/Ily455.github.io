@@ -1,6 +1,6 @@
 ---
-title: "NIST CSF v2 ↔ ISO 27002 Mapping Notes (Coming soon)"
-date: 2026-04-03
+title: "NIST CSF v2 ↔ ISO 27002 Mapping Notes "
+date: 2026-01-03
 draft: false
 ---
 
