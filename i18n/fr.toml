@@ -1,0 +1,8 @@
+[techStack]
+other = "Stack technique"
+
+[backToProjects]
+other = "cd ../projets/"
+
+[backToWriteups]
+other = "cd ../writeups/"
