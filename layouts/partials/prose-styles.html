@@ -1,0 +1,254 @@
+/* ============================================
+   PROSE STYLES — projects & writeups single pages
+   Place at: layouts/partials/prose-styles.html
+   ============================================ */
+
+.prose-custom {
+    color: #d1d5db; /* gray-300 */
+    font-size: 1.0625rem;
+    line-height: 1.8;
+    max-width: 72ch;
+}
+
+/* ---- Headings ---- */
+.prose-custom h1,
+.prose-custom h2,
+.prose-custom h3,
+.prose-custom h4 {
+    color: #f9fafb;
+    font-weight: 700;
+    line-height: 1.3;
+    margin-top: 2.5rem;
+    margin-bottom: 0.75rem;
+}
+
+.prose-custom h2 {
+    font-size: 1.6rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 1px solid #1f2937;
+    margin-top: 3rem;
+}
+
+.prose-custom h3 {
+    font-size: 1.25rem;
+    color: #e5e7eb;
+}
+.prose-custom h3::before {
+    content: "## ";
+    color: #4b5563;
+    font-family: ui-monospace, 'Cascadia Code', 'Source Code Pro', monospace;
+    font-weight: 400;
+    font-size: 0.95em;
+}
+
+.prose-custom h4 {
+    font-size: 1.05rem;
+    color: #9ca3af;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-size: 0.85rem;
+}
+
+/* ---- Paragraphs ---- */
+.prose-custom p {
+    margin-bottom: 1.25rem;
+}
+
+/* ---- Links ---- */
+.prose-custom a {
+    color: #60a5fa;
+    text-decoration: none;
+    border-bottom: 1px solid #1e3a5f;
+    transition: color 0.15s, border-color 0.15s;
+}
+.prose-custom a:hover {
+    color: #93c5fd;
+    border-bottom-color: #3b82f6;
+}
+
+/* ---- Code — inline ---- */
+.prose-custom :not(pre) > code {
+    font-family: ui-monospace, 'Cascadia Code', 'Source Code Pro', 'Fira Code', monospace;
+    font-size: 0.875em;
+    background: #111827;
+    color: #86efac; /* green-300 */
+    padding: 0.15em 0.4em;
+    border-radius: 4px;
+    border: 1px solid #1f2937;
+    white-space: nowrap;
+}
+
+/* ---- Code — blocks ---- */
+.prose-custom pre {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 8px;
+    padding: 1.25rem 1.5rem;
+    overflow-x: auto;
+    margin: 1.75rem 0;
+    position: relative;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+}
+.prose-custom pre::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #22c55e40, #3b82f640, transparent);
+    border-radius: 8px 8px 0 0;
+}
+.prose-custom pre code {
+    font-family: ui-monospace, 'Cascadia Code', 'Source Code Pro', 'Fira Code', monospace;
+    font-size: 0.85rem;
+    line-height: 1.7;
+    color: #e2e8f0;
+    background: none;
+    border: none;
+    padding: 0;
+    white-space: pre;
+}
+
+/* ---- Blockquote ---- */
+.prose-custom blockquote {
+    border-left: 3px solid #22c55e60;
+    padding: 0.5rem 0 0.5rem 1.25rem;
+    margin: 1.75rem 0;
+    color: #9ca3af;
+    font-style: normal;
+    background: #0f1a0f40;
+    border-radius: 0 6px 6px 0;
+}
+.prose-custom blockquote p {
+    margin-bottom: 0;
+}
+
+/* ---- Lists ---- */
+.prose-custom ul,
+.prose-custom ol {
+    padding-left: 1.5rem;
+    margin-bottom: 1.25rem;
+}
+.prose-custom li {
+    margin-bottom: 0.4rem;
+}
+.prose-custom ul > li {
+    list-style: none;
+    position: relative;
+}
+.prose-custom ul > li::before {
+    content: "→";
+    position: absolute;
+    left: -1.4rem;
+    color: #4b5563;
+    font-size: 0.9em;
+    font-family: ui-monospace, monospace;
+}
+.prose-custom ol {
+    list-style: decimal;
+}
+.prose-custom ol > li::marker {
+    color: #4b5563;
+    font-family: ui-monospace, monospace;
+    font-size: 0.85em;
+}
+
+/* ---- Tables ---- */
+.prose-custom table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.75rem 0;
+    font-size: 0.9rem;
+    overflow: hidden;
+    border-radius: 8px;
+    border: 1px solid #1f2937;
+}
+.prose-custom thead {
+    background: #111827;
+}
+.prose-custom th {
+    padding: 0.65rem 1rem;
+    text-align: left;
+    color: #9ca3af;
+    font-weight: 600;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    border-bottom: 1px solid #1f2937;
+}
+.prose-custom td {
+    padding: 0.6rem 1rem;
+    border-bottom: 1px solid #111827;
+    vertical-align: top;
+}
+.prose-custom tr:last-child td {
+    border-bottom: none;
+}
+.prose-custom tbody tr:hover {
+    background: #0f172a60;
+}
+
+/* ---- Horizontal rule ---- */
+.prose-custom hr {
+    border: none;
+    border-top: 1px solid #1f2937;
+    margin: 3rem 0;
+}
+
+/* ---- Images ---- */
+.prose-custom img {
+    max-width: 100%;
+    border-radius: 8px;
+    margin: 1.75rem auto;
+    display: block;
+    border: 1px solid #1f2937;
+}
+.prose-custom img + em,
+.prose-custom img + p > em {
+    display: block;
+    text-align: center;
+    color: #6b7280;
+    font-size: 0.85rem;
+    margin-top: -1rem;
+    font-style: normal;
+}
+
+/* ---- Strong & em ---- */
+.prose-custom strong {
+    color: #f3f4f6;
+    font-weight: 600;
+}
+.prose-custom em {
+    color: #9ca3af;
+    font-style: italic;
+}
+
+/* ---- First paragraph lead ---- */
+.prose-custom > p:first-of-type {
+    font-size: 1.1rem;
+    color: #9ca3af;
+    line-height: 1.75;
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 640px) {
+    .prose-custom {
+        font-size: 1rem;
+    }
+    .prose-custom h2 {
+        font-size: 1.35rem;
+    }
+    .prose-custom pre {
+        padding: 1rem;
+        font-size: 0.8rem;
+    }
+    .prose-custom table {
+        font-size: 0.8rem;
+    }
+    .prose-custom th,
+    .prose-custom td {
+        padding: 0.5rem 0.6rem;
+    }
+}
