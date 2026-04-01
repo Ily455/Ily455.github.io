@@ -1,4 +1,12 @@
 [[projects]]
+  title = "DroidTest"
+  description = "A CLI runner for Android device diagnostics. Feed it a list of ADB sub-commands, it runs them all and produces a structured pass/fail report with optional JSON export."
+  tech = "Python, ADB, Android"
+  image = "https://placehold.co/800x450/1a1a2e/00d4ff?text=DroidTest"
+  link = "https://github.com/Ily455/DroidTest"
+  slug = "/projects/droidtest/"
+
+[[projects]]
   title = "IM-LLVM-Pass"
   description = "An LLVM compiler pass that performs identifier mangling — randomizing function names, global variable names, and structure names at compile time to hinder reverse engineering."
   tech = "LLVM, C++, Assembly"

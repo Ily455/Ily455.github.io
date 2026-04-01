@@ -1,210 +1,142 @@
 ---
 title: "Full SIEM Deployment"
-date: 2026-03-06
+date: 2023-06-15
 draft: false
-description: "End-to-end deployment of a Security Information and Event Management stack — log collection, normalization, correlation rules, dashboards, and alerting — built for a simulated enterprise environment."
-tags: ["siem", "splunk", "zabbix", "security-monitoring", "log-management", "blue-team"]
+description: "End-to-end SOC stack deployment: Elastic Stack, Wazuh, Suricata, MISP, TheHive and Cortex across 6 VMs — from log collection to incident management."
+tags: ["siem", "elastic", "wazuh", "suricata", "misp", "thehive", "blue-team", "detection"]
 ---
 
-## Overview
-
-This project was a full deployment of a SIEM (Security Information and Event Management) system from scratch — log sources, collection agents, normalization, correlation rules, and dashboards — in a simulated enterprise environment.
-
-The goal was practical: understand every layer of a SIEM, not just use a pre-configured one. That means knowing why a log was normalized a certain way, why a correlation rule fires (or doesn't), and what a realistic alert looks like versus noise.
+> Academic project — February to June 2023 at ENSA Oujda. Goal: design and deploy a complete, functional SOC infrastructure capable of detecting real threats, correlating events across host and network layers, and managing incidents end to end.
 
 ---
 
 ## Architecture
 
+Six Ubuntu 20.04.4 LTS VMs (except Fleet on CentOS 8), all on VirtualBox 7.0.6 in bridged mode, on the same LAN. Each component runs isolated on its own VM to avoid interference and make the architecture easier to reason about.
+
 ```
-┌─────────────────────────────────────────────────────────┐
-│  Log Sources                                            │
-│  ┌──────────┐ ┌──────────┐ ┌──────────┐ ┌──────────┐  │
-│  │ Windows  │ │  Linux   │ │ Network  │ │  Web     │  │
-│  │ Event Log│ │  syslog  │ │ devices  │ │  server  │  │
-│  └────┬─────┘ └────┬─────┘ └────┬─────┘ └────┬─────┘  │
-└───────┼─────────────┼─────────────┼─────────────┼───────┘
-        │             │             │             │
-        ▼             ▼             ▼             ▼
-┌──────────────────────────────────────────────────────┐
-│  Collection layer (Splunk Universal Forwarder / syslog-ng) │
-└─────────────────────────┬────────────────────────────┘
-                          │
-                          ▼
-┌──────────────────────────────────────────────────────┐
-│  SIEM Core (Splunk / ELK)                            │
-│  ├── Indexer (storage + search)                      │
-│  ├── Search head (queries + dashboards)              │
-│  └── Correlation engine (alert rules)                │
-└─────────────────────────┬────────────────────────────┘
-                          │
-                          ▼
-┌──────────────────────────────────────────────────────┐
-│  Monitoring & Alerting                               │
-│  ├── Zabbix (infrastructure health)                  │
-│  └── Alert notifications                             │
-└──────────────────────────────────────────────────────┘
+VM1 — Wazuh v4.4.1          192.168.1.120   4GB RAM   HIDS, agent management
+VM2 — Elasticsearch + Kibana v7.17.10
+                             192.168.1.106   8GB RAM   Indexing, dashboards
+VM3 — Logstash v7.17.10     192.168.1.203   2GB RAM   Log ingestion pipeline
+VM4 — Fleet server v4.33    192.168.1.45    4GB RAM   Elastic Agent management (CentOS 8)
+VM5 — Suricata v6.0.11      192.168.1.205   4GB RAM   Network IDS/IPS
+VM6 — MISP v2.4.170
+       TheHive v4.1.24-1
+       Cortex v3.1.7-1       192.168.1.204   4GB RAM   Threat intel + incident management
 ```
+
+All VMs run CLI-only. Web interfaces (Kibana, Wazuh dashboard, TheHive, MISP) are accessed from the physical host via browser.
+
+### Data flow
+
+```
+Endpoints (Elastic Agents)
+        │
+        ▼
+Fleet Server ──────────────────► Elasticsearch
+        │                              │
+        │                              ▼
+Logstash (pipeline)              Kibana dashboards
+        │
+        ▼
+Suricata (network events) ──────► Elasticsearch
+
+Wazuh Agents ──► Wazuh Server ──► Wazuh Indexer ──► Wazuh Dashboard
+                                        │
+                                        ▼
+                               TheHive (cases) ◄──► MISP (IoCs) ◄──► Cortex (analysis)
+```
+
+Elastic Agent + Fleet handles data collection from endpoints without needing Logstash for most sources — Logstash is used for sources that require custom parsing pipelines.
 
 ---
 
-## Log Sources
+## Components
 
-### Windows event logs
+### Elastic Stack
 
-Windows machines send events via Splunk Universal Forwarder. Key event IDs monitored:
+- **Elasticsearch**: indexes and stores all events as JSON documents, distributed across shards for resilience
+- **Kibana**: dashboards for system metrics (CPU, memory, disk per host), Suricata alerts with source/destination geo-mapping, Wazuh security events
+- **Logstash**: ingestion pipeline with filtering, normalization and enrichment before indexing
+- **Elastic Agent + Fleet**: centralized agent deployment and management — policies pushed from Fleet to agents on each monitored host
 
-| Event ID | Meaning |
-|----------|---------|
-| 4624 | Successful logon |
-| 4625 | Failed logon attempt |
-| 4648 | Logon with explicit credentials |
-| 4688 | New process created |
-| 4698/4702 | Scheduled task created/modified |
-| 4720 | User account created |
-| 4732 | Member added to privileged group |
-| 7045 | New service installed |
+### Wazuh
 
-### Linux syslog
+Three agents deployed: two Ubuntu hosts and one DVWA instance. Wazuh Server runs the analysis engine with MITRE ATT&CK rule enrichment and regulatory compliance mapping (PCI DSS, NIST 800-53).
 
-Linux hosts send `/var/log/auth.log`, `/var/log/syslog`, and application logs via syslog-ng to the SIEM indexer. Key patterns:
+Detection categories configured: authentication events, file integrity monitoring, privilege escalation, system call auditing.
 
-```
-Failed password for ... from ...   ← brute force indicator
-Accepted publickey for ...         ← SSH login
-sudo: ... command not allowed      ← privilege escalation attempt
-```
+### Suricata
 
-### Network devices
+Deployed in IDS/IPS mode on its own VM to monitor network traffic. Uses Emerging Threats ruleset. Tested with **tmNIDS** (testmynids.org) to inject simulated malicious traffic:
 
-Firewall and switch logs forwarded via syslog. Key events: connection allowed/denied, policy violations, interface state changes.
+- HTTP malware user-agent strings
+- Bad certificate authorities
+- Tor .onion DNS queries
+- EXE/DLL download over HTTP
+- SSH outbound scan simulation
+- Sinkhole DNS replies
+- Known malware C2 patterns (Cryptowall, SuperFish)
 
----
+Suricata alerts forwarded to Elasticsearch via Fleet integration, visible in Kibana with source/destination geo-map.
 
-## Log Normalization
+### MISP + TheHive + Cortex
 
-Raw logs from different sources use different formats — Windows XML, Linux text, Cisco syslog. Normalization maps them to a common schema so correlation rules work across sources.
-
-Example: a failed logon from Windows (Event ID 4625) and a failed SSH login from Linux both get normalized to:
-
-```
-event_type = "authentication_failure"
-src_ip     = <source IP>
-user       = <attempted username>
-timestamp  = <ISO 8601>
-host       = <device hostname>
-```
-
-This common schema means a single correlation rule can detect brute-force attempts regardless of whether the target is Windows or Linux.
+- **MISP**: IoC repository and threat intelligence sharing. Feeds enrichment data into the analysis chain.
+- **TheHive**: case management for security incidents. Alerts escalated from Wazuh and Suricata create cases with observables.
+- **Cortex**: automated analysis of observables (IPs, hashes, domains) via analyzers. Integrated with MISP for IoC correlation.
 
 ---
 
-## Correlation Rules
+## Validation
 
-### Brute force detection
+Tests structured at three levels:
 
-```
-If: more than 5 authentication_failure events
-    for the same user
-    from the same src_ip
-    within 60 seconds
+**Level 1 — Host metrics**: Elastic Agents report CPU, memory and disk metrics to Elasticsearch. Verified via Kibana Metrics System dashboard.
 
-→ Alert: "Brute force attempt detected"
-   Severity: HIGH
-   Include: src_ip, user, count, first/last seen
-```
+**Level 2 — Network detection**: tmNIDS script run on Suricata VM to generate malicious traffic patterns. Suricata fired alerts across all injected categories:
 
-### Privilege escalation
+| Alert signature | Category |
+|---|---|
+| ET MALWARE Cryptowall .onion Proxy | Network Trojan detected |
+| ET MALWARE SuperFish Possible | Network Trojan detected |
+| ET DNS Reply Sinkhole | Network Trojan detected |
+| ET POLICY malware User-Agent | Attempted Information Leak |
+| ET INFO Anonymous File Sharing | Potentially Bad Traffic |
+| ET DNS Query for .su TLD | Potentially Bad Traffic |
 
-```
-If: authentication_success for user X
-    followed within 300 seconds by
-    privilege_escalation (sudo/runas/UAC) for user X
+**Level 3 — Host intrusion detection**: Wazuh monitoring 3 agents including DVWA. After generating activity:
 
-→ Alert: "Privilege escalation after login"
-   Severity: MEDIUM
-```
-
-### Lateral movement
-
-```
-If: same src_ip appears in authentication_success
-    on more than 3 different hosts
-    within 10 minutes
-
-→ Alert: "Possible lateral movement"
-   Severity: HIGH
-```
-
-### After-hours activity
-
-```
-If: authentication_success
-    between 22:00 and 06:00 (local time)
-    for a user with no after-hours history
-
-→ Alert: "Off-hours login"
-   Severity: LOW (informational)
-```
+- 712 total security events detected
+- 481 authentication failures
+- 16 authentication successes
+- Events tagged with MITRE ATT&CK TTPs: T1078 (Valid Accounts), T1548.003 (Sudo and Sudo Caching), T1100.001
 
 ---
 
-## Dashboards
+## Limitations
 
-### Security overview
+**False positives**: some legitimate traffic patterns (TLS handshake variations, internal DNS queries) triggered alerts. Tuning detection rules requires a baseline of normal traffic, which a lab environment doesn't give you easily.
 
-- Authentication events timeline (successes vs failures)
-- Top failed login sources (by IP, by user)
-- Active alerts by severity
-- Geographic map of login sources (if GeoIP data available)
-
-### System health (Zabbix)
-
-Zabbix runs alongside the SIEM for infrastructure monitoring:
-
-- CPU, memory, disk per host
-- Process availability (SIEM services, forwarders)
-- Network throughput
-- Alert when a log source goes silent (forwarder down)
-
-> 📷 *[Placeholder — SIEM dashboard screenshot]*
-
-> 📷 *[Placeholder — Zabbix monitoring view]*
+**Resource constraints**: 6 VMs at once put significant pressure on the host machines. Elasticsearch alone needs 8GB RAM to run comfortably. In practice this architecture belongs on cloud infrastructure or dedicated hardware.
 
 ---
 
-## Alert Tuning
+## What I learned
 
-The hardest part of SIEM work isn't writing rules — it's reducing false positives. An alert that fires 200 times a day for legitimate activity gets ignored.
+The integration chain from raw event to actionable alert is longer than it looks. Elasticsearch indexes fast and Kibana visualizes well, but the signal quality depends entirely on what you feed in and how you normalize it. Suricata fires on signatures — it's reliable for known patterns but blind to what the rules don't cover. Wazuh adds host context that network-only tools miss entirely.
 
-Tuning steps for each rule:
-1. Run the rule in audit mode — count how many times it fires
-2. Identify the false positive patterns (scheduled tasks that look like new processes, service accounts with legitimate after-hours activity)
-3. Add exclusions with justification: `NOT user IN ["svc_backup", "svc_monitoring"]`
-4. Re-run, adjust threshold until the signal-to-noise ratio is acceptable
-5. Document the exclusions — why each one exists, when to review it
-
----
-
-## What I Learned
-
-**Technical:**
-- Log normalization is where most of the work is — raw logs are messy and inconsistent across sources
-- Correlation rules that look simple on paper require careful tuning against real traffic to avoid alert fatigue
-- Infrastructure monitoring (Zabbix) and security monitoring (SIEM) solve different problems but need to be integrated — knowing a forwarder is down is a security-relevant event
-- Retention policies and storage costs matter at scale — deciding what to index vs. what to archive vs. what to discard is a real tradeoff
-
-**Operational:**
-- Alert fatigue is the biggest failure mode for a SIEM — too many low-quality alerts and the team stops looking
-- Correlation rules need documentation: what they detect, what they don't detect, why exclusions exist
-- A SIEM is only as good as its log sources — gaps in collection mean gaps in visibility
+MISP + TheHive + Cortex is the part that makes a SOC useful beyond detection: without structured case management and IoC enrichment, alerts stay alerts and never become investigations.
 
 ---
 
 ## Resources
 
-- [Splunk documentation](https://docs.splunk.com/)
-- [Zabbix documentation](https://www.zabbix.com/documentation/)
-- [MITRE ATT&CK — detection coverage mapping](https://attack.mitre.org/)
-- [Sigma — generic detection rule format](https://github.com/SigmaHQ/sigma)
-- [Windows Security Event Log reference (SANS)](https://www.sans.org/posters/windows-forensic-analysis/)
+- [Elastic Stack documentation](https://www.elastic.co/guide/index.html)
+- [Wazuh documentation](https://documentation.wazuh.com/)
+- [Suricata documentation](https://suricata.readthedocs.io/)
+- [MISP project](https://www.misp-project.org/)
+- [TheHive project](https://thehive-project.org/)
+- [MITRE ATT&CK](https://attack.mitre.org/)
+- [tmNIDS — NIDS detection tester](https://github.com/3CORESec/testmynids.org)

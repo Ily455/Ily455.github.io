@@ -1,193 +1,128 @@
 ---
-title: "Fuzzing Android — Retours pratiques après des résultats négatifs"
-date: 2026-03-06
+title: "Fuzzing Android — Étude pratique"
+date: 2023-05-01
 draft: false
-description: "Étude de 3 mois sur le fuzzing de systèmes Android avec AFL et Droid-FF. Mise en place de l'infrastructure, tentative de reproduction d'une vulnérabilité, et compte rendu honnête de ce qui n'a pas fonctionné."
-tags: ["fuzzing", "android", "afl", "recherche-securite", "adb"]
+description: "Fuzzing automatisé de fichiers .dex Android avec Droid-FF et Radamsa sur émulateur Genymotion. Crashes confirmés dans libz.so, tombstones analysés, faute tracée jusqu'à adler32+227."
+tags: ["fuzzing", "android", "droid-ff", "radamsa", "adb", "securite"]
 ---
 
-> Projet de recherche — janvier à mai 2023. Objectif : étudier les techniques de fuzzing génératif et mutatif, évaluer des fuzzers Android open source, monter un environnement réel et tenter de reproduire une vulnérabilité connue dans la couche multimédia Android. On n'y est pas totalement arrivé — et documenter pourquoi, c'est l'essentiel.
-
----
-
-## Objectif
-
-Deux volets :
-
-1. **Étude** — analyser les techniques de fuzzing et évaluer les outils existants pour Android : AFL, Droid-FF, et ce qui existait à l'époque
-2. **Pratique** — construire un environnement fonctionnel et tenter de reproduire une vulnérabilité connue dans la couche multimédia Android (Stagefright et ses successeurs)
-
-Cible visée : le parsing de fichiers média. La couche multimédia Android a historiquement été une surface d'attaque riche — des entrées MP4, H.264 ou AAC malformées envoyées au décodeur ont produit de vrais CVEs.
+> Projet académique — printemps 2023. Objectif : apprendre et pratiquer le fuzzing automatisé sur Android. Approche : utiliser Droid-FF pour générer des fichiers .dex mutés, les pousser sur un émulateur, exécuter dexdump, et analyser les crashs via le pipeline complet de triage.
 
 ---
 
-## Contexte — Pourquoi le fuzzing Android est difficile
+## Environnement
 
-Fuzzer un binaire desktop est relativement simple : compiler avec AddressSanitizer, pointer un fuzzer sur le binaire, attendre les crashs. Android ajoute des frictions à chaque niveau :
+**Hôte** : Kali Linux
+**Émulateur** : Genymotion (image Samsung Galaxy S4 — 192.168.1.114:5555)
+**Framework de fuzzing** : [Droid-FF](https://github.com/antojoseph/droid-ff)
+**Moteur de mutation** : Radamsa
+**Connexion** : ADB over TCP
 
-```
-Fuzzing desktop :
-  Fuzzer → Binaire cible → Crash → Terminé
-
-Fuzzing Android :
-  Fuzzer → Pont ADB → VM/device Android
-         → App sandboxée → IPC → Processus système (mediaserver)
-         → HAL → (comportement spécifique au matériel)
-         → Crash quelque part → (peut-être) détecté → renvoyé via ADB
-```
-
-Chaque flèche est un point de défaillance potentiel. Le pont ADB seul introduit assez de latence pour détruire le débit de fuzzing. Récupérer le feedback de couverture depuis un processus distant sandboxé n'est pas trivial.
+L'émulateur est enregistré dans Droid-FF via `adb connect 192.168.1.114:5555`. Tout le transfert de fichiers et la collecte de crashs passent par ADB.
 
 ---
 
-## Outils évalués
+## Workflow
 
-### AFL — American Fuzzy Lop
-
-AFL est le fuzzer à guidage par couverture de référence. Il instrumente un binaire cible à la compilation pour tracer les chemins d'exécution. Les entrées qui atteignent de nouveaux chemins sont conservées et mutées — c'est ce qui le rend "intelligent" par rapport à une mutation purement aléatoire.
+Droid-FF expose un menu en cinq étapes :
 
 ```
-Corpus → Mutation → Exécution → Bitmap couverture → Nouveau chemin ? → Garder l'entrée
-                                                   ↓
-                                              Muter à nouveau
+(0) Generate Files         — muter un fichier seed en N samples
+(1) Start running fuzzer   — pousser les samples, exécuter la cible, logguer les crashs
+(2) View Crashes           — récupérer logcat, identifier les entrées crashantes
+(3) Triage Crashes         — confirmer la reproduction, collecter les tombstones
+(4) View Source of Crashes — symboliser les adresses de crash
+(5) Exploitability Test
 ```
 
-AFL fonctionne bien quand :
-- On contrôle la compilation (instrumentation AFL + `-fsanitize=address`)
-- La cible lit depuis stdin ou un fichier
-- L'exécution est rapide (milliers d'itérations par seconde)
+### Étape 0 — Générer les fichiers
 
-Limites d'AFL pour Android :
-- Les binaires système ne peuvent pas facilement être recompilés avec l'instrumentation AFL
-- Le mode QEMU (fuzzing boîte noire sans instrumentation) fonctionne mais est 2 à 5 fois plus lent
-- ADB ajoute une latence aller-retour — on ne peut pas approcher les débits nécessaires pour qu'AFL soit efficace
+Radamsa choisi comme moteur de mutation, avec un fichier `.dex` de seed. **40 samples** générés.
 
-### Droid-FF
+### Étape 1 — Lancer le fuzzer
 
-Droid-FF est un framework de fuzzing spécifique à Android, conçu pour fonctionner via ADB. Il gère la couche de communication pour qu'on puisse se concentrer sur la logique de fuzzing.
+Pour chaque sample, Droid-FF :
+1. Pousse le `.dex` dans `/data/local/tmp` via `adb push`
+2. Exécute `adb shell /system/xbin/dexdump /data/local/tmp/sampleN.dex`
+3. Logge les SIGSEGV depuis logcat
 
-Évalué face à AFL sur :
-- Complexité de mise en place
-- Débit (itérations/seconde)
-- Qualité du feedback de couverture
-- Intégration avec des corpus existants
+### Étape 2 — Voir les crashs
 
-En pratique : Droid-FF a simplifié la communication ADB mais n'a pas résolu le problème fondamental de latence. Les deux outils ont fini bottleneckés par le pont.
+Logcat récupéré : **1375 lignes** au total. Plusieurs fichiers `.dex` ont déclenché SIGSEGV dans dexdump.
 
----
+### Étape 3 — Triage des crashs
 
-## Architecture de l'environnement
+Pour chaque entrée crashante, Droid-FF :
+1. Vide `/data/tombstones/*`
+2. Re-pousse le fichier et relance dexdump
+3. Confirme que le crash se reproduit
+4. Tire le tombstone dans `fuzzer/confirmed_crashes/`
 
-### Deux VMs en réseau
-
+Exemple — `sample27.dex` :
 ```
-┌─────────────────────────────────┐
-│  Hôte (Linux)                   │
-│                                 │
-│  ┌───────────────┐              │
-│  │ VM Fuzzer     │              │
-│  │ (Ubuntu)      │──── ADB/TCP ─┼──┐
-│  │ AFL / Droid-FF│              │  │
-│  └───────────────┘              │  │
-│                                 │  │
-│  ┌───────────────┐              │  │
-│  │ VM Android    │◄─────────────┘  │
-│  │ (QEMU/AVD)    │                 │
-│  │ Processus cible│                │
-│  └───────────────┘                 │
-└─────────────────────────────────┘
+adb push .../sample27.dex /data/local/tmp        → 0,9 MB/s, 553109 bytes
+adb shell /system/xbin/dexdump /data/local/tmp/sample27.dex
+→ tombstone_00 créé (10447 bytes, 2023-01-11 20:57)
+adb pull /data/tombstones/tombstone_00 .../confirmed_crashes/tombstone_sample27.dex
+→ 7,9 MB/s, 10447 bytes
 ```
 
-ADB sur TCP entre les deux VMs — pas de USB. Cela s'avère avoir peu d'impact sur le débit, les autres goulots d'étranglement étant bien plus importants.
+### Étape 4 — Voir la source des crashs
 
-### Cible
+L'option 4 directe a rencontré des erreurs. Utilisation de `dmesg` pour lire le buffer du tombstone :
 
-Le plan était de cibler `stagefright` / `mediaserver` — le composant Android responsable du parsing et du décodage des fichiers média. Envoyer des fichiers MP4 malformés pour déclencher des bugs de parsing.
+```
+signal 11 (SIGSEGV), code 2 (SEGV_ACCERR), fault addr 0xf7609000
+pid: 2600, tid: 2600, name: dexdump  >>> /system/xbin/dexdump <<<
+ABI: 'x86'
+
+eax f7609000  ebx 565a4f10  ecx 0002ff5f  edx 00000000
+esi 00000023  edi 00000000
+
+backtrace:
+  #00 pc 000018b3  /system/lib/libz.so (adler32+227)
+  #01 pc 0000d4db  /system/xbin/dexdump
+  #02 pc 0000f0ff  /system/xbin/dexdump
+  #03 pc 00006922  /system/xbin/dexdump
+  #04 pc 00001b22  /system/xbin/dexdump
+  #05 pc 00012a64  /system/lib/libc.so (__libc_init+100)
+```
+
+`libz.so` tiré depuis le device, puis addr2line :
 
 ```bash
-# Pousser un fichier de test vers le device
-adb push malformed.mp4 /sdcard/test.mp4
-
-# Déclencher le parsing via intent
-adb shell am start -a android.intent.action.VIEW \
-  -d file:///sdcard/test.mp4 -t video/mp4
+adb pull /system/lib/libz.so
+addr2line -f -e libz.so 000018b3
+# → adler32
+# → ??:?
 ```
 
----
-
-## Ce qui n'a pas fonctionné et pourquoi
-
-### 1. Débit trop faible
-
-AFL a besoin de milliers d'exécutions par seconde pour être efficace. Avec le pont ADB, on obtenait 5 à 20 exécutions par seconde. Ce n'est pas suffisant pour couvrir l'espace de recherche de façon significative.
-
-Solutions testées :
-- ADB sur TCP (légère amélioration par rapport à USB)
-- Réduction de la taille des cas de test
-- Parallélisation sur plusieurs VMs Android
-
-Même avec la parallélisation, le débit restait bien en dessous du seuil d'efficacité.
-
-### 2. Détection des crashs peu fiable
-
-Quand `mediaserver` crashe sur Android, le système le redémarre automatiquement. Détecter si un crash a eu lieu — et quelle entrée l'a provoqué — nécessitait de parser la sortie `logcat`, ce qui ajoutait latence et complexité.
-
-```bash
-adb logcat -s "AndroidRuntime:E" "DEBUG:*"
-```
-
-Ça fonctionnait mais c'était fragile. Les crashs de processus système non liés apparaissaient dans le même flux de logs.
-
-### 3. L'émulateur se comportait différemment du matériel réel
-
-Certains comportements spécifiques aux implémentations HAL Qualcomm ou MediaTek ne pouvaient pas être reproduits dans l'émulateur Android basé sur QEMU. La vulnérabilité qu'on cherchait à reproduire avait des composantes spécifiques au matériel.
-
-### 4. Qualité du corpus
-
-Un bon corpus de fuzzing nécessite des fichiers seeds valides qui exercent les chemins de code visés. On a démarré avec des fichiers MP4 génériques, mais sans savoir exactement quels chemins de codec étaient vulnérables, la sélection des seeds était essentiellement un tâtonnement.
+La fonction est `adler32` dans `libz.so` à l'offset `0x18b3`. Les informations de ligne source sont absentes (binaire strippé, sans symboles de debug). Chaîne du crash : `.dex` malformé → décompression dexdump → adler32 dans libz → SIGSEGV à `0xf7609000`.
 
 ---
 
-## Ce qui a fonctionné
+## Limites
 
-Même sans reproduire la vulnérabilité cible, le projet a produit des résultats utilisables :
+**Émulateur vs matériel réel** : Genymotion utilise la virtualisation matérielle x86. Les vrais appareils Android tournent sur ARM. L'adresse de faute et l'état des registres diffèrent selon la plateforme — un crash sur émulateur ne garantit pas le même crash sur matériel.
 
-**Infrastructure :** Un environnement de fuzzing deux VMs fonctionnel via ADB/TCP, capable de pousser des fichiers et déclencher des intents de parsing média de façon fiable. Réutilisable pour de futures cibles.
+**Absence de symboles de debug** : `addr2line` a identifié le nom de la fonction mais retourné `??:?` pour la ligne source — le libz.so du device est strippé. Pour aller plus loin, il faudrait un build AOSP avec les symboles de debug.
 
-**Triage de crashs :** Un script de parsing logcat qui filtre les crashs et les corrèle avec le fichier d'entrée qui les a déclenchés.
-
-**Corpus :** Un ensemble de fichiers MP4 mutés, dont certains ont causé des anomalies non-crashantes (ANR, erreurs de parser) qui méritaient investigation.
-
-**Compréhension :** Une vision claire des goulots d'étranglement du fuzzing Android et de ce qu'il faudrait pour les surmonter — principalement, obtenir de l'instrumentation à l'intérieur de `mediaserver` pour récupérer un vrai feedback de couverture.
-
----
-
-## Ce qu'il faudrait pour le faire vraiment
-
-1. **Fuzzing in-process** — compiler un harness autonome qui appelle directement le parseur média, sans le surcoût ADB. C'est ce que fait l'[intégration libFuzzer spécifique Android](https://android.googlesource.com/platform/external/libFuzzer/).
-
-2. **Meilleur corpus** — utiliser une mutation consciente du format (connaître la structure des boîtes MP4) plutôt qu'une mutation pure au niveau octet. Des fuzzers comme Atheris ou des fuzzers basés sur une grammaire seraient plus efficaces.
-
-3. **Matériel réel avec ASAN** — compiler Android depuis les sources avec AddressSanitizer pour obtenir la détection d'erreurs mémoire sur du matériel réel.
+**Échec de l'option 4** : La vue source intégrée de Droid-FF a planté, nécessitant un fallback manuel via dmesg. Pas bloquant, mais une lacune dans le workflow de l'outil.
 
 ---
 
 ## Ce que j'en retiens
 
-Le bilan le plus honnête : les résultats négatifs sont des résultats. Les limites d'infrastructure qu'on a rencontrées sont réelles — ce n'est pas propre à ce lab, c'est pourquoi le fuzzing Android reste un sujet de recherche actif.
-
-Plus concrètement :
-- Le fuzzing à guidage par couverture requiert un débit élevé — tout ce qui ajoute de la latence (ADB, VMs, IPC) tue l'efficacité
-- La détection de crashs sur un OS live est plus difficile que sur un binaire seul — il faut filtrer le bruit
-- La fidélité de l'émulateur compte pour les vulnérabilités spécifiques au matériel
-- La mutation consciente du format est significativement plus efficace que le bit-flipping pour des formats structurés
+- Boucle complète de fuzzing mutatif : générer → pousser → exécuter → crasher → trier → symboliser
+- Lecture des tombstones Android et mapping des adresses de crash vers les symboles avec addr2line
+- Fonctionnement de Droid-FF pour coordonner ADB, détection de crashs et collecte de tombstones
+- Limites de l'émulation pour l'analyse de crashs spécifiques au matériel
 
 ---
 
 ## Ressources
 
-- [Documentation AFL](https://github.com/google/AFL)
-- [Droid-FF](https://github.com/interference-security/droid-ff)
-- [libFuzzer sur Android](https://android.googlesource.com/platform/external/libFuzzer/)
-- [Stagefright — Joshua Drake, Black Hat 2015](https://www.blackhat.com/docs/us-15/materials/us-15-Drake-Stagefright-Scary-Code-In-The-Heart-Of-Android.pdf)
-- [Bulletins de sécurité Android](https://source.android.com/docs/security/bulletin)
+- [Droid-FF](https://github.com/antojoseph/droid-ff)
+- [Radamsa](https://gitlab.com/akihe/radamsa)
+- [Format des tombstones Android](https://source.android.com/docs/core/tests/debug/native-crash)
+- [Documentation addr2line](https://man7.org/linux/man-pages/man1/addr2line.1.html)
