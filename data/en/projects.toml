@@ -7,6 +7,14 @@
   slug = "/projects/droidtest/"
 
 [[projects]]
+  title = "LLVM Obfuscation Study — Secure-IC"
+  description = "Comparative benchmark of 4 LLVM obfuscators (O-LLVM, Hikari, Pluto, Tigress) on AES code — size, execution time, CFG similarity. Selected Hikari and integrated it into the Securyzr iSE firmware build chain."
+  tech = "LLVM, Clang, Hikari, BinDiff, Ghidra, RISC-V"
+  image = "https://placehold.co/800x450/1a1a2e/00d4ff?text=LLVM+Obfuscation"
+  link = ""
+  slug = "/projects/secure-ic-obfuscation/"
+
+[[projects]]
   title = "IM-LLVM-Pass"
   description = "An LLVM compiler pass that performs identifier mangling — randomizing function names, global variable names, and structure names at compile time to hinder reverse engineering."
   tech = "LLVM, C++, Assembly"
