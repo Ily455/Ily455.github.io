@@ -37,14 +37,16 @@ Droid-FF expose un menu en cinq étapes :
 
 ### Étape 0 — Générer les fichiers
 
-Radamsa choisi comme moteur de mutation, avec un fichier `.dex` de seed. **40 samples** générés.
+Radamsa choisi comme moteur de mutation, avec un fichier `.dex` de seed. **50 samples** générés.
 
 ### Étape 1 — Lancer le fuzzer
 
 Pour chaque sample, Droid-FF :
-1. Pousse le `.dex` dans `/data/local/tmp` via `adb push`
-2. Exécute `adb shell /system/xbin/dexdump /data/local/tmp/sampleN.dex`
-3. Logge les SIGSEGV depuis logcat
+1. Exécute `dexRepair` sur le sample pour qu'il soit accepté comme `.dex` valide par la cible
+2. Pousse le `.dex` dans `/data/local/tmp` via `adb push`
+3. Exécute `adb shell /system/xbin/dexdump /data/local/tmp/sampleN.dex`
+4. Logge les SIGSEGV depuis logcat
+5. Supprime le fichier testé du device
 
 ### Étape 2 — Voir les crashs
 
