@@ -36,7 +36,7 @@
   tech = "Elastic, Wazuh, Suricata, MISP, TheHive"
   image = "https://placehold.co/800x450/1a1a2e/00d4ff?text=SIEM+Deployment"
   link = ""
-  slug = ""
+  slug = "/projects/full-siem-deployment/"
 
 [[projects]]
   title = "Secure Network Architecture on ESXi"
@@ -44,4 +44,4 @@
   tech = "ESXi, PfSense, OPNsense, Zabbix"
   image = "https://placehold.co/800x450/1a1a2e/00d4ff?text=Network+Architecture"
   link = ""
-  slug = ""
+  slug = "/projects/secure-network-architecture-esxi/"

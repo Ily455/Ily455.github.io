@@ -5,7 +5,7 @@
   period = "Apr 2025 - Sept 2025"
   country = "France"
   responsibilities = [
-    "Performed a mapping between NIST CSF v2 and ISO 27002:2013",
+    "Performed a mapping between NIST CSF v2 and ISO 27002:2022",
     "Developed a NIST maturity simulator from ISO assessments",
     "Contributed to audits, monitoring, and regional cybersecurity management"
   ]

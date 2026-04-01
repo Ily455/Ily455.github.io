@@ -6,3 +6,9 @@ other = "cd ../projets/"
 
 [backToWriteups]
 other = "cd ../writeups/"
+
+[learnMore]
+other = "En savoir plus"
+
+[viewAll]
+other = "Voir tout"
