@@ -1,10 +1,12 @@
 row1 = [
   { icon = "devicon-python-plain", name = "Python" },
   { icon = "devicon-c-plain", name = "C" },
+  { icon = "devicon-cplusplus-plain", name = "C++" },
   { icon = "devicon-bash-plain", name = "Bash" },
   { icon = "devicon-linux-plain", name = "Linux" },
   { icon = "devicon-git-plain", name = "Git" },
-  { icon = "devicon-llvm-plain", name = "LLVM" }
+  { icon = "devicon-llvm-plain", name = "LLVM" },
+  { icon = "devicon-wireshark-plain", name = "Wireshark" }
 ]
 
 row2 = [
