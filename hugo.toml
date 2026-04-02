@@ -49,7 +49,7 @@ defaultContentLanguageInSubdir = false
 [params]
   name = "Ilyass El Annid"
   location = "France"
-  description = "Cybersecurity Engineer interested in low-level security, reverse engineering, and embedded systems."
+  description = "Cybersecurity engineer with experience in software protection, digital forensics, and blue team deployment."
   github = "https://github.com/Ily455"
   linkedin = "https://linkedin.com/in/ilyass-elannid"
   email = "ilyass.elannid@gmail.com"

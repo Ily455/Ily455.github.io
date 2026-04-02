@@ -39,14 +39,6 @@
   slug = "/projects/fsparser/"
 
 [[projects]]
-  title = "Android Fuzzing Study"
-  description = "Étude de 3 mois sur le fuzzing Android. Évaluation d'AFL et Droid-FF, environnement deux VMs, tentative de reproduction d'une vulnérabilité multimédia connue. Limites d'infrastructure documentées honnêtement."
-  tech = "AFL, Python, ADB, Android"
-  image = "https://placehold.co/800x450/1a1a2e/00d4ff?text=Android+Fuzzing"
-  link = ""
-  slug = "/projects/android-fuzzing/"
-
-[[projects]]
   title = "Full SIEM Deployment"
   description = "Stack de monitoring SOC complet : Elastic Stack, Wazuh, Suricata, MISP et TheHive. Règles de détection, corrélation d'événements et workflows d'investigation par IoC."
   tech = "Elastic, Wazuh, Suricata, MISP, TheHive"

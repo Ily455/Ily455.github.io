@@ -1,7 +1,7 @@
 [author]
   name = "Ilyass El Annid"
   location = "France"
-  description = "Ingénieur cybersécurité intéressé par la sécurité bas niveau, le reverse engineering et la sécurité des systèmes embarqués. J’aime travailler au plus près du matériel, lire des papiers et comprendre comment les systèmes peuvent être mis en défaut."
+  description = "Ingénieur cybersécurité avec une expérience en protection logicielle, forensics numérique et déploiement blue team. De l’obfuscation LLVM sur firmware RISC-V embarqué au déploiement d’un stack SOC open source, en passant par l’analyse de menaces ICS/OT. J’aime comprendre comment les systèmes se cassent — au niveau de l’instruction comme de l’infrastructure."
   github = "https://github.com/Ily455"
   linkedin = "https://linkedin.com/in/ilyass-elannid"
   email = "ilyass.elannid@gmail.com"
