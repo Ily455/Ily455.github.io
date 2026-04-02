@@ -1,6 +1,6 @@
 ---
 title: "ICS/OT Threat Modeling — Three Critical Infrastructure Attacks"
-date: 2024-06-01
+date: 2025-03-26
 draft: false
 description: "Structured threat analysis of three ICS/OT attacks using MITRE ATT&CK for ICS: Stuxnet (2010), Ukraine power grid (2015), and Danish energy sector (2023). Attack chain reconstruction, TTPs mapping, and framework comparison."
 tags: ["ics", "ot", "scada", "mitre-attack", "threat-modeling", "stuxnet", "critical-infrastructure"]

@@ -2,7 +2,7 @@
   title = "DroidTest"
   description = "Un runner CLI pour les diagnostics d'appareils Android. On lui donne une liste de sous-commandes ADB, il les exécute toutes et produit un rapport pass/fail structuré avec export JSON optionnel."
   tech = "Python, ADB, Android"
-  image = "https://placehold.co/800x450/1a1a2e/00d4ff?text=DroidTest"
+  image = "https://placehold.co/800x450/0d1117/4ade80?text=DroidTest"
   link = "https://github.com/Ily455/DroidTest"
   slug = "/projects/droidtest/"
 
@@ -10,7 +10,7 @@
   title = "Étude Obfuscation LLVM — Secure-IC"
   description = "Benchmark comparatif de 4 obfuscateurs LLVM (O-LLVM, Hikari, Pluto, Tigress) sur du code AES — taille, temps d'exécution, similarité CFG. Sélection de Hikari et intégration dans la chaîne de build du firmware Securyzr iSE."
   tech = "LLVM, Clang, Hikari, BinDiff, Ghidra, RISC-V"
-  image = "https://placehold.co/800x450/1a1a2e/00d4ff?text=LLVM+Obfuscation"
+  image = "https://placehold.co/800x450/0d1117/4ade80?text=LLVM+Obfuscation"
   link = ""
   slug = "/projects/secure-ic-obfuscation/"
 
@@ -18,7 +18,7 @@
   title = "IM-LLVM-Pass"
   description = "Un pass compilateur LLVM qui effectue du mangling d'identifiants — randomisation des noms de fonctions, variables globales et structures à la compilation pour compliquer le reverse engineering."
   tech = "LLVM, C++, Assembly"
-  image = "https://placehold.co/800x450/1a1a2e/00d4ff?text=IM-LLVM-Pass"
+  image = "https://placehold.co/800x450/0d1117/4ade80?text=IM-LLVM-Pass"
   link = "https://github.com/Ily455/IM-LLVM-Pass"
   slug = "/projects/im-llvm-pass/"
 
@@ -26,7 +26,7 @@
   title = "Py-C-obfuscator"
   description = "Un obfuscateur C source-à-source écrit en Python. Produit une version fonctionnellement équivalente mais obfusquée par transformation de l'AST avant compilation."
   tech = "Python, C, AST"
-  image = "https://placehold.co/800x450/1a1a2e/00d4ff?text=Py-C-obfuscator"
+  image = "https://placehold.co/800x450/0d1117/4ade80?text=Py-C-obfuscator"
   link = "https://github.com/Ily455/Py-C-obfuscator"
   slug = "/projects/py-c-obfuscator/"
 
@@ -34,7 +34,7 @@
   title = "FSParser"
   description = "Un parseur de systèmes de fichiers FAT32 et EXT écrit en Python. Parse des images disque brutes sans s'appuyer sur l'OS pour monter le système de fichiers."
   tech = "Python, FAT32, EXT"
-  image = "https://placehold.co/800x450/1a1a2e/00d4ff?text=FSParser"
+  image = "https://placehold.co/800x450/0d1117/4ade80?text=FSParser"
   link = "https://github.com/Ily455/FSParser"
   slug = "/projects/fsparser/"
 
@@ -42,7 +42,7 @@
   title = "Full SIEM Deployment"
   description = "Stack de monitoring SOC complet : Elastic Stack, Wazuh, Suricata, MISP et TheHive. Règles de détection, corrélation d'événements et workflows d'investigation par IoC."
   tech = "Elastic, Wazuh, Suricata, MISP, TheHive"
-  image = "https://placehold.co/800x450/1a1a2e/00d4ff?text=SIEM+Deployment"
+  image = "https://placehold.co/800x450/0d1117/4ade80?text=SIEM+Deployment"
   link = ""
   slug = "/projects/full-siem-deployment/"
 
@@ -50,6 +50,6 @@
   title = "Secure Network Architecture on ESXi"
   description = "Conception et implémentation d'un réseau lab segmenté sur ESXi. Routing, pare-feux PfSense/OPNsense, VPN, DMZ et supervision Zabbix. Documentation technique complète."
   tech = "ESXi, PfSense, OPNsense, Zabbix"
-  image = "https://placehold.co/800x450/1a1a2e/00d4ff?text=Network+Architecture"
+  image = "https://placehold.co/800x450/0d1117/4ade80?text=Network+Architecture"
   link = ""
   slug = "/projects/secure-network-architecture-esxi/"

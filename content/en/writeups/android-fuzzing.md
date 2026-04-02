@@ -1,6 +1,6 @@
 ---
 title: "Android Fuzzing with Droid-FF and Radamsa"
-date: 2023-05-01
+date: 2023-06-12
 draft: false
 description: "Automated fuzzing of Android .dex files using Droid-FF and Radamsa on a Genymotion emulator. Full triage pipeline: crash detection via logcat, tombstone collection, addr2line symbolization, and crash path analysis through libz.so adler32."
 tags: ["fuzzing", "android", "droid-ff", "radamsa", "adb", "security"]

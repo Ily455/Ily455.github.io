@@ -1,6 +1,6 @@
 ---
 title: "Forensics Mémoire avec Volatility — Analyse d'un Dump WinXP SP2"
-date: 2024-06-01
+date: 2024-10-21
 draft: false
 description: "Walkthrough complet d'un dump mémoire Windows XP SP2 avec Volatility 2.6.1 — 14 plugins couvrant l'énumération des processus, la détection de processus cachés, les connexions réseau, les artéfacts registre, les modules noyau et l'inspection mémoire live via volshell."
 tags: ["forensics", "volatility", "forensics-memoire", "windows", "dfir", "blue-team"]
