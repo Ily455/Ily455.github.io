@@ -1,7 +1,7 @@
 [author]
   name = "Ilyass El Annid"
   location = "France"
-  description = "Cybersecurity engineer. Software protection, digital forensics, blue team. I like understanding how things break."
+  description = "Cybersecurity engineer with experience in software protection, digital forensics, and blue team deployment. From LLVM obfuscation on embedded RISC-V firmware to open-source SOC stack deployment and ICS/OT threat analysis. I like understanding how things break — at the instruction level, and at the infrastructure level."
   github = "https://github.com/Ily455"
   linkedin = "https://linkedin.com/in/ilyass-elannid"
   email = "ilyass.elannid@gmail.com"
