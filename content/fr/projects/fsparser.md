@@ -6,6 +6,8 @@ description: "Un outil Python qui parse des images disque brutes et extrait les 
 tags: ["python", "systemes-fichiers", "forensics", "bas-niveau", "mbr", "fat32", "ext4"]
 ---
 
+> Projet réalisé dans le cadre de mon diplôme d'ingénieur SICS, cours de forensics (2023). Construit comme exercice pratique sur les internals des systèmes de fichiers — parser des images disque brutes sans s'appuyer sur l'OS pour les monter ou les interpréter.
+
 ## Ce que ça fait
 
 FSParser prend une image disque brute et extrait les structures de systèmes de fichiers directement depuis les données binaires — pas d'appel système, pas de drivers de fichiers, pas de montage.

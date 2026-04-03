@@ -28,6 +28,8 @@ VM6 — MISP v2.4.170
 
 Toutes les VMs fonctionnent en CLI uniquement. Les interfaces web (Kibana, dashboard Wazuh, TheHive, MISP) sont accessibles depuis la machine physique.
 
+![Architecture réseau de la stack SIEM](/images/projects/siem/net1.png)
+
 ### Flux de données
 
 ```
@@ -59,11 +61,15 @@ Agents Wazuh ──► Serveur Wazuh ──► Indexeur Wazuh ──► Dashboar
 - **Logstash** : pipeline d'ingestion avec filtrage, normalisation et enrichissement
 - **Elastic Agent + Fleet** : déploiement centralisé des agents et gestion des politiques de collecte
 
+![Dashboard Kibana — vue du trafic réseau](/images/projects/siem/kibana1.png)
+
 ### Wazuh
 
 Trois agents déployés : deux hôtes Ubuntu et une instance DVWA. Le serveur Wazuh enrichit les événements avec le framework MITRE ATT&CK et les exigences de conformité (PCI DSS, NIST 800-53).
 
 Catégories de détection configurées : événements d'authentification, intégrité des fichiers, escalade de privilèges, audit des appels système.
+
+![Monitoring des agents Wazuh](/images/projects/siem/wazuh-1.png)
 
 ### Suricata
 
@@ -79,11 +85,15 @@ Déployé en mode IDS/IPS sur sa propre VM. Utilise le ruleset Emerging Threats.
 
 Les alertes Suricata sont transmises à Elasticsearch via l'intégration Fleet, visibles dans Kibana avec carte de géolocalisation.
 
+![Alertes IDS Suricata dans Kibana](/images/projects/siem/suricata1.png)
+
 ### MISP + TheHive + Cortex
 
 - **MISP** : dépôt d'IoCs et partage de threat intelligence. Alimente l'enrichissement des analyses.
 - **TheHive** : gestion des cas d'incidents. Les alertes Wazuh et Suricata escaladées créent des cas avec observables.
 - **Cortex** : analyse automatisée des observables (IPs, hashes, domaines) via des analyseurs. Intégré à MISP pour la corrélation d'IoCs.
+
+![Interface de gestion d'incidents TheHive](/images/projects/siem/3-thehive.png)
 
 ---
 

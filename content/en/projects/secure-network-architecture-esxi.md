@@ -1,192 +1,101 @@
 ---
-title: "Secure Network Architecture on ESXi"
-date: 2026-03-06
+title: "Virtualized Enterprise Network — VMware ESXi"
+date: 2024-01-15
 draft: false
-description: "Design and deployment of a segmented enterprise network on VMware ESXi — VLANs, pfSense firewall with strict ACLs, DMZ, VPN, and a monitored security perimeter — entirely virtualized."
-tags: ["network", "esxi", "vmware", "pfsense", "vlan", "firewall", "infrastructure"]
+description: "Group project simulating a complete virtualized enterprise network on VMware ESXi 6.5 — Ubuntu router, DNS on Windows Server 2022, DHCP, Apache web server, supervision and admin posts, all deployed from master VM templates."
+tags: ["network", "esxi", "vmware", "linux", "dns", "dhcp", "infrastructure", "virtualisation"]
+---
+
+> Group project — FSI M2, Sécurité des systèmes d'informations module, AMU 2023–2024. Goal: simulate a complete virtualized enterprise network on VMware ESXi, covering hypervisor setup, VM deployment from master images, network services configuration, and supervision.
+
 ---
 
 ## Overview
 
-This project was the design and deployment of a complete enterprise-grade network architecture, running entirely on VMware ESXi. The focus was on security: network segmentation with VLANs, a pfSense firewall enforcing strict access control, a proper DMZ for exposed services, and a VPN gateway for remote access.
+The project involved designing and deploying a full virtualized enterprise network from scratch on VMware ESXi 6.5. Every component — router, DNS, DHCP, web server, supervision post, admin post, and user workstations — runs as a VM on the same ESXi host, managed through the ESXi Host Client web interface.
 
-Everything that would normally require physical switches, routers, and firewall appliances was virtualized — which also made it possible to test attack scenarios and firewall rule changes without risking physical infrastructure.
-
----
-
-## Architecture
-
-```
-Internet (WAN)
-      │
-      ▼
-┌─────────────┐
-│   pfSense   │  ← Firewall, router, VPN gateway, IDS/IPS
-└──────┬──────┘
-       │
-   ┌───┴────────────────────────────────────┐
-   │              vSwitch (ESXi)            │
-   └───┬──────────┬──────────┬──────────┬──┘
-       │          │          │          │
-  VLAN 10    VLAN 20    VLAN 30    VLAN 99
-  LAN/Corp   DMZ        Mgmt       Isolated
-       │          │          │          │
-  ┌────┴───┐ ┌────┴───┐ ┌────┴───┐ ┌────┴───┐
-  │Workst. │ │Web srv │ │ESXi   │ │Sandbox │
-  │AD DC   │ │Mail srv│ │vCenter│ │VMs     │
-  │File srv│ │        │ │       │ │        │
-  └────────┘ └────────┘ └────────┘ └────────┘
-```
+The deployment approach is based on master VMs: a Windows Server master and an Ubuntu master are configured once, then cloned to spin up new instances without reinstalling from scratch each time.
 
 ---
 
-## Network Segments
+## Infrastructure
 
-### VLAN 10 — Corporate LAN
+**Hypervisor**: VMware ESXi 6.5, managed via the ESXi Host Client.
 
-Internal workstations and servers. This segment has:
-- Access to internal resources (file server, AD)
-- Outbound internet access through pfSense (HTTP/HTTPS only by default)
-- No direct access to DMZ or management segments
-- Active Directory domain controller for authentication
-
-### VLAN 20 — DMZ
-
-Services that need to be reachable from the internet. Strict rules:
-- Internet → DMZ: only ports 80 and 443 (web), 25/465/587/993 (mail)
-- DMZ → LAN: **blocked** — a compromised DMZ host cannot reach internal resources
-- DMZ → DMZ: controlled — services can communicate on specific ports only
-
-### VLAN 30 — Management
-
-ESXi host, vCenter, pfSense management interface. Most restricted segment:
-- Only accessible from a dedicated admin workstation on VLAN 10
-- No inbound connections from DMZ or internet
-- Separate credentials from the corporate domain
-
-### VLAN 99 — Isolated / Sandbox
-
-No routing to any other segment. Used for:
-- Testing new VMs before deployment
-- Running potentially malicious samples (isolated from everything)
-- Lab experimentation
+| VM | OS | Role |
+|---|---|---|
+| Ubuntu Master | Ubuntu | Base image for Ubuntu instances |
+| Windows Server Master | Windows Server 2022 | Base image for Windows instances |
+| Routeur_US | Ubuntu Server 20 | Network router / gateway |
+| DNS-WS | Windows Server 2022 | DNS server |
+| DHCP_US | Ubuntu Server 20 | DHCP server |
+| Web_US | Ubuntu Server 20 | Web server (Apache) |
+| Poste supervision | Ubuntu | Supervision / monitoring post |
+| Poste admin | Ubuntu Desktop 22.0 | Administration workstation |
+| Poste utilisateur | Windows 10 | User workstation |
 
 ---
 
-## pfSense Configuration
+## Masters and VM Deployment
 
-### Firewall rules — key policies
+Before deploying services, two master VMs were built — one Windows Server 2022, one Ubuntu. Each is a fully installed and configured OS image that can be cloned to deploy any new instance quickly. Every service VM is created from the appropriate master, then configured for its specific role.
 
-The default pfSense rule set was replaced with explicit allow rules and a default-deny policy.
-
-**WAN interface:**
-```
-allow  TCP  any → DMZ:80,443     ← public web services
-allow  TCP  any → DMZ:25,465,587,993  ← mail
-allow  UDP  any → WAN:1194       ← VPN
-block  any  any → any            ← everything else
-```
-
-**LAN → WAN:**
-```
-allow  TCP  LAN → any:80,443     ← HTTP/HTTPS
-allow  UDP  LAN → any:53         ← DNS
-block  any  LAN → any            ← everything else (no arbitrary ports out)
-```
-
-**DMZ → LAN:**
-```
-block  any  DMZ → LAN            ← DMZ cannot reach internal network
-```
-
-**Mgmt → any:**
-```
-allow  TCP  admin_ws → pfSense:443    ← web UI
-allow  TCP  admin_ws → ESXi:443       ← ESXi management
-block  any  → Mgmt:any               ← no inbound to management segment
-```
-
-### NAT
-
-Outbound NAT masquerades LAN and DMZ traffic behind the WAN IP. Port forwarding on WAN routes incoming traffic to the appropriate DMZ host.
-
-### VPN — OpenVPN
-
-Remote access via OpenVPN on UDP 1194. Configuration:
-- Certificate-based authentication (no password-only auth)
-- Remote clients land in a dedicated VPN subnet
-- Split tunneling disabled — all traffic routed through the VPN (traffic that doesn't need to be secured shouldn't be routed through the enterprise network)
-- VPN clients get access to VLAN 10 resources only, same rules as local LAN
-
-### IDS/IPS — Snort on pfSense
-
-Snort runs inline on the WAN interface to inspect incoming traffic:
-- Rulesets: ET Open, Snort community rules
-- Alerts on known exploit patterns, port scans, malformed packets
-- Blocking mode for high-confidence rules
-
-> 📷 *[Placeholder — pfSense dashboard / firewall rules view]*
+This mirrors production practice: a golden image that's been tested and validated, cloned per need rather than reinstalled each time.
 
 ---
 
-## ESXi Virtual Networking
+## Network Services
 
-VMware ESXi handles the virtual switch and VLAN tagging. Each VM is connected to a port group that corresponds to a VLAN.
+### Router — Ubuntu Server 20
 
-```
-ESXi Physical NIC (uplink)
-    │
-    └── vSwitch0
-         ├── Port Group: "LAN"     (VLAN 10)
-         ├── Port Group: "DMZ"     (VLAN 20)
-         ├── Port Group: "Mgmt"    (VLAN 30)
-         └── Port Group: "Sandbox" (VLAN 99)
-```
+The router VM runs Ubuntu Server with IP forwarding enabled, configured to route traffic between network segments. It acts as the default gateway for other VMs.
 
-pfSense runs as a VM with virtual interfaces connected to each port group — it sees four network interfaces and acts as the inter-VLAN router and firewall for all traffic.
+### DNS — Windows Server 2022
+
+DNS deployed on Windows Server 2022. Resolves internal hostnames so VMs can reference each other by name rather than IP — required for the web server and admin workflows.
+
+### DHCP — Ubuntu Server 20
+
+DHCP server on Ubuntu Server 20, distributing IP configurations to workstations automatically.
+
+### Web Server — Ubuntu Server 20 (Apache)
+
+Apache deployed on Ubuntu Server 20. Used to verify end-to-end connectivity across the network and simulate a production web service reachable from user workstations.
 
 ---
 
-## Security Testing
+## Supervision and Administration
 
-With the environment fully virtualized, it was possible to run attack scenarios without risk:
+### Supervision post
 
-**Port scanning from DMZ to LAN:**
-```bash
-nmap -sS 192.168.10.0/24   ← from a DMZ VM
-# All hosts should appear as "filtered" — pfSense is blocking
-```
+A dedicated VM for monitoring — tracking the health and metrics of deployed services across the infrastructure.
 
-**Attempted lateral movement:**
-Simulating a compromised DMZ web server trying to reach AD DC — all connections blocked, Snort alerts fire.
+### Admin post — Ubuntu Desktop 22.0
 
-**Firewall rule change testing:**
-Add a rule, verify it allows the intended traffic, verify it doesn't open anything unintended, then document and commit.
+A dedicated Ubuntu Desktop 22.0 workstation for managing the infrastructure: configuring services, accessing the ESXi Host Client, and performing administrative tasks centrally.
 
 ---
 
 ## What I Learned
 
-**Network:**
-- VLAN segmentation is the foundation — if your network is flat, any compromise becomes a full compromise
-- Default-deny firewall policy is the only sensible approach — default-allow with exceptions always has gaps
-- DMZ design: the key invariant is that a compromised DMZ host cannot reach internal resources directly
-
 **Virtualization:**
-- ESXi virtual networking is a full software-defined network — vSwitch, port groups, and VLAN tagging work the same as physical gear
-- Running the firewall as a VM on the same host it's protecting is a design limitation — in production, the firewall should be on separate hardware or a separate ESXi host
+- The master VM approach is operationally sound — a golden image configured once, cloned per need. Rebuilding from scratch each time doesn't scale
+- ESXi Host Client gives a unified view of all VMs, their resource usage, and their state — useful for debugging when something silently fails
+- AMD Ryzen hardware requires ESXi 6.5 specifically (not the latest); hardware compatibility matters before choosing a hypervisor version
 
-**Security operations:**
-- IDS rules without tuning generate too much noise — the Snort setup required the same kind of alert tuning as the SIEM rules
-- Every firewall rule should have a documented justification and a review date
-- Access to the management segment is the highest-value target — protecting vCenter and ESXi is as important as protecting the data
+**Networking:**
+- Configuring Ubuntu Server as a router (IP forwarding + manual routing rules) makes the mechanics of routing tangible in a way that a dedicated appliance does not
+- DNS is foundational — without it, every other service has to be addressed by IP, which breaks the moment any address changes
+- Testing each layer independently (router → DNS → DHCP → web) before integration makes debugging the full stack much faster
+
+**Group work:**
+- The mode opératoire format — step-by-step, illustrated, with expected results per action — is the right documentation approach for reproducible infrastructure deployment
+- Parallel work on different components requires explicit coordination on IP addressing and naming conventions before anyone starts configuring
 
 ---
 
 ## Resources
 
-- [pfSense documentation](https://docs.netgate.com/pfsense/en/latest/)
 - [VMware ESXi documentation](https://docs.vmware.com/en/VMware-vSphere/)
-- [OpenVPN on pfSense](https://docs.netgate.com/pfsense/en/latest/vpn/openvpn/)
-- [Snort rules documentation](https://www.snort.org/documents)
-- [VirtualBox / VMware networking — concepts](https://www.vmware.com/topics/glossary/content/virtual-networking.html)
+- [Ubuntu Server documentation](https://ubuntu.com/server/docs)
+- [Windows Server 2022 documentation](https://learn.microsoft.com/en-us/windows-server/)

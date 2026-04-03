@@ -6,7 +6,7 @@ description: "Fuzzing automatisé de fichiers .dex Android avec Droid-FF et Rada
 tags: ["fuzzing", "android", "droid-ff", "radamsa", "adb", "securite"]
 ---
 
-> Projet académique — printemps 2023. Objectif : apprendre et pratiquer le fuzzing automatisé sur Android. Cible : fichiers `.dex` traités par `dexdump`. Framework : Droid-FF avec Radamsa comme moteur de mutation.
+> Projet académique — diplôme d'ingénieur SICS, printemps 2023. Objectif : apprendre et pratiquer le fuzzing automatisé sur Android. Cible : fichiers `.dex` traités par `dexdump`. Framework : Droid-FF avec Radamsa comme moteur de mutation.
 
 ---
 
@@ -19,6 +19,8 @@ tags: ["fuzzing", "android", "droid-ff", "radamsa", "adb", "securite"]
 **Connexion** : ADB over TCP
 
 L'émulateur est enregistré dans Droid-FF via `adb connect 192.168.1.114:5555`. Tout le transfert de fichiers et la collecte de crashs passent par ADB.
+
+![Émulateur Genymotion — Samsung Galaxy S4](/images/writeups/android-fuzzing/genymotion-emulator.png)
 
 ---
 
@@ -42,6 +44,8 @@ Droid-FF expose un menu en cinq étapes :
 (4) View Source of Crashes — symboliser les adresses de crash
 (5) Exploitability Test
 ```
+
+![Menu Droid-FF](/images/writeups/android-fuzzing/droidff-run.png)
 
 ### Étape 0 — Générer les fichiers
 
@@ -83,6 +87,8 @@ adb pull /data/tombstones/tombstone_00 .../confirmed_crashes/tombstone_sample27.
 → 7,9 MB/s, 10447 bytes
 ```
 
+![Tombstone tiré depuis le device](/images/writeups/android-fuzzing/tombstone-pulled.png)
+
 ### Étape 4 — Symboliser le crash
 
 L'option 4 directe a rencontré des erreurs. Utilisation de `dmesg` pour lire le buffer kernel du tombstone :
@@ -103,6 +109,8 @@ backtrace:
   #04 pc 00001b22  /system/xbin/dexdump
   #05 pc 00012a64  /system/lib/libc.so (__libc_init+100)
 ```
+
+![Crash détecté dans la sortie dmesg](/images/writeups/android-fuzzing/crash-dmesg.png)
 
 `libz.so` tiré depuis le device, puis addr2line :
 

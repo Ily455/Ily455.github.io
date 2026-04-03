@@ -147,7 +147,11 @@ NtWriteFile       → write encrypted data back to file
 MoveFileWithProgressW → rename to random name + random extension
 ```
 
+![Cuckoo log — CryptEncrypt API call](/images/writeups/cerber/fig4.png)
+
 Example observed: `c:\Acrobat3\Reader\ACROBAT.PDF` → `c:\Acrobat3\Reader\9Fck7YJuLS.af22`
+
+![Cuckoo log — NtWriteFile (encrypted output)](/images/writeups/cerber/fig5.png)
 
 The encrypted file gets a **random name** with a **random extension** — not `.cerber`. This is a later variant with randomized extension behavior to evade signature-based detection.
 
@@ -159,7 +163,11 @@ After encrypting each directory, Cerber drops two ransom artifacts:
 
 The HTA file renders a browser-like ransom page with Tor hidden service payment links.
 
+![Cerber ransom note on infected desktop](/images/writeups/cerber/cuckoo-report.png)
+
 **6. Bitcoin payment tracking**
+
+![Cerber decryption payment page](/images/writeups/cerber/cuckoo-network.png)
 
 Before exiting, Cerber queries Bitcoin blockchain APIs using `InternetCrackUrl`:
 

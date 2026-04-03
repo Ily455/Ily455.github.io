@@ -42,14 +42,14 @@
   title = "Full SIEM Deployment"
   description = "Stack de monitoring SOC complet : Elastic Stack, Wazuh, Suricata, MISP et TheHive. Règles de détection, corrélation d'événements et workflows d'investigation par IoC."
   tech = "Elastic, Wazuh, Suricata, MISP, TheHive"
-  image = "https://placehold.co/800x450/0d1117/4ade80?text=SIEM+Deployment"
+  image = "/images/projects/siem/net1.png"
   link = ""
   slug = "/projects/full-siem-deployment/"
 
 [[projects]]
-  title = "Secure Network Architecture on ESXi"
-  description = "Conception et implémentation d'un réseau lab segmenté sur ESXi. Routing, pare-feux PfSense/OPNsense, VPN, DMZ et supervision Zabbix. Documentation technique complète."
-  tech = "ESXi, PfSense, OPNsense, Zabbix"
+  title = "Réseau d'entreprise virtualisé — VMware ESXi"
+  description = "Projet de groupe simulant un réseau d'entreprise complet sur VMware ESXi 6.5 — routeur Ubuntu, DNS sur Windows Server 2022, DHCP, serveur web Apache, postes de supervision et d'administration, déployés depuis des masters."
+  tech = "ESXi, Ubuntu Server, Windows Server 2022, Apache"
   image = "https://placehold.co/800x450/0d1117/4ade80?text=Network+Architecture"
   link = ""
   slug = "/projects/secure-network-architecture-esxi/"

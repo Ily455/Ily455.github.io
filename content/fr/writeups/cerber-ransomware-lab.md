@@ -146,7 +146,11 @@ NtWriteFile       → écriture des données chiffrées dans le fichier
 MoveFileWithProgressW → renommage vers un nom et une extension aléatoires
 ```
 
+![Log Cuckoo — appel API CryptEncrypt](/images/writeups/cerber/fig4.png)
+
 Exemple observé : `c:\Acrobat3\Reader\ACROBAT.PDF` → `c:\Acrobat3\Reader\9Fck7YJuLS.af22`
+
+![Log Cuckoo — NtWriteFile (sortie chiffrée)](/images/writeups/cerber/fig5.png)
 
 Le fichier chiffré reçoit un **nom aléatoire** avec une **extension aléatoire** — pas `.cerber`. C'est une variante tardive avec comportement d'extension aléatoire pour contourner la détection par signature d'extension.
 
@@ -158,7 +162,11 @@ Après chiffrement de chaque répertoire, Cerber dépose deux artefacts :
 
 Le fichier HTA affiche une page de rançon avec liens de paiement vers des services cachés Tor.
 
+![Note de rançon Cerber sur le bureau infecté](/images/writeups/cerber/cuckoo-report.png)
+
 **6. Suivi du paiement Bitcoin**
+
+![Page de paiement Cerber via Tor](/images/writeups/cerber/cuckoo-network.png)
 
 Avant de se terminer, Cerber interroge les APIs de blockchain Bitcoin via `InternetCrackUrl` :
 

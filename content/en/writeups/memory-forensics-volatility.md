@@ -6,7 +6,7 @@ description: "Full walkthrough of a Windows XP SP2 memory dump using Volatility 
 tags: ["forensics", "volatility", "memory-forensics", "windows", "dfir", "blue-team"]
 ---
 
-> Lab from my SICS M2 coursework (2024). Objective: perform both basic and advanced memory forensics on a WinXP SP2 dump — from profile identification to interactive memory inspection with volshell. All commands are Volatility 2 syntax.
+> Lab from my SICS engineering degree coursework (2024). Objective: perform both basic and advanced memory forensics on a WinXP SP2 dump — from profile identification to interactive memory inspection with volshell. All commands are Volatility 2 syntax.
 
 ---
 

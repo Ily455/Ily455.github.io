@@ -6,6 +6,8 @@ description: "A Python tool that parses raw disk images and extracts filesystem 
 tags: ["python", "filesystems", "forensics", "low-level", "mbr", "fat32", "ext4"]
 ---
 
+> Project from my SICS engineering degree forensics coursework (2023). Built as a hands-on exercise in filesystem internals — parsing raw disk images without relying on the OS to mount or interpret them.
+
 ## What It Does
 
 FSParser takes a raw disk image file and extracts filesystem structures directly from binary data — no OS calls, no filesystem drivers, no mounting.

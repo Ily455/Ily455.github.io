@@ -28,6 +28,8 @@ VM6 — MISP v2.4.170
 
 All VMs run CLI-only. Web interfaces (Kibana, Wazuh dashboard, TheHive, MISP) are accessed from the physical host via browser.
 
+![SIEM stack — VM network architecture](/images/projects/siem/net1.png)
+
 ### Data flow
 
 ```
@@ -61,9 +63,13 @@ Elastic Agent + Fleet handles data collection from endpoints without needing Log
 - **Logstash**: ingestion pipeline with filtering, normalization and enrichment before indexing
 - **Elastic Agent + Fleet**: centralized agent deployment and management — policies pushed from Fleet to agents on each monitored host
 
+![Kibana dashboard — network traffic overview](/images/projects/siem/kibana1.png)
+
 ### Wazuh
 
 Three agents deployed: two Ubuntu hosts and one DVWA instance. Wazuh Server runs the analysis engine with MITRE ATT&CK rule enrichment and regulatory compliance mapping (PCI DSS, NIST 800-53).
+
+![Wazuh agent monitoring](/images/projects/siem/wazuh-1.png)
 
 Detection categories configured: authentication events, file integrity monitoring, privilege escalation, system call auditing.
 
@@ -81,11 +87,15 @@ Deployed in IDS/IPS mode on its own VM to monitor network traffic. Uses Emerging
 
 Suricata alerts forwarded to Elasticsearch via Fleet integration, visible in Kibana with source/destination geo-map.
 
+![Suricata IDS alerts in Kibana](/images/projects/siem/suricata1.png)
+
 ### MISP + TheHive + Cortex
 
 - **MISP**: IoC repository and threat intelligence sharing. Feeds enrichment data into the analysis chain.
 - **TheHive**: case management for security incidents. Alerts escalated from Wazuh and Suricata create cases with observables.
 - **Cortex**: automated analysis of observables (IPs, hashes, domains) via analyzers. Integrated with MISP for IoC correlation.
+
+![TheHive incident management interface](/images/projects/siem/3-thehive.png)
 
 ---
 
