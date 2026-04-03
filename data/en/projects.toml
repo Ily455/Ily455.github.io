@@ -42,7 +42,7 @@
   title = "Full SIEM Deployment"
   description = "A complete SOC-oriented monitoring stack: Elastic Stack, Wazuh, Suricata, MISP, and TheHive. Detection rules, event correlation, and IoC-driven investigation workflows."
   tech = "Elastic, Wazuh, Suricata, MISP, TheHive"
-  image = "/images/projects/siem/net1.png"
+  image = "/images/projects/siem/wazuh-server-architecture1.png"
   link = ""
   slug = "/projects/full-siem-deployment/"
 
