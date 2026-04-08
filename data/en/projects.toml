@@ -2,7 +2,7 @@
   title = "DroidTest"
   description = "A CLI runner for Android device diagnostics. Feed it a list of ADB sub-commands, it runs them all and produces a structured pass/fail report with optional JSON export."
   tech = "Python, ADB, Android"
-  image = "https://placehold.co/800x450/0d1117/4ade80?text=DroidTest"
+  image = "/images/projects/droidtest.svg"
   link = "https://github.com/Ily455/DroidTest"
   slug = "/projects/droidtest/"
 
@@ -10,7 +10,7 @@
   title = "LLVM Obfuscation Study — Secure-IC"
   description = "Comparative benchmark of 4 LLVM obfuscators (O-LLVM, Hikari, Pluto, Tigress) on AES code — size, execution time, CFG similarity. Selected Hikari and integrated it into the Securyzr iSE firmware build chain."
   tech = "LLVM, Clang, Hikari, BinDiff, Ghidra, RISC-V"
-  image = "https://placehold.co/800x450/0d1117/4ade80?text=LLVM+Obfuscation"
+  image = "/images/projects/llvm-obfuscation.svg"
   link = ""
   slug = "/projects/secure-ic-obfuscation/"
 
@@ -18,7 +18,7 @@
   title = "IM-LLVM-Pass"
   description = "An LLVM compiler pass that performs identifier mangling — randomizing function names, global variable names, and structure names at compile time to hinder reverse engineering."
   tech = "LLVM, C++, Assembly"
-  image = "https://placehold.co/800x450/0d1117/4ade80?text=IM-LLVM-Pass"
+  image = "/images/projects/im-llvm-pass.svg"
   link = "https://github.com/Ily455/IM-LLVM-Pass"
   slug = "/projects/im-llvm-pass/"
 
@@ -26,7 +26,7 @@
   title = "Py-C-obfuscator"
   description = "A source-to-source C obfuscator written in Python. Takes C source code and produces a functionally equivalent but obfuscated version by transforming the AST before compilation."
   tech = "Python, C, AST"
-  image = "https://placehold.co/800x450/0d1117/4ade80?text=Py-C-obfuscator"
+  image = "/images/projects/py-c-obfuscator.svg"
   link = "https://github.com/Ily455/Py-C-obfuscator"
   slug = "/projects/py-c-obfuscator/"
 
@@ -34,7 +34,7 @@
   title = "FSParser"
   description = "A FAT32 and EXT filesystem parser written in Python. Parses raw disk images and extracts filesystem structures without relying on the OS to mount them."
   tech = "Python, FAT32, EXT"
-  image = "https://placehold.co/800x450/0d1117/4ade80?text=FSParser"
+  image = "/images/projects/fsparser.svg"
   link = "https://github.com/Ily455/FSParser"
   slug = "/projects/fsparser/"
 
@@ -50,6 +50,6 @@
   title = "Virtualized Enterprise Network — VMware ESXi"
   description = "Group project simulating a full enterprise network on VMware ESXi 6.5 — Ubuntu router, DNS on Windows Server 2022, DHCP, Apache web server, supervision and admin posts, all deployed from master VM templates."
   tech = "ESXi, Ubuntu Server, Windows Server 2022, Apache"
-  image = "https://placehold.co/800x450/0d1117/4ade80?text=Network+Architecture"
+  image = "/images/projects/esxi-network.svg"
   link = ""
   slug = "/projects/secure-network-architecture-esxi/"

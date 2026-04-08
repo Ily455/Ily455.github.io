@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="800" height="450">
+  <rect width="800" height="450" fill="#0d1117"/>
+  <!-- Window chrome -->
+  <rect x="40" y="40" width="720" height="370" rx="8" fill="#161b22" stroke="#30363d" stroke-width="1"/>
+  <rect x="40" y="40" width="720" height="36" rx="8" fill="#21262d"/>
+  <rect x="40" y="64" width="720" height="12" fill="#21262d"/>
+  <circle cx="68" cy="58" r="6" fill="#ff5f57"/>
+  <circle cx="88" cy="58" r="6" fill="#ffbd2e"/>
+  <circle cx="108" cy="58" r="6" fill="#28ca41"/>
+  <text x="400" y="62" font-family="monospace" font-size="13" fill="#8b949e" text-anchor="middle">im-llvm-pass — identifier mangling</text>
+
+  <!-- Compile command -->
+  <text x="68" y="108" font-family="monospace" font-size="13" fill="#4ade80">$ </text>
+  <text x="84" y="108" font-family="monospace" font-size="13" fill="#e6edf3">clang -Xclang -load -Xclang im-llvm-pass.so -c aes.c -o aes.o</text>
+  <text x="68" y="128" font-family="monospace" font-size="12" fill="#8b949e">[IM-Pass] Mangling 12 functions, 8 globals, 3 structs...</text>
+
+  <!-- Separator -->
+  <line x1="68" y1="145" x2="732" y2="145" stroke="#30363d" stroke-width="1"/>
+
+  <!-- Before / After labels -->
+  <text x="150" y="168" font-family="monospace" font-size="12" fill="#8b949e" text-anchor="middle">BEFORE</text>
+  <line x1="68" y1="172" x2="380" y2="172" stroke="#30363d" stroke-width="1"/>
+  <text x="565" y="168" font-family="monospace" font-size="12" fill="#4ade80" text-anchor="middle">AFTER</text>
+  <line x1="420" y1="172" x2="732" y2="172" stroke="#4ade80" stroke-width="1" opacity="0.4"/>
+
+  <!-- Before: functions -->
+  <text x="68" y="196" font-family="monospace" font-size="12" fill="#8b949e">; Function names</text>
+  <text x="68" y="214" font-family="monospace" font-size="13" fill="#e6edf3">define void </text>
+  <text x="166" y="214" font-family="monospace" font-size="13" fill="#79c0ff">@aes_encrypt</text>
+  <text x="284" y="214" font-family="monospace" font-size="13" fill="#e6edf3">(...</text>
+  <text x="68" y="232" font-family="monospace" font-size="13" fill="#e6edf3">define i32 </text>
+  <text x="162" y="232" font-family="monospace" font-size="13" fill="#79c0ff">@key_expand</text>
+  <text x="270" y="232" font-family="monospace" font-size="13" fill="#e6edf3">(...</text>
+
+  <text x="68" y="258" font-family="monospace" font-size="12" fill="#8b949e">; Struct names</text>
+  <text x="68" y="276" font-family="monospace" font-size="13" fill="#e6edf3">%</text>
+  <text x="78" y="276" font-family="monospace" font-size="13" fill="#ffa657">CipherContext</text>
+  <text x="182" y="276" font-family="monospace" font-size="13" fill="#e6edf3"> = type { ... }</text>
+
+  <!-- Vertical divider -->
+  <line x1="400" y1="150" x2="400" y2="380" stroke="#30363d" stroke-width="1"/>
+
+  <!-- After: functions -->
+  <text x="420" y="196" font-family="monospace" font-size="12" fill="#8b949e">; Mangled names</text>
+  <text x="420" y="214" font-family="monospace" font-size="13" fill="#e6edf3">define void </text>
+  <text x="518" y="214" font-family="monospace" font-size="13" fill="#4ade80">@_f7a3c92e1b</text>
+  <text x="642" y="214" font-family="monospace" font-size="13" fill="#e6edf3">(...</text>
+  <text x="420" y="232" font-family="monospace" font-size="13" fill="#e6edf3">define i32 </text>
+  <text x="514" y="232" font-family="monospace" font-size="13" fill="#4ade80">@_d291a04fc7</text>
+  <text x="638" y="232" font-family="monospace" font-size="13" fill="#e6edf3">(...</text>
+
+  <text x="420" y="258" font-family="monospace" font-size="12" fill="#8b949e">; Mangled struct</text>
+  <text x="420" y="276" font-family="monospace" font-size="13" fill="#e6edf3">%</text>
+  <text x="430" y="276" font-family="monospace" font-size="13" fill="#4ade80">_a8f2d1c063</text>
+  <text x="546" y="276" font-family="monospace" font-size="13" fill="#e6edf3"> = type { ... }</text>
+
+  <!-- Summary -->
+  <line x1="68" y1="300" x2="732" y2="300" stroke="#30363d" stroke-width="1"/>
+  <text x="68" y="326" font-family="monospace" font-size="12" fill="#8b949e">Mangled:  </text>
+  <text x="150" y="326" font-family="monospace" font-size="12" fill="#4ade80">12 functions  ·  8 globals  ·  3 struct types</text>
+  <text x="68" y="348" font-family="monospace" font-size="12" fill="#8b949e">Binary:   functionally identical  ·  symbols unrecoverable without debug info</text>
+  <text x="68" y="370" font-family="monospace" font-size="12" fill="#8b949e">Pass type: ModulePass  ·  target: any LLVM IR (x86, ARM, RISC-V)</text>
+</svg>

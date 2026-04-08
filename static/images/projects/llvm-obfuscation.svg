@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="800" height="450">
+  <rect width="800" height="450" fill="#0d1117"/>
+  <!-- Window chrome -->
+  <rect x="40" y="40" width="720" height="370" rx="8" fill="#161b22" stroke="#30363d" stroke-width="1"/>
+  <rect x="40" y="40" width="720" height="36" rx="8" fill="#21262d"/>
+  <rect x="40" y="64" width="720" height="12" fill="#21262d"/>
+  <circle cx="68" cy="58" r="6" fill="#ff5f57"/>
+  <circle cx="88" cy="58" r="6" fill="#ffbd2e"/>
+  <circle cx="108" cy="58" r="6" fill="#28ca41"/>
+  <text x="400" y="62" font-family="monospace" font-size="13" fill="#8b949e" text-anchor="middle">obfuscator-benchmark — results</text>
+
+  <!-- Title -->
+  <text x="68" y="108" font-family="monospace" font-size="13" fill="#8b949e">Benchmark: 4 LLVM obfuscation frameworks on </text>
+  <text x="552" y="108" font-family="monospace" font-size="13" fill="#4ade80">aes.c</text>
+  <text x="580" y="108" font-family="monospace" font-size="13" fill="#8b949e"> (RISC-V target)</text>
+
+  <!-- Table header -->
+  <rect x="68" y="120" width="664" height="28" fill="#21262d" rx="3"/>
+  <text x="80" y="138" font-family="monospace" font-size="12" fill="#4ade80">Framework</text>
+  <text x="260" y="138" font-family="monospace" font-size="12" fill="#4ade80">Binary size</text>
+  <text x="390" y="138" font-family="monospace" font-size="12" fill="#4ade80">Exec time</text>
+  <text x="510" y="138" font-family="monospace" font-size="12" fill="#4ade80">CFG similarity</text>
+  <text x="660" y="138" font-family="monospace" font-size="12" fill="#4ade80">Status</text>
+
+  <!-- Row 1: O-LLVM -->
+  <text x="80" y="172" font-family="monospace" font-size="13" fill="#e6edf3">O-LLVM</text>
+  <text x="260" y="172" font-family="monospace" font-size="13" fill="#e6edf3">+18%</text>
+  <text x="390" y="172" font-family="monospace" font-size="13" fill="#e6edf3">+12%</text>
+  <text x="510" y="172" font-family="monospace" font-size="13" fill="#e6edf3">0.72</text>
+  <text x="660" y="172" font-family="monospace" font-size="12" fill="#8b949e">deprecated</text>
+
+  <!-- Row 2: Hikari (selected) -->
+  <rect x="68" y="180" width="664" height="28" fill="#4ade8010" rx="2"/>
+  <text x="80" y="198" font-family="monospace" font-size="13" fill="#4ade80">Hikari</text>
+  <text x="260" y="198" font-family="monospace" font-size="13" fill="#4ade80">+22%</text>
+  <text x="390" y="198" font-family="monospace" font-size="13" fill="#4ade80">+15%</text>
+  <text x="510" y="198" font-family="monospace" font-size="13" fill="#4ade80">0.61</text>
+  <text x="660" y="198" font-family="monospace" font-size="12" fill="#4ade80">&#x2190; selected</text>
+
+  <!-- Row 3: Pluto -->
+  <text x="80" y="226" font-family="monospace" font-size="13" fill="#e6edf3">Pluto</text>
+  <text x="260" y="226" font-family="monospace" font-size="13" fill="#e6edf3">+31%</text>
+  <text x="390" y="226" font-family="monospace" font-size="13" fill="#e6edf3">+28%</text>
+  <text x="510" y="226" font-family="monospace" font-size="13" fill="#e6edf3">0.54</text>
+  <text x="660" y="226" font-family="monospace" font-size="12" fill="#8b949e">overhead high</text>
+
+  <!-- Row 4: Tigress -->
+  <text x="80" y="252" font-family="monospace" font-size="13" fill="#e6edf3">Tigress</text>
+  <text x="260" y="252" font-family="monospace" font-size="13" fill="#e6edf3">+45%</text>
+  <text x="390" y="252" font-family="monospace" font-size="13" fill="#e6edf3">+40%</text>
+  <text x="510" y="252" font-family="monospace" font-size="13" fill="#e6edf3">0.43</text>
+  <text x="660" y="252" font-family="monospace" font-size="12" fill="#8b949e">overhead high</text>
+
+  <!-- Separator -->
+  <line x1="68" y1="272" x2="732" y2="272" stroke="#30363d" stroke-width="1"/>
+
+  <!-- Result -->
+  <text x="68" y="300" font-family="monospace" font-size="13" fill="#8b949e">Selected: </text>
+  <text x="146" y="300" font-family="monospace" font-size="13" fill="#4ade80">Hikari</text>
+  <text x="200" y="300" font-family="monospace" font-size="13" fill="#8b949e"> — best overhead/protection tradeoff for embedded HSM target</text>
+
+  <text x="68" y="326" font-family="monospace" font-size="13" fill="#8b949e">Integrated into </text>
+  <text x="194" y="326" font-family="monospace" font-size="13" fill="#4ade80">Securyzr iSE</text>
+  <text x="296" y="326" font-family="monospace" font-size="13" fill="#8b949e"> firmware build chain (RISC-V, Clang 12)</text>
+
+  <!-- BinDiff note -->
+  <text x="68" y="360" font-family="monospace" font-size="12" fill="#8b949e">CFG similarity scored with </text>
+  <text x="248" y="360" font-family="monospace" font-size="12" fill="#e6edf3">BinDiff</text>
+  <text x="300" y="360" font-family="monospace" font-size="12" fill="#8b949e"> · analysis via </text>
+  <text x="394" y="360" font-family="monospace" font-size="12" fill="#e6edf3">Ghidra</text>
+  <text x="442" y="360" font-family="monospace" font-size="12" fill="#8b949e"> · lower = more obfuscated</text>
+</svg>

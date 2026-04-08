@@ -2,7 +2,7 @@
   title = "DroidTest"
   description = "Un runner CLI pour les diagnostics d'appareils Android. On lui donne une liste de sous-commandes ADB, il les exécute toutes et produit un rapport pass/fail structuré avec export JSON optionnel."
   tech = "Python, ADB, Android"
-  image = "https://placehold.co/800x450/0d1117/4ade80?text=DroidTest"
+  image = "/images/projects/droidtest.svg"
   link = "https://github.com/Ily455/DroidTest"
   slug = "/projects/droidtest/"
 
@@ -10,7 +10,7 @@
   title = "Étude Obfuscation LLVM — Secure-IC"
   description = "Benchmark comparatif de 4 obfuscateurs LLVM (O-LLVM, Hikari, Pluto, Tigress) sur du code AES — taille, temps d'exécution, similarité CFG. Sélection de Hikari et intégration dans la chaîne de build du firmware Securyzr iSE."
   tech = "LLVM, Clang, Hikari, BinDiff, Ghidra, RISC-V"
-  image = "https://placehold.co/800x450/0d1117/4ade80?text=LLVM+Obfuscation"
+  image = "/images/projects/llvm-obfuscation.svg"
   link = ""
   slug = "/projects/secure-ic-obfuscation/"
 
@@ -18,7 +18,7 @@
   title = "IM-LLVM-Pass"
   description = "Un pass compilateur LLVM qui effectue du mangling d'identifiants — randomisation des noms de fonctions, variables globales et structures à la compilation pour compliquer le reverse engineering."
   tech = "LLVM, C++, Assembly"
-  image = "https://placehold.co/800x450/0d1117/4ade80?text=IM-LLVM-Pass"
+  image = "/images/projects/im-llvm-pass.svg"
   link = "https://github.com/Ily455/IM-LLVM-Pass"
   slug = "/projects/im-llvm-pass/"
 
@@ -26,7 +26,7 @@
   title = "Py-C-obfuscator"
   description = "Un obfuscateur C source-à-source écrit en Python. Produit une version fonctionnellement équivalente mais obfusquée par transformation de l'AST avant compilation."
   tech = "Python, C, AST"
-  image = "https://placehold.co/800x450/0d1117/4ade80?text=Py-C-obfuscator"
+  image = "/images/projects/py-c-obfuscator.svg"
   link = "https://github.com/Ily455/Py-C-obfuscator"
   slug = "/projects/py-c-obfuscator/"
 
@@ -34,7 +34,7 @@
   title = "FSParser"
   description = "Un parseur de systèmes de fichiers FAT32 et EXT écrit en Python. Parse des images disque brutes sans s'appuyer sur l'OS pour monter le système de fichiers."
   tech = "Python, FAT32, EXT"
-  image = "https://placehold.co/800x450/0d1117/4ade80?text=FSParser"
+  image = "/images/projects/fsparser.svg"
   link = "https://github.com/Ily455/FSParser"
   slug = "/projects/fsparser/"
 
@@ -50,6 +50,6 @@
   title = "Réseau d'entreprise virtualisé — VMware ESXi"
   description = "Projet de groupe simulant un réseau d'entreprise complet sur VMware ESXi 6.5 — routeur Ubuntu, DNS sur Windows Server 2022, DHCP, serveur web Apache, postes de supervision et d'administration, déployés depuis des masters."
   tech = "ESXi, Ubuntu Server, Windows Server 2022, Apache"
-  image = "https://placehold.co/800x450/0d1117/4ade80?text=Network+Architecture"
+  image = "/images/projects/esxi-network.svg"
   link = ""
   slug = "/projects/secure-network-architecture-esxi/"
