@@ -20,6 +20,8 @@ L'approche de déploiement repose sur des VMs masters : un master Windows Server
 
 ## Infrastructure
 
+![Topologie réseau virtualisé VMware ESXi](/images/projects/esxi/topology.svg)
+
 **Hyperviseur** : VMware ESXi 6.5, géré via l'ESXi Host Client.
 
 | VM | OS | Rôle |

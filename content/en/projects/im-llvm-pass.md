@@ -18,6 +18,8 @@ The result: a binary where internal symbols like `checkLicenseKey` or `decrypt_p
 
 ---
 
+![LLVM compilation pipeline — pass position and symbol table before/after](/images/projects/im-llvm-pass/pipeline.svg)
+
 ## Why IR Level
 
 The pass operates on **LLVM IR** (Intermediate Representation), not on source code or the final binary.

@@ -13,6 +13,8 @@ A source-to-source C obfuscator written in Python. Takes C source code as input 
 
 Applies a set of obfuscation transformations at the source code level before compilation — making the code harder to read and analyze without affecting its behavior.
 
+![Source-to-source transformation pipeline](/images/projects/py-c-obfuscator/pipeline.svg)
+
 ## Why I built it
 
 As part of my research on obfuscation at Secure-IC, I wanted to explore source-level obfuscation as a complement to compiler-level approaches. Python was a natural choice for rapid prototyping of AST transformations.

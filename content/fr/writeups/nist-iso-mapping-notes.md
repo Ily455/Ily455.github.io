@@ -55,6 +55,8 @@ Contrôles technologiques    (34 contrôles)
 
 ---
 
+![Structure NIST CSF v2 et ISO 27002:2022 — mapping](/images/writeups/nist/framework-mapping.svg)
+
 ## Méthodologie
 
 ### Étape 1 — Ancrage sur les concepts cybersécurité partagés

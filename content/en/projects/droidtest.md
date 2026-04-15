@@ -33,6 +33,8 @@ Summary: 31 passed, 3 failed, 34 total
 
 ---
 
+![DroidTest execution flow](/images/projects/droidtest/workflow.svg)
+
 ## The Problem It Solves
 
 Testing an Android device's hardware and software state manually means typing `adb shell ...` dozens of times, reading the output, and keeping track of what passed. That's tedious and error-prone.

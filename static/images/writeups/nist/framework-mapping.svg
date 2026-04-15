@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 420" width="800" height="420">
+  <rect width="800" height="420" fill="#0d1117"/>
+  <text x="400" y="26" font-family="monospace" font-size="14" fill="#e6edf3" text-anchor="middle" font-weight="bold">NIST CSF v2 ↔ ISO 27002:2022 — Framework Structure</text>
+
+  <!-- NIST side header -->
+  <rect x="20" y="42" width="360" height="32" rx="4" fill="#4ade8020" stroke="#4ade80" stroke-width="1"/>
+  <text x="200" y="63" font-family="monospace" font-size="12" fill="#4ade80" text-anchor="middle">NIST CSF v2 — 6 Functions · 106 subcategories</text>
+
+  <!-- ISO side header -->
+  <rect x="420" y="42" width="360" height="32" rx="4" fill="#79c0ff20" stroke="#79c0ff" stroke-width="1"/>
+  <text x="600" y="63" font-family="monospace" font-size="12" fill="#79c0ff" text-anchor="middle">ISO 27002:2022 — 4 Themes · 93 controls</text>
+
+  <!-- NIST Functions -->
+  <rect x="20" y="86" width="360" height="46" rx="3" fill="#161b22" stroke="#ffa657" stroke-width="1"/>
+  <text x="40" y="104" font-family="monospace" font-size="11" fill="#ffa657">GV — GOVERN</text>
+  <text x="200" y="104" font-family="monospace" font-size="9" fill="#8b949e">← new in v2</text>
+  <text x="40" y="122" font-family="monospace" font-size="9" fill="#8b949e">org context · risk strategy · supply chain · policy · oversight</text>
+
+  <rect x="20" y="138" width="360" height="36" rx="3" fill="#161b22" stroke="#30363d" stroke-width="1"/>
+  <text x="40" y="156" font-family="monospace" font-size="11" fill="#e6edf3">ID — IDENTIFY</text>
+  <text x="40" y="170" font-family="monospace" font-size="9" fill="#8b949e">asset mgmt · risk assessment · improvement</text>
+
+  <rect x="20" y="180" width="360" height="36" rx="3" fill="#161b22" stroke="#30363d" stroke-width="1"/>
+  <text x="40" y="198" font-family="monospace" font-size="11" fill="#e6edf3">PR — PROTECT</text>
+  <text x="40" y="212" font-family="monospace" font-size="9" fill="#8b949e">access control · data security · training · platform security</text>
+
+  <rect x="20" y="222" width="360" height="36" rx="3" fill="#161b22" stroke="#30363d" stroke-width="1"/>
+  <text x="40" y="240" font-family="monospace" font-size="11" fill="#e6edf3">DE — DETECT</text>
+  <text x="40" y="254" font-family="monospace" font-size="9" fill="#8b949e">anomaly detection · monitoring · analysis</text>
+
+  <rect x="20" y="264" width="360" height="36" rx="3" fill="#161b22" stroke="#30363d" stroke-width="1"/>
+  <text x="40" y="282" font-family="monospace" font-size="11" fill="#e6edf3">RS — RESPOND</text>
+  <text x="40" y="296" font-family="monospace" font-size="9" fill="#8b949e">incident mgmt · analysis · mitigation · comms</text>
+
+  <rect x="20" y="306" width="360" height="36" rx="3" fill="#161b22" stroke="#30363d" stroke-width="1"/>
+  <text x="40" y="324" font-family="monospace" font-size="11" fill="#e6edf3">RC — RECOVER</text>
+  <text x="40" y="338" font-family="monospace" font-size="9" fill="#8b949e">recovery planning · communication · improvements</text>
+
+  <!-- ISO Themes -->
+  <rect x="420" y="86" width="360" height="62" rx="3" fill="#161b22" stroke="#30363d" stroke-width="1"/>
+  <text x="440" y="108" font-family="monospace" font-size="11" fill="#e6edf3">Organizational controls</text>
+  <text x="730" y="108" font-family="monospace" font-size="11" fill="#79c0ff" text-anchor="end">37 controls</text>
+  <text x="440" y="126" font-family="monospace" font-size="9" fill="#8b949e">policies · roles · threat intel · supplier relations</text>
+  <text x="440" y="141" font-family="monospace" font-size="9" fill="#8b949e">incident mgmt · business continuity · compliance</text>
+
+  <rect x="420" y="154" width="360" height="46" rx="3" fill="#161b22" stroke="#30363d" stroke-width="1"/>
+  <text x="440" y="174" font-family="monospace" font-size="11" fill="#e6edf3">People controls</text>
+  <text x="730" y="174" font-family="monospace" font-size="11" fill="#79c0ff" text-anchor="end">8 controls</text>
+  <text x="440" y="190" font-family="monospace" font-size="9" fill="#8b949e">screening · ToS · awareness · disciplinary · remote</text>
+
+  <rect x="420" y="206" width="360" height="46" rx="3" fill="#161b22" stroke="#30363d" stroke-width="1"/>
+  <text x="440" y="226" font-family="monospace" font-size="11" fill="#e6edf3">Physical controls</text>
+  <text x="730" y="226" font-family="monospace" font-size="11" fill="#79c0ff" text-anchor="end">14 controls</text>
+  <text x="440" y="242" font-family="monospace" font-size="9" fill="#8b949e">perimeter · entry control · media · clear desk</text>
+
+  <rect x="420" y="258" width="360" height="84" rx="3" fill="#161b22" stroke="#30363d" stroke-width="1"/>
+  <text x="440" y="278" font-family="monospace" font-size="11" fill="#e6edf3">Technological controls</text>
+  <text x="730" y="278" font-family="monospace" font-size="11" fill="#79c0ff" text-anchor="end">34 controls</text>
+  <text x="440" y="296" font-family="monospace" font-size="9" fill="#8b949e">access mgmt (A.5–A.8) · crypto · network security</text>
+  <text x="440" y="312" font-family="monospace" font-size="9" fill="#8b949e">endpoint · SIEM · vuln mgmt · audit logging</text>
+  <text x="440" y="328" font-family="monospace" font-size="9" fill="#4ade80">★ highest density mapping with NIST PR / DE</text>
+
+  <!-- Mapping arrows -->
+  <line x1="380" y1="109" x2="420" y2="109" stroke="#ffa657" stroke-width="1" stroke-dasharray="3,3"/>
+  <line x1="380" y1="200" x2="420" y2="200" stroke="#30363d" stroke-width="1" stroke-dasharray="3,3"/>
+  <line x1="380" y1="240" x2="420" y2="290" stroke="#30363d" stroke-width="1" stroke-dasharray="3,3"/>
+  <line x1="380" y1="270" x2="420" y2="290" stroke="#30363d" stroke-width="1" stroke-dasharray="3,3"/>
+
+  <!-- Methodology note -->
+  <rect x="20" y="358" width="760" height="48" rx="4" fill="#161b22" stroke="#30363d" stroke-width="1"/>
+  <text x="400" y="376" font-family="monospace" font-size="10" fill="#8b949e" text-anchor="middle">Mapping methodology: (1) anchor on shared cybersecurity concepts tagged in ISO 27002 · (2) semantic comparison per subcategory</text>
+  <text x="400" y="394" font-family="monospace" font-size="10" fill="#e6edf3" text-anchor="middle">One ISO control → multiple NIST subcategories · One NIST subcategory → multiple ISO controls · built maturity simulator on top</text>
+</svg>

@@ -23,6 +23,8 @@ A mapping lets you answer: *"If we score X on this ISO control, what does that i
 
 ---
 
+![NIST CSF v2 and ISO 27002:2022 framework structure and mapping](/images/writeups/nist/framework-mapping.svg)
+
 ## The Frameworks
 
 ### NIST CSF v2

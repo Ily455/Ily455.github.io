@@ -10,6 +10,8 @@ tags: ["firmware", "reverse-engineering", "binwalk", "hashcat", "cryptography", 
 
 ---
 
+![Firmware extraction and credential recovery pipeline](/images/writeups/zyxel/pipeline.svg)
+
 ## Environment
 
 **OS**: Ubuntu VM

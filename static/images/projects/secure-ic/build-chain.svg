@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 320" width="800" height="320">
+  <rect width="800" height="320" fill="#0d1117"/>
+  <text x="400" y="26" font-family="monospace" font-size="14" fill="#e6edf3" text-anchor="middle" font-weight="bold">Hikari Integration — Securyzr iSE Build Chain</text>
+
+  <!-- AES C source -->
+  <rect x="20" y="55" width="110" height="60" rx="5" fill="#161b22" stroke="#30363d" stroke-width="1"/>
+  <text x="75" y="76" font-family="monospace" font-size="10" fill="#e6edf3" text-anchor="middle">AES source</text>
+  <text x="75" y="92" font-family="monospace" font-size="10" fill="#8b949e" text-anchor="middle">aes_gcm.c</text>
+  <text x="75" y="108" font-family="monospace" font-size="9" fill="#8b949e" text-anchor="middle">firmware IP</text>
+
+  <!-- Arrow -->
+  <line x1="130" y1="85" x2="155" y2="85" stroke="#4ade80" stroke-width="1.5"/>
+  <polygon points="155,81 163,85 155,89" fill="#4ade80"/>
+
+  <!-- Hikari Clang -->
+  <rect x="163" y="44" width="130" height="82" rx="5" fill="#4ade8015" stroke="#4ade80" stroke-width="1.5"/>
+  <text x="228" y="66" font-family="monospace" font-size="11" fill="#4ade80" text-anchor="middle">Hikari Clang 15</text>
+  <text x="228" y="82" font-family="monospace" font-size="9" fill="#8b949e" text-anchor="middle">-mllvm -bcf</text>
+  <text x="228" y="96" font-family="monospace" font-size="9" fill="#8b949e" text-anchor="middle">-mllvm -fla</text>
+  <text x="228" y="110" font-family="monospace" font-size="9" fill="#8b949e" text-anchor="middle">-mllvm -sub</text>
+  <text x="228" y="122" font-family="monospace" font-size="9" fill="#4ade80" text-anchor="middle">LLVM 15.0.2</text>
+
+  <!-- Arrow to dual output -->
+  <line x1="293" y1="85" x2="318" y2="85" stroke="#30363d" stroke-width="1.5"/>
+  <polygon points="318,81 326,85 318,89" fill="#30363d"/>
+
+  <!-- IR output -->
+  <rect x="326" y="55" width="110" height="60" rx="5" fill="#161b22" stroke="#79c0ff" stroke-width="1"/>
+  <text x="381" y="76" font-family="monospace" font-size="10" fill="#79c0ff" text-anchor="middle">LLVM IR</text>
+  <text x="381" y="92" font-family="monospace" font-size="10" fill="#8b949e" text-anchor="middle">aes_gcm.bc</text>
+  <text x="381" y="108" font-family="monospace" font-size="9" fill="#8b949e" text-anchor="middle">platform-neutral</text>
+
+  <!-- Arrow from IR to RISC-V cross-compile -->
+  <line x1="436" y1="85" x2="461" y2="85" stroke="#30363d" stroke-width="1.5"/>
+  <polygon points="461,81 469,85 461,89" fill="#30363d"/>
+
+  <!-- RISC-V crosscompile -->
+  <rect x="469" y="55" width="130" height="60" rx="5" fill="#161b22" stroke="#30363d" stroke-width="1"/>
+  <text x="534" y="76" font-family="monospace" font-size="10" fill="#e6edf3" text-anchor="middle">RISC-V cross</text>
+  <text x="534" y="92" font-family="monospace" font-size="10" fill="#8b949e" text-anchor="middle">llc + linker</text>
+  <text x="534" y="108" font-family="monospace" font-size="9" fill="#8b949e" text-anchor="middle">riscv32 target</text>
+
+  <!-- Arrow to firmware -->
+  <line x1="599" y1="85" x2="624" y2="85" stroke="#30363d" stroke-width="1.5"/>
+  <polygon points="624,81 632,85 624,89" fill="#30363d"/>
+
+  <!-- Firmware binary -->
+  <rect x="632" y="55" width="148" height="60" rx="5" fill="#161b22" stroke="#ffa657" stroke-width="1"/>
+  <text x="706" y="76" font-family="monospace" font-size="10" fill="#ffa657" text-anchor="middle">Securyzr iSE</text>
+  <text x="706" y="92" font-family="monospace" font-size="10" fill="#8b949e" text-anchor="middle">firmware.bin</text>
+  <text x="706" y="108" font-family="monospace" font-size="9" fill="#8b949e" text-anchor="middle">obfuscated + signed</text>
+
+  <!-- Separator -->
+  <line x1="20" y1="155" x2="780" y2="155" stroke="#30363d" stroke-width="1"/>
+
+  <!-- Build output breakdown -->
+  <text x="400" y="178" font-family="monospace" font-size="12" fill="#e6edf3" text-anchor="middle">Build directory output</text>
+
+  <rect x="20" y="192" width="360" height="110" rx="5" fill="#161b22" stroke="#30363d" stroke-width="1"/>
+  <text x="50" y="212" font-family="monospace" font-size="11" fill="#8b949e">build/</text>
+  <text x="50" y="230" font-family="monospace" font-size="11" fill="#8b949e">  ├── obj/</text>
+  <text x="200" y="230" font-family="monospace" font-size="10" fill="#e6edf3">obfuscated .o files</text>
+  <text x="50" y="248" font-family="monospace" font-size="11" fill="#79c0ff">  ├── ir/</text>
+  <text x="200" y="248" font-family="monospace" font-size="10" fill="#79c0ff">.bc LLVM IR (reusable)</text>
+  <text x="50" y="266" font-family="monospace" font-size="11" fill="#ffa657">  └── bin/</text>
+  <text x="200" y="266" font-family="monospace" font-size="10" fill="#ffa657">final firmware binary</text>
+  <text x="50" y="290" font-family="monospace" font-size="10" fill="#8b949e">Makefile: CC=/hikari/bin/clang CFLAGS=-mllvm -bcf</text>
+
+  <!-- Validation block -->
+  <rect x="400" y="192" width="380" height="110" rx="5" fill="#161b22" stroke="#4ade80" stroke-width="1"/>
+  <text x="590" y="212" font-family="monospace" font-size="11" fill="#4ade80" text-anchor="middle">Hardware validation — FPGA target</text>
+  <line x1="410" y1="218" x2="770" y2="218" stroke="#30363d" stroke-width="1"/>
+  <text x="420" y="238" font-family="monospace" font-size="10" fill="#4ade80">✓ prog test</text>
+  <text x="520" y="238" font-family="monospace" font-size="10" fill="#8b949e">NVM generated + loaded, firmware launched</text>
+  <text x="420" y="258" font-family="monospace" font-size="10" fill="#4ade80">✓ CRYPTO_TESTS</text>
+  <text x="520" y="258" font-family="monospace" font-size="10" fill="#8b949e">AES GCM outputs correct</text>
+  <text x="420" y="278" font-family="monospace" font-size="10" fill="#4ade80">✓ secure boot</text>
+  <text x="520" y="278" font-family="monospace" font-size="10" fill="#8b949e">chain unaffected by obfuscation</text>
+  <text x="420" y="298" font-family="monospace" font-size="10" fill="#8b949e">ARM + RISC-V CPUs on Securyzr iSE FPGA</text>
+</svg>

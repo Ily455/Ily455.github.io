@@ -18,6 +18,8 @@ Résultat : un binaire où les symboles internes comme `checkLicenseKey` ou `dec
 
 ---
 
+![Pipeline LLVM](/images/projects/im-llvm-pass/pipeline.svg)
+
 ## Pourquoi au niveau IR
 
 Le pass opère sur **LLVM IR** (Intermediate Representation), pas sur le code source ni le binaire final.

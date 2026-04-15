@@ -1,0 +1,97 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 420" width="800" height="420">
+  <rect width="800" height="420" fill="#0d1117"/>
+  <text x="400" y="30" font-family="monospace" font-size="14" fill="#e6edf3" text-anchor="middle" font-weight="bold">Disk Image Structure — What FSParser reads</text>
+
+  <!-- Disk bar -->
+  <rect x="30" y="50" width="740" height="40" rx="4" fill="#21262d" stroke="#30363d" stroke-width="1"/>
+  <!-- MBR segment -->
+  <rect x="30" y="50" width="60" height="40" rx="4" fill="#4ade8030" stroke="#4ade80" stroke-width="1.5"/>
+  <text x="60" y="75" font-family="monospace" font-size="10" fill="#4ade80" text-anchor="middle">MBR</text>
+  <!-- Partition 1 FAT32 -->
+  <rect x="90" y="50" width="280" height="40" fill="#79c0ff20" stroke="#79c0ff" stroke-width="1" stroke-dasharray="none"/>
+  <text x="230" y="75" font-family="monospace" font-size="11" fill="#79c0ff" text-anchor="middle">Partition 1 — FAT32</text>
+  <!-- Partition 2 EXT4 -->
+  <rect x="370" y="50" width="400" height="40" fill="#ffa65720" stroke="#ffa657" stroke-width="1"/>
+  <text x="570" y="75" font-family="monospace" font-size="11" fill="#ffa657" text-anchor="middle">Partition 2 — EXT4</text>
+
+  <!-- Offset labels -->
+  <text x="30" y="105" font-family="monospace" font-size="10" fill="#8b949e">0x0000</text>
+  <text x="84" y="105" font-family="monospace" font-size="10" fill="#8b949e">0x01BE</text>
+  <text x="370" y="105" font-family="monospace" font-size="10" fill="#8b949e">part2_start</text>
+
+  <!-- MBR detail box -->
+  <rect x="30" y="120" width="220" height="130" rx="6" fill="#161b22" stroke="#4ade80" stroke-width="1"/>
+  <text x="140" y="140" font-family="monospace" font-size="12" fill="#4ade80" text-anchor="middle">MBR  (512 bytes)</text>
+  <line x1="40" y1="148" x2="240" y2="148" stroke="#30363d" stroke-width="1"/>
+  <text x="50" y="166" font-family="monospace" font-size="10" fill="#8b949e">offset 0x000</text>
+  <text x="170" y="166" font-family="monospace" font-size="10" fill="#e6edf3">446 B boot code</text>
+  <text x="50" y="182" font-family="monospace" font-size="10" fill="#8b949e">offset 0x1BE</text>
+  <text x="170" y="182" font-family="monospace" font-size="10" fill="#e6edf3">part entry × 4</text>
+  <text x="50" y="198" font-family="monospace" font-size="10" fill="#8b949e">  ├ boot flag</text>
+  <text x="50" y="212" font-family="monospace" font-size="10" fill="#8b949e">  ├ type (0x0B=FAT32)</text>
+  <text x="50" y="226" font-family="monospace" font-size="10" fill="#8b949e">  ├ start LBA</text>
+  <text x="50" y="240" font-family="monospace" font-size="10" fill="#4ade80">offset 0x1FE</text>
+  <text x="170" y="240" font-family="monospace" font-size="10" fill="#4ade80">0x55AA signature</text>
+
+  <!-- FAT32 detail box -->
+  <rect x="270" y="120" width="230" height="150" rx="6" fill="#161b22" stroke="#79c0ff" stroke-width="1"/>
+  <text x="385" y="140" font-family="monospace" font-size="12" fill="#79c0ff" text-anchor="middle">FAT32 BPB</text>
+  <line x1="280" y1="148" x2="490" y2="148" stroke="#30363d" stroke-width="1"/>
+  <text x="285" y="166" font-family="monospace" font-size="10" fill="#8b949e">+0x000</text>
+  <text x="340" y="166" font-family="monospace" font-size="10" fill="#e6edf3">JMP + OEM name</text>
+  <text x="285" y="182" font-family="monospace" font-size="10" fill="#8b949e">+0x00B</text>
+  <text x="340" y="182" font-family="monospace" font-size="10" fill="#e6edf3">bytes/sector = 512</text>
+  <text x="285" y="198" font-family="monospace" font-size="10" fill="#8b949e">+0x00D</text>
+  <text x="340" y="198" font-family="monospace" font-size="10" fill="#e6edf3">sectors/cluster</text>
+  <text x="285" y="214" font-family="monospace" font-size="10" fill="#8b949e">+0x010</text>
+  <text x="340" y="214" font-family="monospace" font-size="10" fill="#e6edf3">num FATs = 2</text>
+  <text x="285" y="230" font-family="monospace" font-size="10" fill="#8b949e">+0x024</text>
+  <text x="340" y="230" font-family="monospace" font-size="10" fill="#e6edf3">root cluster</text>
+  <text x="285" y="246" font-family="monospace" font-size="10" fill="#79c0ff">+0x052</text>
+  <text x="340" y="246" font-family="monospace" font-size="10" fill="#79c0ff">"FAT32" label</text>
+  <text x="285" y="262" font-family="monospace" font-size="10" fill="#8b949e">+0x1FE</text>
+  <text x="340" y="262" font-family="monospace" font-size="10" fill="#8b949e">0x55AA signature</text>
+
+  <!-- EXT4 detail box -->
+  <rect x="520" y="120" width="250" height="150" rx="6" fill="#161b22" stroke="#ffa657" stroke-width="1"/>
+  <text x="645" y="140" font-family="monospace" font-size="12" fill="#ffa657" text-anchor="middle">EXT Superblock</text>
+  <line x1="530" y1="148" x2="760" y2="148" stroke="#30363d" stroke-width="1"/>
+  <text x="535" y="166" font-family="monospace" font-size="10" fill="#8b949e">part+0x400</text>
+  <text x="620" y="166" font-family="monospace" font-size="10" fill="#e6edf3">start of superblock</text>
+  <text x="535" y="182" font-family="monospace" font-size="10" fill="#8b949e">  +0x00</text>
+  <text x="620" y="182" font-family="monospace" font-size="10" fill="#e6edf3">inode count</text>
+  <text x="535" y="198" font-family="monospace" font-size="10" fill="#8b949e">  +0x04</text>
+  <text x="620" y="198" font-family="monospace" font-size="10" fill="#e6edf3">block count</text>
+  <text x="535" y="214" font-family="monospace" font-size="10" fill="#8b949e">  +0x18</text>
+  <text x="620" y="214" font-family="monospace" font-size="10" fill="#e6edf3">block size (log)</text>
+  <text x="535" y="230" font-family="monospace" font-size="10" fill="#ffa657">  +0x38</text>
+  <text x="620" y="230" font-family="monospace" font-size="10" fill="#ffa657">magic = 0xEF53</text>
+  <text x="535" y="246" font-family="monospace" font-size="10" fill="#8b949e">  +0x48</text>
+  <text x="620" y="246" font-family="monospace" font-size="10" fill="#e6edf3">FS state</text>
+  <text x="535" y="262" font-family="monospace" font-size="10" fill="#8b949e">  +0x78</text>
+  <text x="620" y="262" font-family="monospace" font-size="10" fill="#e6edf3">volume name</text>
+
+  <!-- Python struct snippet -->
+  <rect x="30" y="290" width="740" height="110" rx="6" fill="#161b22" stroke="#30363d" stroke-width="1"/>
+  <text x="50" y="312" font-family="monospace" font-size="11" fill="#8b949e"># All parsing via struct.unpack — no OS calls, no filesystem driver</text>
+  <text x="50" y="332" font-family="monospace" font-size="11" fill="#ff7b72">with </text>
+  <text x="90" y="332" font-family="monospace" font-size="11" fill="#e6edf3">open(</text>
+  <text x="132" y="332" font-family="monospace" font-size="11" fill="#a5d6ff">"disk.img"</text>
+  <text x="218" y="332" font-family="monospace" font-size="11" fill="#e6edf3">, </text>
+  <text x="232" y="332" font-family="monospace" font-size="11" fill="#a5d6ff">"rb"</text>
+  <text x="264" y="332" font-family="monospace" font-size="11" fill="#e6edf3">) </text>
+  <text x="280" y="332" font-family="monospace" font-size="11" fill="#ff7b72">as </text>
+  <text x="310" y="332" font-family="monospace" font-size="11" fill="#e6edf3">f:</text>
+  <text x="50" y="352" font-family="monospace" font-size="11" fill="#e6edf3">    f.seek(part_offset + </text>
+  <text x="232" y="352" font-family="monospace" font-size="11" fill="#79c0ff">1024</text>
+  <text x="264" y="352" font-family="monospace" font-size="11" fill="#e6edf3">)</text>
+  <text x="290" y="352" font-family="monospace" font-size="11" fill="#8b949e">   # superblock starts at +1024 in partition</text>
+  <text x="50" y="372" font-family="monospace" font-size="11" fill="#e6edf3">    magic = struct.unpack_from(</text>
+  <text x="272" y="372" font-family="monospace" font-size="11" fill="#a5d6ff">"&lt;H"</text>
+  <text x="304" y="372" font-family="monospace" font-size="11" fill="#e6edf3">, data, </text>
+  <text x="356" y="372" font-family="monospace" font-size="11" fill="#79c0ff">56</text>
+  <text x="374" y="372" font-family="monospace" font-size="11" fill="#e6edf3">)[</text>
+  <text x="392" y="372" font-family="monospace" font-size="11" fill="#79c0ff">0</text>
+  <text x="404" y="372" font-family="monospace" font-size="11" fill="#e6edf3">]</text>
+  <text x="430" y="372" font-family="monospace" font-size="11" fill="#8b949e">  # 0xEF53 = EXT magic</text>
+</svg>

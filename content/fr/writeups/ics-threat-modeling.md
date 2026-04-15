@@ -18,6 +18,8 @@ L'asymétrie clé : les systèmes OT privilégient la disponibilité sur la conf
 
 ---
 
+![Chaînes d'attaque ICS — Stuxnet, Ukraine 2015, SektorCERT 2023](/images/writeups/ics/attack-chain.svg)
+
 ## Méthodologie
 
 Chaque incident a été mappé sur **MITRE ATT&CK for ICS** (distinct du framework entreprise). Tactiques clés pertinentes pour les attaques ICS :

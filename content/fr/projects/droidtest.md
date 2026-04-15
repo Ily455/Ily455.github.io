@@ -6,6 +6,8 @@ description: "Un outil CLI Python qui exécute des lots de commandes ADB de diag
 tags: ["python", "android", "adb", "cli", "testing", "automation"]
 ---
 
+![Flux d'exécution DroidTest](/images/projects/droidtest/workflow.svg)
+
 ## Ce que ça fait
 
 DroidTest est un runner en ligne de commande pour les diagnostics d'appareils Android. On lui donne une liste de sous-commandes `adb`, il les exécute toutes et produit un rapport pass/fail structuré.

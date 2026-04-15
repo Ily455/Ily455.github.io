@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 360" width="800" height="360">
+  <rect width="800" height="360" fill="#0d1117"/>
+  <text x="400" y="28" font-family="monospace" font-size="14" fill="#e6edf3" text-anchor="middle" font-weight="bold">Py-C-obfuscator — Source-to-Source Transformation Pipeline</text>
+
+  <!-- Stage 1: C source -->
+  <rect x="20" y="55" width="110" height="60" rx="5" fill="#161b22" stroke="#30363d" stroke-width="1"/>
+  <text x="75" y="78" font-family="monospace" font-size="11" fill="#e6edf3" text-anchor="middle">C Source</text>
+  <text x="75" y="95" font-family="monospace" font-size="10" fill="#8b949e" text-anchor="middle">input.c</text>
+  <text x="75" y="110" font-family="monospace" font-size="10" fill="#8b949e" text-anchor="middle">readable code</text>
+
+  <line x1="130" y1="85" x2="155" y2="85" stroke="#30363d" stroke-width="1.5"/>
+  <polygon points="155,81 163,85 155,89" fill="#30363d"/>
+
+  <!-- Stage 2: Python parser -->
+  <rect x="163" y="55" width="120" height="60" rx="5" fill="#161b22" stroke="#30363d" stroke-width="1"/>
+  <text x="223" y="78" font-family="monospace" font-size="11" fill="#e6edf3" text-anchor="middle">Python</text>
+  <text x="223" y="95" font-family="monospace" font-size="10" fill="#8b949e" text-anchor="middle">C parser</text>
+  <text x="223" y="110" font-family="monospace" font-size="10" fill="#8b949e" text-anchor="middle">pycparser</text>
+
+  <line x1="283" y1="85" x2="308" y2="85" stroke="#30363d" stroke-width="1.5"/>
+  <polygon points="308,81 316,85 308,89" fill="#30363d"/>
+
+  <!-- Stage 3: AST (highlighted) -->
+  <rect x="316" y="44" width="120" height="82" rx="5" fill="#79c0ff10" stroke="#79c0ff" stroke-width="1.5"/>
+  <text x="376" y="68" font-family="monospace" font-size="11" fill="#79c0ff" text-anchor="middle">AST</text>
+  <text x="376" y="84" font-family="monospace" font-size="10" fill="#8b949e" text-anchor="middle">FuncDecl</text>
+  <text x="376" y="100" font-family="monospace" font-size="10" fill="#8b949e" text-anchor="middle">  └ ParamList</text>
+  <text x="376" y="116" font-family="monospace" font-size="10" fill="#8b949e" text-anchor="middle">  └ Compound</text>
+
+  <line x1="436" y1="85" x2="461" y2="85" stroke="#4ade80" stroke-width="2"/>
+  <polygon points="461,81 469,85 461,89" fill="#4ade80"/>
+
+  <!-- Stage 4: Transformations -->
+  <rect x="469" y="44" width="160" height="82" rx="5" fill="#4ade8015" stroke="#4ade80" stroke-width="1.5"/>
+  <text x="549" y="66" font-family="monospace" font-size="11" fill="#4ade80" text-anchor="middle">Transformations</text>
+  <text x="549" y="82" font-family="monospace" font-size="10" fill="#e6edf3" text-anchor="middle">→ rename identifiers</text>
+  <text x="549" y="98" font-family="monospace" font-size="10" fill="#e6edf3" text-anchor="middle">→ rewrite expressions</text>
+  <text x="549" y="114" font-family="monospace" font-size="10" fill="#e6edf3" text-anchor="middle">→ opaque predicates</text>
+
+  <line x1="629" y1="85" x2="654" y2="85" stroke="#30363d" stroke-width="1.5"/>
+  <polygon points="654,81 662,85 654,89" fill="#30363d"/>
+
+  <!-- Stage 5: Output -->
+  <rect x="662" y="55" width="118" height="60" rx="5" fill="#161b22" stroke="#30363d" stroke-width="1"/>
+  <text x="721" y="78" font-family="monospace" font-size="11" fill="#e6edf3" text-anchor="middle">Obfuscated C</text>
+  <text x="721" y="95" font-family="monospace" font-size="10" fill="#8b949e" text-anchor="middle">output.c</text>
+  <text x="721" y="110" font-family="monospace" font-size="10" fill="#8b949e" text-anchor="middle">valid C source</text>
+
+  <!-- Separator -->
+  <line x1="20" y1="155" x2="780" y2="155" stroke="#30363d" stroke-width="1"/>
+
+  <!-- Key property -->
+  <text x="400" y="178" font-family="monospace" font-size="12" fill="#e6edf3" text-anchor="middle">Key property: functionally equivalent — compiles and runs identically</text>
+
+  <!-- Before/After code comparison -->
+  <rect x="20" y="195" width="370" height="145" rx="5" fill="#161b22" stroke="#30363d" stroke-width="1"/>
+  <text x="205" y="214" font-family="monospace" font-size="11" fill="#8b949e" text-anchor="middle">BEFORE</text>
+  <line x1="30" y1="220" x2="380" y2="220" stroke="#30363d" stroke-width="1"/>
+  <text x="40" y="240" font-family="monospace" font-size="12" fill="#ff7b72">int </text>
+  <text x="70" y="240" font-family="monospace" font-size="12" fill="#d2a8ff">add</text>
+  <text x="100" y="240" font-family="monospace" font-size="12" fill="#e6edf3">(int a, int b) {</text>
+  <text x="40" y="260" font-family="monospace" font-size="12" fill="#e6edf3">  return a + b;</text>
+  <text x="40" y="278" font-family="monospace" font-size="12" fill="#e6edf3">}</text>
+  <text x="40" y="306" font-family="monospace" font-size="12" fill="#ff7b72">void </text>
+  <text x="78" y="306" font-family="monospace" font-size="12" fill="#d2a8ff">swap</text>
+  <text x="112" y="306" font-family="monospace" font-size="12" fill="#e6edf3">(int *x, int *y) {</text>
+  <text x="40" y="326" font-family="monospace" font-size="12" fill="#e6edf3">  int t=*x; *x=*y; *y=t;</text>
+  <text x="40" y="344" font-family="monospace" font-size="12" fill="#e6edf3">}</text>
+
+  <rect x="410" y="195" width="370" height="145" rx="5" fill="#161b22" stroke="#4ade80" stroke-width="1"/>
+  <text x="595" y="214" font-family="monospace" font-size="11" fill="#4ade80" text-anchor="middle">AFTER</text>
+  <line x1="420" y1="220" x2="770" y2="220" stroke="#30363d" stroke-width="1"/>
+  <text x="430" y="240" font-family="monospace" font-size="12" fill="#ff7b72">int </text>
+  <text x="460" y="240" font-family="monospace" font-size="12" fill="#4ade80">_x7f2a</text>
+  <text x="512" y="240" font-family="monospace" font-size="12" fill="#e6edf3">(int _k9, int _m3) {</text>
+  <text x="430" y="260" font-family="monospace" font-size="12" fill="#e6edf3">  return (_k9^_m3)+((_k9&amp;_m3)&lt;&lt;1);</text>
+  <text x="430" y="278" font-family="monospace" font-size="12" fill="#e6edf3">}</text>
+  <text x="430" y="306" font-family="monospace" font-size="12" fill="#ff7b72">void </text>
+  <text x="468" y="306" font-family="monospace" font-size="12" fill="#4ade80">_q1r8</text>
+  <text x="510" y="306" font-family="monospace" font-size="12" fill="#e6edf3">(int *_p2, int *_n5) {</text>
+  <text x="430" y="326" font-family="monospace" font-size="12" fill="#e6edf3">  int _t0=*_p2;*_p2=*_n5;*_n5=_t0;</text>
+  <text x="430" y="344" font-family="monospace" font-size="12" fill="#e6edf3">}</text>
+</svg>

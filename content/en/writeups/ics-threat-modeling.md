@@ -18,6 +18,8 @@ The key asymmetry: OT systems prioritize availability over confidentiality. Patc
 
 ---
 
+![ICS attack kill chains — Stuxnet, Ukraine 2015, SektorCERT 2023](/images/writeups/ics/attack-chain.svg)
+
 ## Methodology
 
 Each incident was mapped against **MITRE ATT&CK for ICS** (distinct from the enterprise framework). Key tactics relevant to ICS attacks:

@@ -20,6 +20,8 @@ Objectif : évaluer des outils d'obfuscation, en sélectionner un, et l'intégre
 
 ## Analyse Comparative
 
+![Benchmark obfuscateurs — overhead vs similarité CFG](/images/projects/secure-ic/benchmark.svg)
+
 ### Environnement
 
 Quatre VMs Ubuntu Server 22.04.4 dans VirtualBox 7.0 sur un hôte Windows 10 (Dell, i5-1135G7, 16 Go RAM). Chaque VM avait 3072 Mo de RAM et 4 vCPUs — une par obfuscateur, pour éviter les conflits de dépendances.
@@ -104,6 +106,8 @@ Un pattern clair : un score de similarité plus bas corrèle avec un coût en re
 ---
 
 ## PoC — Intégration dans Securyzr iSE
+
+![Intégration Hikari dans la chaîne de build Securyzr iSE](/images/projects/secure-ic/build-chain.svg)
 
 ### Obfuscateur Retenu : Hikari
 

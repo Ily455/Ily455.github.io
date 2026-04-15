@@ -20,6 +20,8 @@ The deployment approach is based on master VMs: a Windows Server master and an U
 
 ## Infrastructure
 
+![ESXi virtualized enterprise network topology](/images/projects/esxi/topology.svg)
+
 **Hypervisor**: VMware ESXi 6.5, managed via the ESXi Host Client.
 
 | VM | OS | Role |

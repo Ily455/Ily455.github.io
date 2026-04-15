@@ -10,6 +10,8 @@ tags: ["forensics", "volatility", "forensics-memoire", "windows", "dfir", "blue-
 
 ---
 
+![Workflow analyse mémoire Volatility](/images/writeups/volatility/workflow.svg)
+
 ## Cible
 
 ```

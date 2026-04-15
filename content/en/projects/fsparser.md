@@ -20,6 +20,8 @@ It reads fixed offsets, parses binary fields, and prints human-readable output a
 
 ---
 
+![Disk image structure — MBR, FAT32, EXT](/images/projects/fsparser/disk-layout.svg)
+
 ## Why Parse Raw Structures
 
 Most tools that "read" a filesystem rely on the OS to mount it first. That works fine in normal usage, but in forensics and low-level analysis contexts, you often need to:

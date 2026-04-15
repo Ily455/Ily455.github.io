@@ -20,6 +20,8 @@ Il lit des offsets fixes, parse des champs binaires et affiche une sortie lisibl
 
 ---
 
+![Structure image disque](/images/projects/fsparser/disk-layout.svg)
+
 ## Pourquoi parser les structures brutes
 
 La plupart des outils qui "lisent" un système de fichiers s'appuient sur l'OS pour le monter d'abord. Ça fonctionne en usage normal, mais dans les contextes forensics et d'analyse bas niveau, on a souvent besoin de :

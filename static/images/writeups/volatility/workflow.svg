@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 380" width="800" height="380">
+  <rect width="800" height="380" fill="#0d1117"/>
+  <text x="400" y="26" font-family="monospace" font-size="14" fill="#e6edf3" text-anchor="middle" font-weight="bold">Volatility 2 — Memory Analysis Workflow (WinXP SP2)</text>
+
+  <!-- Dump file -->
+  <rect x="20" y="48" width="150" height="60" rx="5" fill="#161b22" stroke="#30363d" stroke-width="1"/>
+  <text x="95" y="70" font-family="monospace" font-size="10" fill="#e6edf3" text-anchor="middle">dump_practice.dmp</text>
+  <text x="95" y="86" font-family="monospace" font-size="9" fill="#8b949e" text-anchor="middle">WinXP SP2 — VirtualBox</text>
+  <text x="95" y="100" font-family="monospace" font-size="9" fill="#8b949e" text-anchor="middle">2016-01-03 23:00 UTC</text>
+
+  <line x1="170" y1="78" x2="195" y2="78" stroke="#30363d" stroke-width="1.5"/>
+  <polygon points="195,74 203,78 195,82" fill="#30363d"/>
+
+  <!-- imageinfo -->
+  <rect x="203" y="48" width="130" height="60" rx="5" fill="#4ade8015" stroke="#4ade80" stroke-width="1.5"/>
+  <text x="268" y="68" font-family="monospace" font-size="10" fill="#4ade80" text-anchor="middle">imageinfo</text>
+  <text x="268" y="84" font-family="monospace" font-size="9" fill="#8b949e" text-anchor="middle">profile detection</text>
+  <text x="268" y="99" font-family="monospace" font-size="9" fill="#4ade80" text-anchor="middle">WinXPSP2x86 ✓</text>
+
+  <line x1="333" y1="78" x2="358" y2="78" stroke="#30363d" stroke-width="1.5"/>
+  <polygon points="358,74 366,78 358,82" fill="#30363d"/>
+
+  <!-- Plugin pipeline -->
+  <rect x="366" y="40" width="414" height="76" rx="5" fill="#161b22" stroke="#30363d" stroke-width="1"/>
+  <text x="573" y="60" font-family="monospace" font-size="10" fill="#8b949e" text-anchor="middle">Analysis plugins  (-f dump.dmp --profile=WinXPSP2x86)</text>
+  <line x1="376" y1="66" x2="770" y2="66" stroke="#30363d" stroke-width="1"/>
+  <text x="390" y="82" font-family="monospace" font-size="9" fill="#e6edf3">pslist  psscan  pstree  connections  sockets</text>
+  <text x="390" y="97" font-family="monospace" font-size="9" fill="#e6edf3">userassist  driverscan  iehistory  threads  vadinfo</text>
+  <text x="390" y="112" font-family="monospace" font-size="9" fill="#e6edf3">consoles  editbox  notepad  volshell</text>
+
+  <!-- Key findings grid -->
+  <text x="400" y="148" font-family="monospace" font-size="12" fill="#e6edf3" text-anchor="middle">Key Findings</text>
+  <line x1="20" y1="155" x2="780" y2="155" stroke="#30363d" stroke-width="1"/>
+
+  <!-- Finding boxes: 3 columns x 2 rows -->
+  <!-- Row 1 -->
+  <rect x="20" y="165" width="235" height="90" rx="4" fill="#161b22" stroke="#30363d" stroke-width="1"/>
+  <text x="137" y="184" font-family="monospace" font-size="10" fill="#4ade80" text-anchor="middle">pslist vs psscan</text>
+  <text x="137" y="200" font-family="monospace" font-size="9" fill="#8b949e" text-anchor="middle">no hidden processes detected</text>
+  <text x="137" y="216" font-family="monospace" font-size="9" fill="#e6edf3" text-anchor="middle">notepad.exe PID 1088</text>
+  <text x="137" y="232" font-family="monospace" font-size="9" fill="#e6edf3" text-anchor="middle">14× wmplayer.exe (user "pero")</text>
+  <text x="137" y="248" font-family="monospace" font-size="9" fill="#8b949e" text-anchor="middle">System, csrss, winlogon, lsass</text>
+
+  <rect x="283" y="165" width="234" height="90" rx="4" fill="#161b22" stroke="#30363d" stroke-width="1"/>
+  <text x="400" y="184" font-family="monospace" font-size="10" fill="#4ade80" text-anchor="middle">connections / sockets</text>
+  <text x="400" y="200" font-family="monospace" font-size="9" fill="#e6edf3" text-anchor="middle">WMP → 50.31.192.83:554</text>
+  <text x="400" y="216" font-family="monospace" font-size="9" fill="#8b949e" text-anchor="middle">RTSP stream (PID 1360)</text>
+  <text x="400" y="232" font-family="monospace" font-size="9" fill="#e6edf3" text-anchor="middle">IE → sc1.slable.com:8126</text>
+  <text x="400" y="248" font-family="monospace" font-size="9" fill="#8b949e" text-anchor="middle">DNS error page (no network)</text>
+
+  <rect x="545" y="165" width="235" height="90" rx="4" fill="#161b22" stroke="#30363d" stroke-width="1"/>
+  <text x="662" y="184" font-family="monospace" font-size="10" fill="#4ade80" text-anchor="middle">editbox / notepad</text>
+  <text x="662" y="200" font-family="monospace" font-size="9" fill="#e6edf3" text-anchor="middle">live process memory extract</text>
+  <text x="662" y="216" font-family="monospace" font-size="9" fill="#4ade80" text-anchor="middle">"You are the best. Mhm."</text>
+  <text x="662" y="232" font-family="monospace" font-size="9" fill="#8b949e" text-anchor="middle">file never saved to disk</text>
+  <text x="662" y="248" font-family="monospace" font-size="9" fill="#8b949e" text-anchor="middle">undo buf: "Mhm."</text>
+
+  <!-- Row 2 -->
+  <rect x="20" y="268" width="235" height="90" rx="4" fill="#161b22" stroke="#30363d" stroke-width="1"/>
+  <text x="137" y="287" font-family="monospace" font-size="10" fill="#4ade80" text-anchor="middle">driverscan</text>
+  <text x="137" y="303" font-family="monospace" font-size="9" fill="#e6edf3" text-anchor="middle">PROCEXP141.SYS loaded</text>
+  <text x="137" y="319" font-family="monospace" font-size="9" fill="#8b949e" text-anchor="middle">Process Explorer kernel driver</text>
+  <text x="137" y="335" font-family="monospace" font-size="9" fill="#8b949e" text-anchor="middle">(legitimate — user was running</text>
+  <text x="137" y="350" font-family="monospace" font-size="9" fill="#8b949e" text-anchor="middle">Sysinternals tools)</text>
+
+  <rect x="283" y="268" width="234" height="90" rx="4" fill="#161b22" stroke="#30363d" stroke-width="1"/>
+  <text x="400" y="287" font-family="monospace" font-size="10" fill="#4ade80" text-anchor="middle">vadinfo — notepad PID 1088</text>
+  <text x="400" y="303" font-family="monospace" font-size="9" fill="#e6edf3" text-anchor="middle">notepad.exe mapped 0x01000000</text>
+  <text x="400" y="319" font-family="monospace" font-size="9" fill="#8b949e" text-anchor="middle">PAGE_EXECUTE_WRITECOPY (normal)</text>
+  <text x="400" y="335" font-family="monospace" font-size="9" fill="#4ade80" text-anchor="middle">no RWX anomaly → no injection</text>
+  <text x="400" y="351" font-family="monospace" font-size="9" fill="#8b949e" text-anchor="middle">stack/heap: PAGE_READWRITE</text>
+
+  <rect x="545" y="268" width="235" height="90" rx="4" fill="#161b22" stroke="#30363d" stroke-width="1"/>
+  <text x="662" y="287" font-family="monospace" font-size="10" fill="#4ade80" text-anchor="middle">volshell — PID 1088</text>
+  <text x="662" y="303" font-family="monospace" font-size="9" fill="#e6edf3" text-anchor="middle">dis(0x7c90eb94) → RET / PUSHF</text>
+  <text x="662" y="319" font-family="monospace" font-size="9" fill="#8b949e" text-anchor="middle">kernel32.dll + ntdll.dll range</text>
+  <text x="662" y="335" font-family="monospace" font-size="9" fill="#e6edf3" text-anchor="middle">INT 0x2e — legacy syscall gate</text>
+  <text x="662" y="351" font-family="monospace" font-size="9" fill="#8b949e" text-anchor="middle">(WinXP, pre-SYSENTER)</text>
+</svg>

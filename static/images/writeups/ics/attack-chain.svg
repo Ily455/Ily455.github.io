@@ -1,0 +1,116 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 420" width="800" height="420">
+  <rect width="800" height="420" fill="#0d1117"/>
+  <text x="400" y="26" font-family="monospace" font-size="14" fill="#e6edf3" text-anchor="middle" font-weight="bold">ICS Attack Kill Chains — MITRE ATT&amp;CK for ICS</text>
+
+  <!-- Column headers -->
+  <text x="130" y="50" font-family="monospace" font-size="10" fill="#f85149" text-anchor="middle">Stuxnet (2010)</text>
+  <text x="400" y="50" font-family="monospace" font-size="10" fill="#ffa657" text-anchor="middle">Ukraine Grid (2015)</text>
+  <text x="670" y="50" font-family="monospace" font-size="10" fill="#79c0ff" text-anchor="middle">SektorCERT DK (2023)</text>
+
+  <line x1="260" y1="36" x2="260" y2="410" stroke="#30363d" stroke-width="1"/>
+  <line x1="530" y1="36" x2="530" y2="410" stroke="#30363d" stroke-width="1"/>
+
+  <!-- Tactic rows -->
+  <!-- Initial Access -->
+  <rect x="20" y="58" width="220" height="42" rx="3" fill="#f8514920" stroke="#f85149" stroke-width="1"/>
+  <text x="130" y="74" font-family="monospace" font-size="9" fill="#f85149" text-anchor="middle">TA0108 Initial Access</text>
+  <text x="130" y="89" font-family="monospace" font-size="9" fill="#e6edf3" text-anchor="middle">USB LNK exploit (4× zero-days)</text>
+
+  <rect x="280" y="58" width="230" height="42" rx="3" fill="#ffa65720" stroke="#ffa657" stroke-width="1"/>
+  <text x="395" y="74" font-family="monospace" font-size="9" fill="#ffa657" text-anchor="middle">TA0108 Initial Access</text>
+  <text x="395" y="89" font-family="monospace" font-size="9" fill="#e6edf3" text-anchor="middle">Spearphishing → IT network</text>
+
+  <rect x="550" y="58" width="230" height="42" rx="3" fill="#79c0ff20" stroke="#79c0ff" stroke-width="1"/>
+  <text x="665" y="74" font-family="monospace" font-size="9" fill="#79c0ff" text-anchor="middle">TA0108 Initial Access</text>
+  <text x="665" y="89" font-family="monospace" font-size="9" fill="#e6edf3" text-anchor="middle">Firewall CVE exploitation</text>
+
+  <!-- Arrows -->
+  <line x1="130" y1="100" x2="130" y2="112" stroke="#f85149" stroke-width="1"/>
+  <polygon points="126,112 130,120 134,112" fill="#f85149"/>
+  <line x1="395" y1="100" x2="395" y2="112" stroke="#ffa657" stroke-width="1"/>
+  <polygon points="391,112 395,120 399,112" fill="#ffa657"/>
+  <line x1="665" y1="100" x2="665" y2="112" stroke="#79c0ff" stroke-width="1"/>
+  <polygon points="661,112 665,120 669,112" fill="#79c0ff"/>
+
+  <!-- Lateral Movement -->
+  <rect x="20" y="120" width="220" height="42" rx="3" fill="#f8514920" stroke="#f85149" stroke-width="1"/>
+  <text x="130" y="136" font-family="monospace" font-size="9" fill="#f85149" text-anchor="middle">TA0103 Lateral Movement</text>
+  <text x="130" y="151" font-family="monospace" font-size="9" fill="#e6edf3" text-anchor="middle">IT → Siemens Step 7 WS</text>
+
+  <rect x="280" y="120" width="230" height="42" rx="3" fill="#ffa65720" stroke="#ffa657" stroke-width="1"/>
+  <text x="395" y="136" font-family="monospace" font-size="9" fill="#ffa657" text-anchor="middle">TA0103 Lateral Movement</text>
+  <text x="395" y="151" font-family="monospace" font-size="9" fill="#e6edf3" text-anchor="middle">IT → OT via VPN jump host</text>
+
+  <rect x="550" y="120" width="230" height="42" rx="3" fill="#79c0ff20" stroke="#79c0ff" stroke-width="1"/>
+  <text x="665" y="136" font-family="monospace" font-size="9" fill="#79c0ff" text-anchor="middle">TA0103 Lateral Movement</text>
+  <text x="665" y="151" font-family="monospace" font-size="9" fill="#e6edf3" text-anchor="middle">IT → OT (Zyxel firewalls)</text>
+
+  <!-- Arrows -->
+  <line x1="130" y1="162" x2="130" y2="174" stroke="#f85149" stroke-width="1"/>
+  <polygon points="126,174 130,182 134,174" fill="#f85149"/>
+  <line x1="395" y1="162" x2="395" y2="174" stroke="#ffa657" stroke-width="1"/>
+  <polygon points="391,174 395,182 399,174" fill="#ffa657"/>
+  <line x1="665" y1="162" x2="665" y2="174" stroke="#79c0ff" stroke-width="1"/>
+  <polygon points="661,174 665,182 669,174" fill="#79c0ff"/>
+
+  <!-- Collection -->
+  <rect x="20" y="182" width="220" height="42" rx="3" fill="#f8514920" stroke="#f85149" stroke-width="1"/>
+  <text x="130" y="198" font-family="monospace" font-size="9" fill="#f85149" text-anchor="middle">TA0102 Collection</text>
+  <text x="130" y="213" font-family="monospace" font-size="9" fill="#e6edf3" text-anchor="middle">Intercept PLC comms (S7)</text>
+
+  <rect x="280" y="182" width="230" height="42" rx="3" fill="#ffa65720" stroke="#ffa657" stroke-width="1"/>
+  <text x="395" y="198" font-family="monospace" font-size="9" fill="#ffa657" text-anchor="middle">TA0102 Collection</text>
+  <text x="395" y="213" font-family="monospace" font-size="9" fill="#e6edf3" text-anchor="middle">OPC DA data, SCADA config</text>
+
+  <rect x="550" y="182" width="230" height="42" rx="3" fill="#79c0ff20" stroke="#79c0ff" stroke-width="1"/>
+  <text x="665" y="198" font-family="monospace" font-size="9" fill="#79c0ff" text-anchor="middle">TA0102 Collection</text>
+  <text x="665" y="213" font-family="monospace" font-size="9" fill="#e6edf3" text-anchor="middle">Survey OT network topology</text>
+
+  <!-- Arrows -->
+  <line x1="130" y1="224" x2="130" y2="236" stroke="#f85149" stroke-width="1"/>
+  <polygon points="126,236 130,244 134,236" fill="#f85149"/>
+  <line x1="395" y1="224" x2="395" y2="236" stroke="#ffa657" stroke-width="1"/>
+  <polygon points="391,236 395,244 399,236" fill="#ffa657"/>
+  <line x1="665" y1="224" x2="665" y2="236" stroke="#79c0ff" stroke-width="1"/>
+  <polygon points="661,236 665,244 669,236" fill="#79c0ff"/>
+
+  <!-- Inhibit Response -->
+  <rect x="20" y="244" width="220" height="42" rx="3" fill="#f8514920" stroke="#f85149" stroke-width="1"/>
+  <text x="130" y="260" font-family="monospace" font-size="9" fill="#f85149" text-anchor="middle">TA0109 Inhibit Response</text>
+  <text x="130" y="275" font-family="monospace" font-size="9" fill="#e6edf3" text-anchor="middle">Rootkit masks rotor alarms</text>
+
+  <rect x="280" y="244" width="230" height="42" rx="3" fill="#ffa65720" stroke="#ffa657" stroke-width="1"/>
+  <text x="395" y="260" font-family="monospace" font-size="9" fill="#ffa657" text-anchor="middle">TA0109 Inhibit Response</text>
+  <text x="395" y="275" font-family="monospace" font-size="9" fill="#e6edf3" text-anchor="middle">Wiper on HMIs + RTUs</text>
+
+  <rect x="550" y="244" width="230" height="42" rx="3" fill="#79c0ff20" stroke="#79c0ff" stroke-width="1"/>
+  <text x="665" y="260" font-family="monospace" font-size="9" fill="#79c0ff" text-anchor="middle">TA0109 Inhibit Response</text>
+  <text x="665" y="275" font-family="monospace" font-size="9" fill="#e6edf3" text-anchor="middle">Disable safety interlocks</text>
+
+  <!-- Arrows -->
+  <line x1="130" y1="286" x2="130" y2="298" stroke="#f85149" stroke-width="1"/>
+  <polygon points="126,298 130,306 134,298" fill="#f85149"/>
+  <line x1="395" y1="286" x2="395" y2="298" stroke="#ffa657" stroke-width="1"/>
+  <polygon points="391,298 395,306 399,298" fill="#ffa657"/>
+  <line x1="665" y1="286" x2="665" y2="298" stroke="#79c0ff" stroke-width="1"/>
+  <polygon points="661,298 665,306 669,298" fill="#79c0ff"/>
+
+  <!-- Impact -->
+  <rect x="20" y="306" width="220" height="48" rx="3" fill="#f8514940" stroke="#f85149" stroke-width="2"/>
+  <text x="130" y="324" font-family="monospace" font-size="9" fill="#f85149" text-anchor="middle">TA0105 Impact</text>
+  <text x="130" y="340" font-family="monospace" font-size="9" fill="#e6edf3" text-anchor="middle">~1,000 centrifuges destroyed</text>
+  <text x="130" y="352" font-family="monospace" font-size="9" fill="#8b949e" text-anchor="middle">operators saw nothing</text>
+
+  <rect x="280" y="306" width="230" height="48" rx="3" fill="#ffa65740" stroke="#ffa657" stroke-width="2"/>
+  <text x="395" y="324" font-family="monospace" font-size="9" fill="#ffa657" text-anchor="middle">TA0105 Impact</text>
+  <text x="395" y="340" font-family="monospace" font-size="9" fill="#e6edf3" text-anchor="middle">225,000+ customers blacked out</text>
+  <text x="395" y="352" font-family="monospace" font-size="9" fill="#8b949e" text-anchor="middle">3 oblast power companies</text>
+
+  <rect x="550" y="306" width="230" height="48" rx="3" fill="#79c0ff40" stroke="#79c0ff" stroke-width="2"/>
+  <text x="665" y="324" font-family="monospace" font-size="9" fill="#79c0ff" text-anchor="middle">TA0105 Impact</text>
+  <text x="665" y="340" font-family="monospace" font-size="9" fill="#e6edf3" text-anchor="middle">22 energy companies targeted</text>
+  <text x="665" y="352" font-family="monospace" font-size="9" fill="#8b949e" text-anchor="middle">partial disruption prevented</text>
+
+  <!-- Framework note -->
+  <text x="400" y="380" font-family="monospace" font-size="9" fill="#8b949e" text-anchor="middle">Mapped against MITRE ATT&amp;CK for ICS — distinct from Enterprise framework, OT-specific tactics</text>
+</svg>

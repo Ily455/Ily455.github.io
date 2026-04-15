@@ -10,6 +10,8 @@ tags: ["forensics", "volatility", "memory-forensics", "windows", "dfir", "blue-t
 
 ---
 
+![Volatility memory analysis workflow — plugins and key findings](/images/writeups/volatility/workflow.svg)
+
 ## Target
 
 ```
