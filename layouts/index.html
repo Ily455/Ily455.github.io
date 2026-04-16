@@ -1,7 +1,4 @@
 {{ define "main" }}
-<head>
-    <link rel="stylesheet" type='text/css' href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/devicon.min.css" />
-</head>
 <div class="w-full md:w-4/5 lg:w-3/5 mx-auto px-14 py-12">
     {{ $authorData := index site.Data .Language.Lang "author" }}
     {{ $author := cond (and $authorData $authorData.author) $authorData.author site.Params }}
