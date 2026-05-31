@@ -1,6 +1,12 @@
 [techStack]
 other = "Stack technique"
 
+[latestWriteup]
+other = "Dernier writeup"
+
+[latestProject]
+other = "Dernier projet"
+
 [backToProjects]
 other = "cd ../projets/"
 

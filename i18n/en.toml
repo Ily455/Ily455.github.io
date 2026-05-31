@@ -1,6 +1,18 @@
 [techStack]
 other = "Tech Stack"
 
+[learnMore]
+other = "Learn more"
+
+[viewAll]
+other = "View all"
+
+[latestWriteup]
+other = "Latest writeup"
+
+[latestProject]
+other = "Latest project"
+
 [backToProjects]
 other = "cd ../projects/"
 

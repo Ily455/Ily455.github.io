@@ -61,6 +61,32 @@
     </section>
     {{ end }}
 
+    <!-- Latest writeup + project -->
+    {{ $latestWriteup := index (where site.RegularPages "Section" "writeups") 0 }}
+    {{ $latestProject := index (where site.RegularPages "Section" "projects") 0 }}
+    {{ if or $latestWriteup $latestProject }}
+    <section class="mb-20">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-3xl mx-auto">
+            {{ with $latestWriteup }}
+            <a href="{{ .Permalink }}" class="group block p-4 rounded-lg border border-gray-700 hover:border-green-400/50 bg-[#0d0d0d] hover:bg-green-400/5 transition-all duration-300">
+                <div class="text-green-400 font-mono text-xs mb-2 uppercase tracking-widest">{{ T "latestWriteup" }}</div>
+                <h3 class="text-white font-semibold text-base mb-1 group-hover:text-green-300 transition-colors line-clamp-2">{{ .Title }}</h3>
+                <p class="text-gray-500 text-xs font-mono mb-2">{{ .Date.Format "2006-01-02" }}</p>
+                {{ with .Params.description }}<p class="text-gray-400 text-sm line-clamp-2">{{ . }}</p>{{ end }}
+            </a>
+            {{ end }}
+            {{ with $latestProject }}
+            <a href="{{ .Permalink }}" class="group block p-4 rounded-lg border border-gray-700 hover:border-blue-400/50 bg-[#0d0d0d] hover:bg-blue-400/5 transition-all duration-300">
+                <div class="text-blue-400 font-mono text-xs mb-2 uppercase tracking-widest">{{ T "latestProject" }}</div>
+                <h3 class="text-white font-semibold text-base mb-1 group-hover:text-blue-300 transition-colors line-clamp-2">{{ .Title }}</h3>
+                <p class="text-gray-500 text-xs font-mono mb-2">{{ .Date.Format "2006-01-02" }}</p>
+                {{ with .Params.description }}<p class="text-gray-400 text-sm line-clamp-2">{{ . }}</p>{{ end }}
+            </a>
+            {{ end }}
+        </div>
+    </section>
+    {{ end }}
+
     <!-- Experience -->
     {{ $experienceData := index site.Data .Language.Lang "experience" }}
     {{ $experience := cond (and $experienceData $experienceData.experience) $experienceData.experience site.Params.experience }}
