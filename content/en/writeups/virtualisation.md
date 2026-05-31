@@ -1,5 +1,5 @@
 ---
-title: "Virtualisation — The Type 1 / Type 2 Classification and Its Gap"
+title: "Virtualisation — The Type 1 / Type 2 Classification Has a Gap"
 date: 2025-05-30
 draft: false
 description: "The Type 1 / Type 2 hypervisor classification has a gap — KVM, Hyper-V, and Hypervisor.framework don't fit cleanly into either category, and understanding why matters more than the label."
