@@ -1,6 +1,6 @@
 ---
 title: "Virtualisation — La classification Type 1 / Type 2 a une lacune"
-date: 2025-05-30
+date: 2026-05-31
 draft: false
 description: "La classification Type 1 / Type 2 des hyperviseurs a une lacune — KVM, Hyper-V et Hypervisor.framework n'entrent pas proprement dans l'une ou l'autre catégorie, et comprendre pourquoi compte plus que le label."
 tags: ["virtualisation", "hyperviseur", "kvm", "docker", "conteneurs", "linux", "systèmes"]
