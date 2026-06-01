@@ -1,4 +1,12 @@
 [[projects]]
+  title = "ATT&CK Detection Lab"
+  description = "Local lab for simulating MITRE ATT&CK techniques against a Linux target and detecting them with Elastic SIEM — Atomic Red Team, Docker, Sigma rules, one technique at a time."
+  tech = "Docker, Elastic, Filebeat, Atomic Red Team, Sigma, Linux"
+  image = "/images/projects/attack-detect-lab.svg"
+  link = ""
+  slug = "/projects/attack-detect-lab/"
+
+[[projects]]
   title = "DroidTest"
   description = "A CLI runner for Android device diagnostics. Feed it a list of ADB sub-commands, it runs them all and produces a structured pass/fail report with optional JSON export."
   tech = "Python, ADB, Android"
