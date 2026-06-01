@@ -1,6 +1,6 @@
 [[projects]]
   title = "ATT&CK Detection Lab"
-  description = "Local lab for simulating MITRE ATT&CK techniques against a Linux target and detecting them with Elastic SIEM — Atomic Red Team, Docker, Sigma rules, one technique at a time."
+  description = "Local lab for simulating MITRE ATT&CK techniques against a Linux VM and detecting them with Elastic SIEM — Atomic Red Team, auditd, Sigma rules, one technique at a time."
   tech = "Docker, Elastic, Filebeat, Atomic Red Team, Sigma, Linux"
   image = "/images/projects/attack-detect-lab.svg"
   link = ""

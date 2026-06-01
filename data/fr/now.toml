@@ -1,5 +1,5 @@
 [now]
   title = "ATT&CK Detection Lab"
-  description = "Construction d'un lab local qui simule des techniques MITRE ATT&CK contre un conteneur Linux et les détecte avec Elastic SIEM. Une technique à la fois — logs, règle Sigma, requête KQL, writeup."
+  description = "Construction d'un lab local qui simule des techniques MITRE ATT&CK contre une VM Linux (UTM) et les détecte avec Elastic SIEM dans Docker. Une technique à la fois — logs auditd, règle Sigma, requête KQL, writeup."
   status = "En cours"
   slug = "/projects/attack-detect-lab/"

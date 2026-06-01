@@ -2,8 +2,8 @@
 title: "ATT&CK Detection Lab"
 date: 2026-05-31
 draft: false
-description: "Lab local pour simuler des techniques MITRE ATT&CK et les détecter avec Elastic SIEM — tout tourne sous Docker, pas de VMs, nettoyage en une commande."
-tags: ["elastic", "siem", "docker", "mitre-attack", "atomic-red-team", "detection", "blue-team", "sigma", "linux"]
+description: "Lab local pour simuler des techniques MITRE ATT&CK et les détecter avec Elastic SIEM — Atomic Red Team contre une cible Linux, logs envoyés dans Kibana."
+tags: ["elastic", "siem", "docker", "mitre-attack", "atomic-red-team", "detection", "blue-team", "linux", "auditd"]
 ---
 
 > Projet personnel, 2026 — **en cours.** Objectif : construire un environnement autonome pour simuler des techniques adversariales et concevoir les détections — une technique à la fois, avec des logs, des règles Sigma et des writeups en sortie.
@@ -12,10 +12,10 @@ tags: ["elastic", "siem", "docker", "mitre-attack", "atomic-red-team", "detectio
 
 ## Vue d'ensemble
 
-Le lab exécute des techniques Atomic Red Team contre un conteneur Linux cible et les détecte avec Elastic SIEM. Le pipeline complet — simulation d'attaque, collecte de logs, détection — tourne en local sur un Mac Apple Silicon, sans VMs ni dépendance cloud.
+Le lab exécute des techniques Atomic Red Team contre une cible Linux dédiée et les détecte avec Elastic SIEM. Le stack SIEM tourne dans Docker sur un Mac Apple Silicon. Les techniques s'exécutent sur une VM Linux séparée (UTM), qui envoie ses logs vers Elasticsearch via Filebeat.
 
-Chaque technique produit :
-- Des logs bruts capturés depuis le système de logging unifié macOS
+Chaque technique complétée produit :
+- Des logs bruts depuis auditd et syslog sur la cible Linux
 - Une règle Sigma de détection
 - Une requête KQL pour Kibana
 - Un writeup documentant la technique, les preuves et la logique de détection
@@ -25,23 +25,19 @@ Chaque technique produit :
 ## Architecture
 
 ```
-┌─────────────────────────────────────────────────────────────┐
-│  macOS Host (M3)                                            │
-│                                                             │
-│  run-test.sh                                                │
-│    └── pwsh → Invoke-AtomicTest ──► SSH → conteneur cible   │
-│                                                             │
-│  ┌──────────────────────────────────────────────────────┐   │
-│  │  Docker  (réseau bridge : elastic)                   │   │
-│  │                                                      │   │
-│  │  target ──► Filebeat ──► Elasticsearch ◄── Kibana   │   │
-│  │  (Ubuntu)   surveille     stocke +         SIEM UI  │   │
-│  │             /logs/        indexe                     │   │
-│  └──────────────────────────────────────────────────────┘   │
-└─────────────────────────────────────────────────────────────┘
+┌──────────────────────────────────────────────────────────────┐
+│  macOS Host (M3)                                             │
+│                                                              │
+│  run-test.sh                                                 │
+│    └── SSH → VM Linux (UTM)                                  │
+│               ├── Atomic Red Team exécute les techniques     │
+│               ├── auditd enregistre chaque processus/syscall │
+│               └── Filebeat ──► Elasticsearch ◄── Kibana      │
+│                                (Docker)         (Docker)     │
+└──────────────────────────────────────────────────────────────┘
 ```
 
-**Décision de conception clé :** Atomic Red Team s'exécute dans le conteneur cible via SSH — pas sur le Mac hôte. Le Mac ne fait qu'initier le test. PowerShell et le framework Atomic ne laissent aucune trace sur l'hôte après nettoyage, au-delà de Docker Desktop lui-même.
+**Décision de conception clé :** Atomic Red Team et toute la simulation d'attaque restent sur la cible Linux — pas sur le Mac. Le Mac ne fait qu'initier les tests via SSH. Le SIEM (Elasticsearch + Kibana) tourne dans Docker et ne touche jamais la cible directement — il reçoit uniquement les logs.
 
 ---
 
@@ -51,12 +47,12 @@ Chaque technique produit :
 |---|---|---|
 | Elasticsearch | Stockage et indexation des logs | 8.14.3 |
 | Kibana | Interface SIEM, règles de détection, KQL | 8.14.3 |
-| Filebeat | Collecteur de logs | 8.14.3 |
-| Conteneur cible | Ubuntu ARM64, surface d'attaque | — |
+| Filebeat | Collecteur de logs (sur la VM cible) | 8.14.3 |
+| VM cible | Ubuntu 22.04 ARM64, surface d'attaque | UTM sur M3 |
 | Atomic Red Team | Simulateur de techniques MITRE ATT&CK | latest |
-| PowerShell | Runtime Atomic (transport SSH) | latest |
+| PowerShell | Runtime Atomic | 7.4.6 |
 
-Toutes les images Elastic tournent en `linux/arm64` — exécution native sur M3, sans émulation.
+Les images Elastic tournent en `linux/arm64` — exécution native sur M3, sans émulation.
 
 ---
 
@@ -66,12 +62,12 @@ Toutes les images Elastic tournent en `linux/arm64` — exécution native sur M3
 ./run-test.sh T1059.004
 ```
 
-1. Ouvre une session SSH depuis PowerShell vers le conteneur cible
-2. Exécute `Invoke-AtomicTest T1059.004` dans le conteneur
-3. Attend que les événements post-exécution se stabilisent
-4. Lance `Invoke-AtomicTest T1059.004 -Cleanup` pour supprimer les artefacts
-5. Filebeat envoie les logs du conteneur vers Elasticsearch en quelques secondes
-6. Les événements apparaissent dans Kibana sous la data view `attack-detect-logs-*`
+1. SSH vers la VM Linux cible
+2. Exécution d'`Invoke-AtomicTest T1059.004` sur la cible
+3. auditd enregistre chaque appel `execve` — chaque commande exécutée, avec ses arguments
+4. Filebeat envoie les logs auditd et syslog vers Elasticsearch en quelques secondes
+5. Les événements apparaissent dans Kibana sous la data view `attack-detect-logs-*`
+6. `Invoke-AtomicTest T1059.004 -Cleanup` supprime les artefacts
 
 ---
 
@@ -79,7 +75,7 @@ Toutes les images Elastic tournent en `linux/arm64` — exécution native sur M3
 
 | # | ID | Nom | Statut |
 |---|---|---|---|
-| 1 | T1059.004 | Unix Shell | Planifié |
+| 1 | T1059.004 | Unix Shell | En cours |
 | 2 | T1053.003 | Persistance via Cron | Planifié |
 | 3 | T1136.001 | Création de compte local | Planifié |
 | 4 | T1087.001 | Découverte de comptes locaux | Planifié |
@@ -88,25 +84,30 @@ Toutes les images Elastic tournent en `linux/arm64` — exécution native sur M3
 
 ---
 
-## Pourquoi Docker plutôt que des VMs
+## Contraintes techniques découvertes pendant la construction
 
-Les VMs ajoutent une couche coûteuse et lente à itérer. Docker offre :
-- Stack complète opérationnelle en moins de 2 minutes
-- `docker compose down -v` efface tout — aucun état résiduel entre les tests
-- Images ARM64 natives sur M3, sans overhead Rosetta
-- Le conteneur cible est un vrai environnement Linux — les techniques se comportent comme sur un vrai hôte Linux
+La première version de ce lab utilisait un conteneur Docker comme cible plutôt qu'une VM. Cela a révélé plusieurs contraintes importantes.
 
-La contrepartie : le système de logging unifié macOS est propriétaire et moins structuré qu'auditd sous Linux ou l'Event Log Windows. Le lab est conçu avec une architecture v2 en tête qui déplace tout dans des conteneurs pour un vrai setup Linux-vers-Linux.
+**Le noyau linuxkit de Docker Desktop n'a pas de sous-système audit.** Faire tourner Ubuntu dans un conteneur Docker sur macOS signifie que le conteneur partage la VM Linux interne de Docker Desktop — pas un noyau standard. Le sous-système audit (`auditd`, `CAP_AUDIT_*`) n'est pas compilé dedans. `auditctl -s` retourne "Operation not permitted" quelle que soit la configuration des capabilities. Aucun contournement possible sans remplacer le noyau.
+
+**Le script block logging PowerShell sous Linux nécessite systemd/journald.** Activer `ScriptBlockLogging` dans `powershell.config.json` ne fait rien silencieusement dans un conteneur minimal — il n'y a pas de journald pour recevoir les logs. Ils disparaissent.
+
+**Conséquence :** Une cible en conteneur ne peut capturer que ce qu'elle écrit délibérément dans des fichiers de log connus — événements auth, cron, redirections explicites. Elle ne peut pas enregistrer passivement quelles commandes ont été exécutées. Ce n'est pas de la surveillance SIEM réelle.
+
+**Solution :** Déplacer la cible vers une vraie VM Linux (UTM, Ubuntu 22.04). La VM dispose d'un vrai noyau, d'un vrai systemd, d'un vrai auditd. Deux règles audit capturent chaque appel `execve` sur le système — chaque commande exécutée, quelle que soit la façon dont l'attaquant l'a déclenchée.
+
+```bash
+auditctl -a always,exit -F arch=b64 -S execve -k exec_commands
+auditctl -a always,exit -F arch=b32 -S execve -k exec_commands
+```
+
+**Note ARM64 :** Le dépôt de packages Linux de Microsoft ne publie pas PowerShell pour ARM64. L'installation nécessite de télécharger l'archive directement depuis les releases GitHub.
 
 ---
 
-## Roadmap — v2
+## Roadmap
 
-Déplacer Atomic Red Team dans un conteneur attaquant dédié. Mouvement latéral SSH entre conteneurs, sans implication de l'hôte. Le Mac reste complètement propre.
-
-```
-Mac (client SSH uniquement)
-  └── SSH → Conteneur attaquant (PowerShell + Atomic)
-                └── SSH → Conteneur cible (Ubuntu + Filebeat)
-                              └── Filebeat → Elasticsearch → Kibana
-```
+- Finaliser la VM UTM avec auditd + Filebeat
+- Exécuter les 6 techniques avec des preuves complètes au niveau des commandes
+- Écrire les règles Sigma et requêtes KQL pour chaque technique
+- Writeups documentant les preuves et la logique de détection par technique
