@@ -6,7 +6,7 @@ description: "Lab local pour simuler des techniques MITRE ATT&CK et les détecte
 tags: ["elastic", "siem", "docker", "mitre-attack", "atomic-red-team", "detection", "blue-team", "sigma", "linux"]
 ---
 
-> Projet personnel, 2026. Objectif : construire un environnement autonome pour simuler des techniques adversariales et concevoir les détections — une technique à la fois, avec des logs, des règles Sigma et des writeups en sortie.
+> Projet personnel, 2026 — **en cours.** Objectif : construire un environnement autonome pour simuler des techniques adversariales et concevoir les détections — une technique à la fois, avec des logs, des règles Sigma et des writeups en sortie.
 
 ---
 

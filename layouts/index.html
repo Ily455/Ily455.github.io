@@ -40,6 +40,23 @@
     {{ warnf "Author data not found. Please check your site configuration." }}
     {{ end }}
 
+    <!-- Now -->
+    {{ with (index site.Data .Language.Lang "now") }}
+    {{ with .now }}
+    <section class="mb-12">
+        <a href="{{ .slug }}" class="group block max-w-3xl ml-0 p-4 rounded-lg border border-gray-700 hover:border-green-400/50 bg-[#0d0d0d] hover:bg-green-400/5 transition-all duration-300">
+            <div class="flex items-center gap-3 mb-2">
+                <span class="w-2 h-2 rounded-full bg-green-400 animate-pulse shrink-0"></span>
+                <span class="text-green-400 font-mono text-xs uppercase tracking-widest">Now</span>
+                <span class="text-gray-600 font-mono text-xs">— {{ .status }}</span>
+            </div>
+            <h3 class="text-white font-semibold text-base mb-1 group-hover:text-green-300 transition-colors">{{ .title }}</h3>
+            <p class="text-gray-400 text-sm">{{ .description }}</p>
+        </a>
+    </section>
+    {{ end }}
+    {{ end }}
+
     <!-- Tech Stack -->
     {{ with (index site.Data .Language.Lang "tech") }}
     <section class="mb-20">
