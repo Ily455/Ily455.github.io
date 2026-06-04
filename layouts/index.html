@@ -79,8 +79,11 @@
     {{ end }}
 
     <!-- Latest writeup + project -->
+    {{ $nowData := index site.Data .Language.Lang "now" }}
+    {{ $nowSlug := cond (and $nowData $nowData.now $nowData.now.slug) $nowData.now.slug "" }}
     {{ $latestWriteup := index (where site.RegularPages "Section" "writeups") 0 }}
-    {{ $latestProject := index (where site.RegularPages "Section" "projects") 0 }}
+    {{ $allProjects := where site.RegularPages "Section" "projects" }}
+    {{ $latestProject := index (where $allProjects ".RelPermalink" "ne" $nowSlug) 0 }}
     {{ if or $latestWriteup $latestProject }}
     <section class="mb-20">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-3xl mx-auto">
