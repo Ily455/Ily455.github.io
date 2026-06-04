@@ -16,7 +16,7 @@
             <a href="{{ .Permalink }}" class="block group">
                 <div class="flex items-center gap-2 mb-2">
                     <h2 class="text-xl font-semibold text-text-primary-light dark:text-text-primary-dark group-hover:text-green-400 transition-colors duration-200">{{ .Title }}</h2>
-                    {{ if eq .Params.type "article" }}<span class="shrink-0 text-xs px-2 py-0.5 rounded-full border border-gray-600 text-gray-500 font-mono">article</span>{{ end }}
+                    {{ if eq .Params.post_type "article" }}<span class="shrink-0 text-xs px-2 py-0.5 rounded-full border border-gray-600 text-gray-500 font-mono">article</span>{{ end }}
                 </div>
             </a>
             {{ if .Description }}

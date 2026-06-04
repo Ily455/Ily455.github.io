@@ -54,7 +54,8 @@
       "Bash(python3 -c \"import playwright\")",
       "Bash(npx playwright *)",
       "Bash(npm install *)",
-      "Bash(node check_portfolio.js)"
+      "Bash(node check_portfolio.js)",
+      "Bash(node -e ' *)"
     ],
     "additionalDirectories": [
       "/Users/ily455/Downloads/_claude_memory_updated",
