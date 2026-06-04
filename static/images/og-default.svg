@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#0d0d0d"/>
+  <rect x="0" y="0" width="1200" height="4" fill="#4ade80"/>
+  <text x="80" y="260" font-family="monospace" font-size="22" fill="#4ade80">$ whoami</text>
+  <text x="80" y="330" font-family="monospace" font-size="64" font-weight="bold" fill="#f9fafb">Ilyass El Annid</text>
+  <text x="80" y="400" font-family="monospace" font-size="28" fill="#9ca3af">Cybersecurity Engineer</text>
+  <text x="80" y="460" font-family="monospace" font-size="20" fill="#6b7280">ily455.github.io</text>
+</svg>

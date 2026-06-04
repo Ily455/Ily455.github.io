@@ -1,0 +1,124 @@
+{{- $siteName := .Site.Title -}}
+{{- $siteURL := .Site.BaseURL -}}
+{{- $ogImage := absURL "images/og-default.svg" -}}
+{{- $description := "" -}}
+{{- if .Params.description -}}
+  {{- $description = .Params.description -}}
+{{- else if .IsHome -}}
+  {{- $description = .Site.Params.description -}}
+{{- else if .Summary -}}
+  {{- $description = .Summary | truncate 160 -}}
+{{- else -}}
+  {{- $description = .Site.Params.description -}}
+{{- end -}}
+
+{{- $ogType := "website" -}}
+{{- if or (eq .Section "writeups") (eq .Section "projects") -}}
+  {{- $ogType = "article" -}}
+{{- end -}}
+
+<!-- SEO: description -->
+<meta name="description" content="{{ $description }}">
+<meta name="author" content="{{ .Site.Params.name }}">
+
+<!-- Canonical -->
+<link rel="canonical" href="{{ .Permalink }}">
+
+<!-- hreflang (multilingual) -->
+<link rel="alternate" hreflang="{{ .Language.Lang }}" href="{{ .Permalink }}">
+{{- range .Translations }}
+<link rel="alternate" hreflang="{{ .Language.Lang }}" href="{{ .Permalink }}">
+{{- end }}
+<link rel="alternate" hreflang="x-default" href="{{ $siteURL }}">
+
+<!-- Open Graph -->
+<meta property="og:site_name" content="{{ $siteName }}">
+<meta property="og:title" content="{{ if .IsHome }}{{ $siteName }}{{ else }}{{ .Title }} — {{ $siteName }}{{ end }}">
+<meta property="og:description" content="{{ $description }}">
+<meta property="og:url" content="{{ .Permalink }}">
+<meta property="og:type" content="{{ $ogType }}">
+<meta property="og:image" content="{{ $ogImage }}">
+<meta property="og:locale" content="{{ replace .Language.Lang "-" "_" }}">
+{{- range .Translations }}
+<meta property="og:locale:alternate" content="{{ replace .Language.Lang "-" "_" }}">
+{{- end }}
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="{{ if .IsHome }}{{ $siteName }}{{ else }}{{ .Title }} — {{ $siteName }}{{ end }}">
+<meta name="twitter:description" content="{{ $description }}">
+<meta name="twitter:image" content="{{ $ogImage }}">
+
+<!-- Sitemap -->
+<link rel="sitemap" type="application/xml" href="{{ absURL "sitemap.xml" }}">
+
+<!-- JSON-LD -->
+{{- if .IsHome }}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": "{{ $siteURL }}#person",
+      "name": "{{ .Site.Params.name }}",
+      "url": "{{ $siteURL }}",
+      "jobTitle": "Cybersecurity Engineer",
+      "description": "{{ $description }}",
+      "sameAs": [
+        "{{ .Site.Params.github }}",
+        "{{ .Site.Params.linkedin }}"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "{{ $siteURL }}#website",
+      "name": "{{ $siteName }}",
+      "url": "{{ $siteURL }}",
+      "author": { "@id": "{{ $siteURL }}#person" }
+    }
+  ]
+}
+</script>
+{{- else if eq .Section "writeups" }}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "{{ .Title }}",
+  "description": "{{ $description }}",
+  "url": "{{ .Permalink }}",
+  "datePublished": "{{ .Date.Format "2006-01-02" }}",
+  "dateModified": "{{ .Lastmod.Format "2006-01-02" }}",
+  "author": {
+    "@type": "Person",
+    "name": "{{ .Site.Params.name }}",
+    "url": "{{ $siteURL }}"
+  },
+  "publisher": {
+    "@type": "Person",
+    "name": "{{ .Site.Params.name }}",
+    "url": "{{ $siteURL }}"
+  },
+  "inLanguage": "{{ .Language.Lang }}"
+}
+</script>
+{{- else if eq .Section "projects" }}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "{{ .Title }}",
+  "description": "{{ $description }}",
+  "url": "{{ .Permalink }}",
+  "datePublished": "{{ .Date.Format "2006-01-02" }}",
+  "author": {
+    "@type": "Person",
+    "name": "{{ .Site.Params.name }}",
+    "url": "{{ $siteURL }}"
+  },
+  "applicationCategory": "SecurityApplication",
+  "inLanguage": "{{ .Language.Lang }}"
+}
+</script>
+{{- end }}

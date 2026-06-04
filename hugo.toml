@@ -2,6 +2,11 @@ baseURL = "https://ily455.github.io/"
 languageCode = "en-us"
 title = "Ilyass El Annid"
 theme = "hugo-noir"
+enableRobotsTXT = false
+
+[sitemap]
+  changefreq = "weekly"
+  priority = 0.5
 
 defaultContentLanguage = "en"
 defaultContentLanguageInSubdir = false
