@@ -5,7 +5,7 @@ draft: false
 layout: "about"
 ---
 
-I'm a cybersecurity engineer based in France. Double degree — MSc in IT Reliability & Security from Aix-Marseille University, State Engineering Degree in Cybersecurity from ENSA Oujda.
+I'm Ilyass El Annid, a cybersecurity engineer based in France. Double degree — MSc in IT Reliability & Security from Aix-Marseille University, State Engineering Degree in Cybersecurity from ENSA Oujda.
 
 My work spans several areas: software protection (LLVM obfuscation, compiler passes, source-level transformations), blue team infrastructure (full SOC stack deployment with Elastic, Wazuh, Suricata, MISP, TheHive), digital forensics (memory analysis, malware reverse engineering), and ICS/OT security (threat modeling on critical infrastructure incidents with MITRE ATT&CK for ICS).
 

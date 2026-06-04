@@ -31,7 +31,7 @@ Chaque technique complétée produit :
 │  run-test.sh                                                 │
 │    └── SSH → VM Linux (UTM)                                  │
 │               ├── Atomic Red Team exécute les techniques     │
-│               ├── auditd enregistre chaque processus/syscall │
+│               ├── auditd enregistre chaque syscall execve     │
 │               └── Filebeat ──► Elasticsearch ◄── Kibana      │
 │                                (Docker)         (Docker)     │
 └──────────────────────────────────────────────────────────────┘
@@ -75,12 +75,107 @@ Les images Elastic tournent en `linux/arm64` — exécution native sur M3, sans 
 
 | # | ID | Nom | Statut |
 |---|---|---|---|
-| 1 | T1059.004 | Unix Shell | En cours |
-| 2 | T1053.003 | Persistance via Cron | Planifié |
-| 3 | T1136.001 | Création de compte local | Planifié |
-| 4 | T1087.001 | Découverte de comptes locaux | Planifié |
-| 5 | T1083 | Découverte de fichiers et répertoires | Planifié |
-| 6 | T1105 | Transfert d'outils | Planifié |
+| 1 | T1059.004 | Unix Shell | Terminé |
+| 2 | T1053.003 | Persistance via Cron | Terminé |
+| 3 | T1136.001 | Création de compte local | Terminé |
+| 4 | T1087.001 | Découverte de comptes locaux | Terminé |
+| 5 | T1083 | Découverte de fichiers et répertoires | Terminé |
+| 6 | T1105 | Transfert d'outils | Terminé |
+
+### T1059.004 — Unix Shell
+
+15/17 sous-tests exécutés avec succès. auditd a capturé chaque invocation de shell via `execve`.
+
+Extrait de log :
+```
+type=EXECVE msg=audit(1780489845.066:1912): argc=3 a0="sh" a1="-c" a2=""
+```
+
+**Requête KQL :**
+```
+message: "type=EXECVE" AND (message: "a0=\"sh\"" OR message: "a0=\"bash\"" OR message: "a0=\"dash\"")
+```
+
+---
+
+### T1053.003 — Persistance via Cron
+
+4/4 sous-tests exécutés avec succès. auditd a capturé les écritures dans les répertoires cron et les commandes bash via les enregistrements PROCTITLE.
+
+Preuve clé — crontab chargé depuis /tmp/ :
+```
+type=EXECVE argc=2 a0="crontab" a1="/tmp/persistevil"
+```
+
+**Requête KQL :**
+```
+message: "type=EXECVE" AND message: "a0=\"crontab\""
+```
+
+---
+
+### T1136.001 — Création de compte local
+
+Atomic a créé un utilisateur local nommé `evil_user`. auditd a capturé la création et la suppression via `useradd`/`userdel`.
+
+Preuve clé — PROCTITLE décodé :
+```
+userdel evil_user
+```
+
+À noter : `auid=1000` persiste après sudo — auditd trace l'utilisateur d'origine (`ubuntu`) même quand la commande tourne en root.
+
+**Requête KQL :**
+```
+message: "type=EXECVE" AND (message: "a0=\"useradd\"" OR message: "a0=\"adduser\"")
+```
+
+---
+
+### T1087.001 — Découverte de comptes locaux
+
+Atomic a exécuté des commandes d'énumération : `cat /etc/passwd`, `cat /etc/shadow`, `lsof`, `getent passwd`. auditd a capturé chaque invocation.
+
+```
+type=EXECVE argc=2 a0="cat" a1="/etc/passwd"
+type=EXECVE argc=1 a0="lsof"
+```
+
+**Requête KQL :**
+```
+message: "type=EXECVE" AND (message: "a1=\"/etc/passwd\"" OR message: "a1=\"/etc/shadow\"" OR message: "a0=\"lsof\"")
+```
+
+---
+
+### T1083 — Découverte de fichiers et répertoires
+
+3/3 tests réussis : découverte de fichiers via `ls /tmp`, énumération récursive de répertoires, et `showmount` pour la découverte de partages réseau.
+
+```
+type=EXECVE argc=2 a0="find" a1="/"
+type=EXECVE argc=1 a0="showmount"
+```
+
+**Requête KQL :**
+```
+message: "type=EXECVE" AND (message: "a0=\"find\"" OR message: "a0=\"showmount\"" OR message: "a0=\"tree\"")
+```
+
+---
+
+### T1105 — Transfert d'outils
+
+6/9 tests réussis. Un conteneur `remote` dédié (Ubuntu + SSH + rsync) a été ajouté pour permettre les tests de transfert. rsync push/pull, scp push, sftp push, et curl download+execute ont tous réussi.
+
+```
+type=EXECVE a0="curl" a1="-s" a2="<url>"
+```
+
+**Requête KQL :**
+```
+message: "type=EXECVE" AND (message: "a0=\"curl\"" OR message: "a0=\"wget\"")
+```
 
 ---
 
@@ -107,7 +202,10 @@ auditctl -a always,exit -F arch=b32 -S execve -k exec_commands
 
 ## Roadmap
 
-- Finaliser la VM UTM avec auditd + Filebeat
-- Exécuter les 6 techniques avec des preuves complètes au niveau des commandes
-- Écrire les règles Sigma et requêtes KQL pour chaque technique
-- Writeups documentant les preuves et la logique de détection par technique
+- ~~Finaliser la VM UTM avec auditd + Filebeat~~ ✓
+- ~~T1059.004 — Unix Shell~~ ✓
+- ~~T1053.003 — Persistance via Cron~~ ✓
+- ~~T1136.001 — Création de compte local~~ ✓
+- ~~T1087.001 — Découverte de comptes locaux~~ ✓
+- ~~T1083 — Découverte de fichiers et répertoires~~ ✓
+- ~~T1105 — Transfert d'outils~~ ✓

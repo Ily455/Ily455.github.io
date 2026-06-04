@@ -61,10 +61,28 @@
     {
       "@type": "Person",
       "@id": "{{ $siteURL }}#person",
-      "name": "{{ .Site.Params.name }}",
+      "name": "Ilyass El Annid",
       "url": "{{ $siteURL }}",
       "jobTitle": "Cybersecurity Engineer",
       "description": "{{ $description }}",
+      "email": "{{ .Site.Params.email }}",
+      "knowsAbout": [
+        "Cybersecurity", "LLVM Obfuscation", "Digital Forensics",
+        "Blue Team", "SIEM", "Malware Analysis", "ICS Security",
+        "Elastic Stack", "Wazuh", "MITRE ATT&CK"
+      ],
+      "alumniOf": [
+        {
+          "@type": "EducationalOrganization",
+          "name": "Aix-Marseille Université",
+          "url": "https://www.univ-amu.fr"
+        },
+        {
+          "@type": "EducationalOrganization",
+          "name": "École Nationale des Sciences Appliquées d'Oujda",
+          "url": "https://ensao.ump.ac.ma"
+        }
+      ],
       "sameAs": [
         "{{ .Site.Params.github }}",
         "{{ .Site.Params.linkedin }}"

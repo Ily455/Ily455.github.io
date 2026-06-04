@@ -5,7 +5,7 @@ draft: false
 layout: "about"
 ---
 
-Ingénieur cybersécurité basé en France. Double diplôme — Master Fiabilité & Sécurité Informatique à Aix-Marseille, diplôme d'ingénieur d'État en cybersécurité à l'ENSA Oujda.
+Je suis Ilyass El Annid, ingénieur cybersécurité basé en France. Double diplôme — Master Fiabilité & Sécurité Informatique à Aix-Marseille, diplôme d'ingénieur d'État en cybersécurité à l'ENSA Oujda.
 
 Mon travail couvre plusieurs domaines : la protection logicielle (obfuscation LLVM, passes compilateur, transformations au niveau source), l'infrastructure blue team (déploiement complet d'un stack SOC avec Elastic, Wazuh, Suricata, MISP, TheHive), la forensics numérique (analyse mémoire, reverse engineering de malwares) et la sécurité ICS/OT (modélisation des menaces sur des incidents d'infrastructure critique avec MITRE ATT&CK for ICS).
 

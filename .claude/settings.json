@@ -45,14 +45,16 @@
       "Bash(gh api *)",
       "Bash(git commit *)",
       "Bash(docker compose *)",
-      "Bash(mv /Users/ily455/attack-detect-lab /Users/ily455/Desktop/Projects/attack-detect-lab && echo \"ok\")"
+      "Bash(mv /Users/ily455/attack-detect-lab /Users/ily455/Desktop/Projects/attack-detect-lab && echo \"ok\")",
+      "Bash(cp /Users/ily455/Downloads/googlef9cf6d2a7561866b.html *)"
     ],
     "additionalDirectories": [
       "/Users/ily455/Downloads/_claude_memory_updated",
       "/Users/ily455/Desktop/cv",
       "/Users/ily455/Desktop/CV_Job_Search",
       "/Users/ily455/.ssh",
-      "/Users/ily455/attack-detect-lab"
+      "/Users/ily455/attack-detect-lab",
+      "/Users/ily455/Downloads"
     ]
   }
 }

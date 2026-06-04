@@ -31,7 +31,7 @@ Each completed technique produces:
 │  run-test.sh                                                 │
 │    └── SSH → Linux VM (UTM)                                  │
 │               ├── Atomic Red Team executes techniques        │
-│               ├── auditd records every process/syscall       │
+│               ├── auditd records every execve syscall        │
 │               └── Filebeat ──► Elasticsearch ◄── Kibana      │
 │                                (Docker)         (Docker)     │
 └──────────────────────────────────────────────────────────────┘
@@ -75,12 +75,107 @@ Elastic images run as `linux/arm64` — native M3 execution, no emulation.
 
 | # | ID | Name | Status |
 |---|---|---|---|
-| 1 | T1059.004 | Unix Shell | In progress |
-| 2 | T1053.003 | Cron Job Persistence | Planned |
-| 3 | T1136.001 | Create Local Account | Planned |
-| 4 | T1087.001 | Local Account Discovery | Planned |
-| 5 | T1083 | File and Directory Discovery | Planned |
-| 6 | T1105 | Ingress Tool Transfer | Planned |
+| 1 | T1059.004 | Unix Shell | Done |
+| 2 | T1053.003 | Cron Job Persistence | Done |
+| 3 | T1136.001 | Create Local Account | Done |
+| 4 | T1087.001 | Local Account Discovery | Done |
+| 5 | T1083 | File and Directory Discovery | Done |
+| 6 | T1105 | Ingress Tool Transfer | Done |
+
+### T1059.004 — Unix Shell
+
+15/17 sub-tests executed successfully. auditd captured every shell invocation via `execve`.
+
+Sample log evidence:
+```
+type=EXECVE msg=audit(1780489845.066:1912): argc=3 a0="sh" a1="-c" a2=""
+```
+
+**KQL detection:**
+```
+message: "type=EXECVE" AND (message: "a0=\"sh\"" OR message: "a0=\"bash\"" OR message: "a0=\"dash\"")
+```
+
+---
+
+### T1053.003 — Cron Job Persistence
+
+4/4 sub-tests executed successfully. auditd captured writes to cron directories and bash commands via PROCTITLE records.
+
+Key evidence — crontab loaded from /tmp/:
+```
+type=EXECVE argc=2 a0="crontab" a1="/tmp/persistevil"
+```
+
+**KQL detection:**
+```
+message: "type=EXECVE" AND message: "a0=\"crontab\""
+```
+
+---
+
+### T1136.001 — Create Local Account
+
+Atomic created a local user named `evil_user`. auditd captured both creation and deletion via `useradd`/`userdel`.
+
+Key evidence — PROCTITLE hex decoded:
+```
+userdel evil_user
+```
+
+Notable: `auid=1000` persists across sudo — auditd tracks the original user (`ubuntu`) even when the command runs as root.
+
+**KQL detection:**
+```
+message: "type=EXECVE" AND (message: "a0=\"useradd\"" OR message: "a0=\"adduser\"")
+```
+
+---
+
+### T1087.001 — Local Account Discovery
+
+Atomic ran enumeration commands: `cat /etc/passwd`, `cat /etc/shadow`, `lsof`, `getent passwd`. auditd captured every invocation.
+
+```
+type=EXECVE argc=2 a0="cat" a1="/etc/passwd"
+type=EXECVE argc=1 a0="lsof"
+```
+
+**KQL detection:**
+```
+message: "type=EXECVE" AND (message: "a1=\"/etc/passwd\"" OR message: "a1=\"/etc/shadow\"" OR message: "a0=\"lsof\"")
+```
+
+---
+
+### T1083 — File and Directory Discovery
+
+3/3 tests succeeded: file discovery via `ls /tmp`, recursive directory tree enumeration, and `showmount` for network share discovery.
+
+```
+type=EXECVE argc=2 a0="find" a1="/"
+type=EXECVE argc=1 a0="showmount"
+```
+
+**KQL detection:**
+```
+message: "type=EXECVE" AND (message: "a0=\"find\"" OR message: "a0=\"showmount\"" OR message: "a0=\"tree\"")
+```
+
+---
+
+### T1105 — Ingress Tool Transfer
+
+6/9 tests succeeded. A dedicated `remote` container (Ubuntu + SSH + rsync) was added to enable the transfer tests. rsync push/pull, scp push, sftp push, and curl download+execute all passed.
+
+```
+type=EXECVE a0="curl" a1="-s" a2="<url>"
+```
+
+**KQL detection:**
+```
+message: "type=EXECVE" AND (message: "a0=\"curl\"" OR message: "a0=\"wget\"")
+```
 
 ---
 
@@ -107,7 +202,10 @@ auditctl -a always,exit -F arch=b32 -S execve -k exec_commands
 
 ## Roadmap
 
-- Complete UTM VM setup with auditd + Filebeat
-- Run all 6 techniques with full command-level log evidence
-- Write Sigma rules and KQL queries for each technique
-- Writeups documenting evidence and detection logic per technique
+- ~~Complete UTM VM setup with auditd + Filebeat~~ ✓
+- ~~T1059.004 — Unix Shell~~ ✓
+- ~~T1053.003 — Cron Job Persistence~~ ✓
+- ~~T1136.001 — Create Local Account~~ ✓
+- ~~T1087.001 — Local Account Discovery~~ ✓
+- ~~T1083 — File and Directory Discovery~~ ✓
+- ~~T1105 — Ingress Tool Transfer~~ ✓
