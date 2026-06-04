@@ -6,9 +6,9 @@ description: "Lab local pour simuler des techniques MITRE ATT&CK et les détecte
 tags: ["elastic", "siem", "docker", "mitre-attack", "atomic-red-team", "detection", "blue-team", "linux", "auditd"]
 ---
 
+**[→ GitHub : Ily455/attack-detect-lab](https://github.com/Ily455/attack-detect-lab)**
+
 > Projet personnel, 2026. Un environnement autonome pour simuler des techniques adversariales et les détecter avec Elastic SIEM — 6 techniques MITRE ATT&CK, preuves log réelles et règles de détection Kibana.
->
-> [GitHub — Ily455/attack-detect-lab](https://github.com/Ily455/attack-detect-lab)
 
 ---
 
