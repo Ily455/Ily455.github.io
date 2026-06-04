@@ -166,7 +166,7 @@ message: "type=EXECVE" AND (message: "a0=\"find\"" OR message: "a0=\"showmount\"
 
 ### T1105 — Ingress Tool Transfer
 
-6/9 tests succeeded. A dedicated `remote` container (Ubuntu + SSH + rsync) was added to enable the transfer tests. rsync push/pull, scp push, sftp push, and curl download+execute all passed.
+7/9 tests succeeded. A dedicated `remote` container (Ubuntu + SSH + rsync) was added to enable the transfer tests. rsync push/pull, scp push/pull, sftp push/pull, and curl download+execute all passed.
 
 ```
 type=EXECVE a0="curl" a1="-s" a2="<url>"

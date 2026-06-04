@@ -166,7 +166,7 @@ message: "type=EXECVE" AND (message: "a0=\"find\"" OR message: "a0=\"showmount\"
 
 ### T1105 — Transfert d'outils
 
-6/9 tests réussis. Un conteneur `remote` dédié (Ubuntu + SSH + rsync) a été ajouté pour permettre les tests de transfert. rsync push/pull, scp push, sftp push, et curl download+execute ont tous réussi.
+7/9 tests réussis. Un conteneur `remote` dédié (Ubuntu + SSH + rsync) a été ajouté pour permettre les tests de transfert. rsync push/pull, scp push/pull, sftp push/pull, et curl download+execute ont tous réussi.
 
 ```
 type=EXECVE a0="curl" a1="-s" a2="<url>"
