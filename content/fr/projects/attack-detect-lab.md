@@ -8,7 +8,7 @@ tags: ["elastic", "siem", "docker", "mitre-attack", "atomic-red-team", "detectio
 
 **[→ GitHub : Ily455/attack-detect-lab](https://github.com/Ily455/attack-detect-lab)**
 
-> Projet personnel, 2026. Un environnement autonome pour simuler des techniques adversariales et les détecter avec Elastic SIEM — 6 techniques MITRE ATT&CK, preuves log réelles et règles de détection Kibana.
+> Projet personnel, 2026. Simulation de techniques adversariales avec Atomic Red Team contre une cible Linux, détectées avec Elastic SIEM — 6 techniques MITRE ATT&CK, preuves log auditd réelles et règles de détection Kibana.
 
 ---
 
