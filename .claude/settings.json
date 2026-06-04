@@ -46,7 +46,15 @@
       "Bash(git commit *)",
       "Bash(docker compose *)",
       "Bash(mv /Users/ily455/attack-detect-lab /Users/ily455/Desktop/Projects/attack-detect-lab && echo \"ok\")",
-      "Bash(cp /Users/ily455/Downloads/googlef9cf6d2a7561866b.html *)"
+      "Bash(cp /Users/ily455/Downloads/googlef9cf6d2a7561866b.html *)",
+      "Bash(git -C /Users/ily455/Desktop/Ily455.github.io log --oneline)",
+      "Bash(git -C /Users/ily455/Desktop/Ily455.github.io diff HEAD~5 HEAD --name-only)",
+      "Bash(hugo server *)",
+      "Bash(curl -s http://localhost:1313/)",
+      "Bash(python3 -c \"import playwright\")",
+      "Bash(npx playwright *)",
+      "Bash(npm install *)",
+      "Bash(node check_portfolio.js)"
     ],
     "additionalDirectories": [
       "/Users/ily455/Downloads/_claude_memory_updated",
