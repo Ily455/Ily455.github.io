@@ -6,7 +6,7 @@ description: "Local cybersecurity lab for simulating MITRE ATT&CK techniques and
 tags: ["elastic", "siem", "docker", "mitre-attack", "atomic-red-team", "detection", "blue-team", "linux", "auditd"]
 ---
 
-> Personal lab project, 2026 — **work in progress.** Goal: build a self-contained environment for simulating adversary techniques and engineering the detections — one technique at a time, with logs, Sigma rules, and writeups as output.
+> Personal lab project, 2026. A self-contained environment for simulating adversary techniques and detecting them with Elastic SIEM — 6 MITRE ATT&CK techniques, real log evidence, and Kibana detection rules.
 
 ---
 
