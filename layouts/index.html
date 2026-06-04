@@ -86,7 +86,7 @@
     {{ $latestProject := index (where $allProjects ".RelPermalink" "ne" $nowSlug) 0 }}
     {{ if or $latestWriteup $latestProject }}
     <section class="mb-20">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-3xl mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-3xl ml-0">
             {{ with $latestWriteup }}
             <a href="{{ .Permalink }}" class="group block p-4 rounded-lg border border-gray-700 hover:border-green-400/50 bg-[#0d0d0d] hover:bg-green-400/5 transition-all duration-300">
                 <div class="text-green-400 font-mono text-xs mb-2 uppercase tracking-widest">{{ T "latestWriteup" }}</div>
