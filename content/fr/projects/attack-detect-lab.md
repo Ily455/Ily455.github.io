@@ -14,7 +14,7 @@ tags: ["elastic", "siem", "docker", "mitre-attack", "atomic-red-team", "detectio
 
 ## Vue d'ensemble
 
-Le lab exécute des techniques Atomic Red Team contre une cible Linux dédiée et les détecte avec Elastic SIEM. Le stack SIEM tourne dans Docker sur un Mac Apple Silicon. Les techniques s'exécutent sur une VM Linux séparée (UTM), qui envoie ses logs vers Elasticsearch via Filebeat.
+Le lab exécute des techniques Atomic Red Team contre une cible Linux dédiée et les détecte avec Elastic SIEM. Le stack SIEM tourne dans Docker sur la machine hôte. Les techniques s'exécutent sur une VM Linux séparée (UTM), qui envoie ses logs vers Elasticsearch via Filebeat.
 
 Chaque technique produit : des logs bruts depuis auditd sur la cible Linux, une règle Sigma, une requête KQL validée dans Kibana Security, et un writeup documentant les preuves et la logique de détection.
 
@@ -24,7 +24,7 @@ Chaque technique produit : des logs bruts depuis auditd sur la cible Linux, une 
 
 ```
 ┌──────────────────────────────────────────────────────────────┐
-│  macOS Host (M3)                                             │
+│  macOS Host                                                  │
 │                                                              │
 │  run-test.sh                                                 │
 │    └── SSH → VM Linux (UTM)                                  │
@@ -35,7 +35,7 @@ Chaque technique produit : des logs bruts depuis auditd sur la cible Linux, une 
 └──────────────────────────────────────────────────────────────┘
 ```
 
-Atomic Red Team et toute la simulation d'attaque restent sur la cible Linux. Le Mac ne fait qu'initier les tests via SSH. Le SIEM reçoit les logs mais ne touche jamais la cible directement.
+Atomic Red Team et toute la simulation d'attaque restent sur la cible Linux. L'hôte ne fait qu'initier les tests via SSH. Le SIEM reçoit les logs mais ne touche jamais la cible directement.
 
 ---
 
@@ -46,11 +46,11 @@ Atomic Red Team et toute la simulation d'attaque restent sur la cible Linux. Le 
 | Elasticsearch | Stockage et indexation des logs | 8.14.3 |
 | Kibana | Interface SIEM, règles de détection, KQL | 8.14.3 |
 | Filebeat | Collecteur de logs (sur la VM cible) | 8.14.3 |
-| VM cible | Ubuntu 22.04 ARM64, surface d'attaque | UTM sur M3 |
+| VM cible | Ubuntu 22.04 ARM64, surface d'attaque | UTM |
 | Atomic Red Team | Simulateur de techniques MITRE ATT&CK | latest |
 | PowerShell | Runtime Atomic | 7.4.6 |
 
-Les images Elastic tournent en `linux/arm64` — exécution native sur M3, sans émulation.
+Les images Elastic tournent en `linux/arm64` — sans émulation.
 
 ---
 

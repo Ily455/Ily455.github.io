@@ -17,8 +17,6 @@ VMware and VirtualBox on modern systems use them under the hood. Tools people th
 
 Some call this "Type 1.5." The label doesn't matter. What matters is that the classification predates this pattern and doesn't describe it well.
 
-I ran into this practically: Docker on an M3 Mac needs a Linux VM. What creates it is Hypervisor.framework — kernel-integrated, hardware-accelerated, minimal overhead. Same story on Linux with KVM, same on Windows with Hyper-V. One level of virtualization, not two.
+I ran into this practically: Docker on macOS needs a Linux VM. What creates it is Hypervisor.framework — kernel-integrated, hardware-accelerated, minimal overhead. Same story on Linux with KVM, same on Windows with Hyper-V. One level of virtualization, not two.
 
 Containers are a separate thing. No emulated hardware, no isolated kernel — just Linux namespaces and cgroups. A container is a process. The kernel is fully shared. That's why containers start in milliseconds and VMs take minutes.
-
-The model taught in most courses isn't wrong. It just stops before this part.

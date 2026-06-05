@@ -14,7 +14,7 @@ tags: ["elastic", "siem", "docker", "mitre-attack", "atomic-red-team", "detectio
 
 ## Overview
 
-The lab runs Atomic Red Team techniques against a dedicated Linux target and detects them with Elastic SIEM. The SIEM stack runs in Docker on an Apple Silicon Mac. Techniques execute on a separate Linux VM (UTM), which ships logs to Elasticsearch via Filebeat.
+The lab runs Atomic Red Team techniques against a dedicated Linux target and detects them with Elastic SIEM. The SIEM stack runs in Docker on the host. Techniques execute on a separate Linux VM (UTM), which ships logs to Elasticsearch via Filebeat.
 
 Each completed technique produces: raw logs from auditd on the Linux target, a Sigma detection rule, a KQL query validated in Kibana Security, and a writeup documenting the evidence and detection logic.
 
@@ -24,7 +24,7 @@ Each completed technique produces: raw logs from auditd on the Linux target, a S
 
 ```
 ┌──────────────────────────────────────────────────────────────┐
-│  macOS Host (M3)                                             │
+│  macOS Host                                                  │
 │                                                              │
 │  run-test.sh                                                 │
 │    └── SSH → Linux VM (UTM)                                  │
@@ -35,7 +35,7 @@ Each completed technique produces: raw logs from auditd on the Linux target, a S
 └──────────────────────────────────────────────────────────────┘
 ```
 
-Atomic Red Team and all attack simulation stay on the Linux target. The Mac only initiates tests over SSH. The SIEM receives logs but never touches the target directly.
+Atomic Red Team and all attack simulation stay on the Linux target. The host only initiates tests over SSH. The SIEM receives logs but never touches the target directly.
 
 ---
 
@@ -46,11 +46,11 @@ Atomic Red Team and all attack simulation stay on the Linux target. The Mac only
 | Elasticsearch | Log storage and indexing | 8.14.3 |
 | Kibana | SIEM UI, detection rules, KQL | 8.14.3 |
 | Filebeat | Log shipper (runs on target VM) | 8.14.3 |
-| Target VM | Ubuntu 22.04 ARM64, attack surface | UTM on M3 |
+| Target VM | Ubuntu 22.04 ARM64, attack surface | UTM |
 | Atomic Red Team | MITRE ATT&CK technique simulator | latest |
 | PowerShell | Atomic runtime | 7.4.6 |
 
-Elastic images run as `linux/arm64` — native M3 execution, no emulation.
+Elastic images run as `linux/arm64` — no emulation.
 
 ---
 

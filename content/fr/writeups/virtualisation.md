@@ -17,8 +17,6 @@ VMware et VirtualBox sur les systèmes modernes utilisent ces mécanismes en sou
 
 Certains appellent ça "Type 1.5." Le label n'a pas d'importance. Ce qui compte, c'est que la classification est antérieure à ce modèle et ne le décrit pas bien.
 
-Je l'ai rencontré concrètement : Docker sur un Mac M3 a besoin d'une VM Linux. Ce qui la crée, c'est Hypervisor.framework — intégré au noyau, accéléré matériellement, overhead minimal. Même histoire sous Linux avec KVM, même chose sous Windows avec Hyper-V. Un seul niveau de virtualisation, pas deux.
+Je l'ai rencontré concrètement : Docker sur macOS a besoin d'une VM Linux. Ce qui la crée, c'est Hypervisor.framework — intégré au noyau, accéléré matériellement, overhead minimal. Même histoire sous Linux avec KVM, même chose sous Windows avec Hyper-V. Un seul niveau de virtualisation, pas deux.
 
 Les conteneurs, c'est autre chose. Pas de matériel émulé, pas de noyau isolé — juste des namespaces Linux et des cgroups. Un conteneur est un processus. Le noyau est entièrement partagé. C'est pour ça que les conteneurs démarrent en millisecondes et les VMs en minutes.
-
-Le modèle enseigné dans la plupart des cours n'est pas faux. Il s'arrête juste avant cette partie.
