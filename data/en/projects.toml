@@ -3,7 +3,7 @@
   description = "Local lab for simulating MITRE ATT&CK techniques against a Linux VM and detecting them with Elastic SIEM — Atomic Red Team, auditd, Sigma rules, one technique at a time."
   tech = "Docker, Elastic, Filebeat, Atomic Red Team, Sigma, Linux"
   image = "/images/projects/attack-detect-lab.svg"
-  link = ""
+  link = "https://github.com/Ily455/attack-detect-lab"
   slug = "/projects/attack-detect-lab/"
 
 [[projects]]

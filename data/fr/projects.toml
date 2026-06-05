@@ -3,7 +3,7 @@
   description = "Lab local pour simuler des techniques MITRE ATT&CK contre une VM Linux et les détecter avec Elastic SIEM — Atomic Red Team, auditd, règles Sigma, une technique à la fois."
   tech = "Docker, Elastic, Filebeat, Atomic Red Team, Sigma, Linux"
   image = "/images/projects/attack-detect-lab.svg"
-  link = ""
+  link = "https://github.com/Ily455/attack-detect-lab"
   slug = "/projects/attack-detect-lab/"
 
 [[projects]]
