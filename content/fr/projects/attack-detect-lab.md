@@ -14,7 +14,7 @@ tags: ["elastic", "siem", "docker", "mitre-attack", "atomic-red-team", "detectio
 
 ## Vue d'ensemble
 
-Le lab exécute des techniques Atomic Red Team contre une cible Linux dédiée et les détecte avec Elastic SIEM. Le stack SIEM tourne dans Docker sur la machine hôte. Les techniques s'exécutent sur une VM Linux séparée (UTM), qui envoie ses logs vers Elasticsearch via Filebeat.
+Le lab exécute des techniques Atomic Red Team contre une cible Linux dédiée et les détecte avec Elastic SIEM. Le stack SIEM tourne dans Docker sur un Mac. Les techniques s'exécutent sur une VM Linux séparée (UTM), qui envoie ses logs vers Elasticsearch via Filebeat.
 
 Chaque technique produit : des logs bruts depuis auditd sur la cible Linux, une règle Sigma, une requête KQL validée dans Kibana Security, et un writeup documentant les preuves et la logique de détection.
 
@@ -35,7 +35,7 @@ Chaque technique produit : des logs bruts depuis auditd sur la cible Linux, une 
 └──────────────────────────────────────────────────────────────┘
 ```
 
-Atomic Red Team et toute la simulation d'attaque restent sur la cible Linux. L'hôte ne fait qu'initier les tests via SSH. Le SIEM reçoit les logs mais ne touche jamais la cible directement.
+Atomic Red Team et toute la simulation d'attaque restent sur la cible Linux. Le Mac ne fait qu'initier les tests via SSH. Le SIEM reçoit les logs mais ne touche jamais la cible directement.
 
 ---
 
