@@ -1,96 +1,94 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 420" width="800" height="420">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="800" height="450">
   <defs>
     <style>
       text { font-family: 'Courier New', monospace; fill: #e5e7eb; }
       .label { font-size: 11px; fill: #9ca3af; }
-      .title { font-size: 13px; font-weight: bold; fill: #f9fafb; }
+      .title { font-size: 12px; font-weight: bold; fill: #f9fafb; }
       .tag { font-size: 10px; fill: #6b7280; }
       .green { fill: #4ade80; }
       .blue { fill: #60a5fa; }
       .orange { fill: #fb923c; }
     </style>
+    <marker id="arr-green" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#4ade80"/>
+    </marker>
+    <marker id="arr-blue" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#60a5fa"/>
+    </marker>
+    <marker id="arr-orange" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#fb923c"/>
+    </marker>
   </defs>
 
   <!-- Background -->
-  <rect width="800" height="420" fill="#0d0d0d" rx="12"/>
+  <rect width="800" height="450" fill="#0d0d0d" rx="12"/>
 
-  <!-- Host box -->
-  <rect x="20" y="16" width="760" height="386" fill="none" stroke="#374151" stroke-width="1" rx="8" stroke-dasharray="4,3"/>
-  <text x="36" y="36" class="tag">macOS host (M3)</text>
+  <!-- macOS host outer box -->
+  <rect x="20" y="16" width="760" height="418" fill="none" stroke="#374151" stroke-width="1" rx="8" stroke-dasharray="4,3"/>
+  <text x="36" y="34" class="tag">macOS host (M3)</text>
 
-  <!-- run-test.sh -->
-  <rect x="40" y="50" width="160" height="52" fill="#111827" rx="6" stroke="#374151" stroke-width="1"/>
-  <text x="120" y="71" text-anchor="middle" class="title" font-size="12">run-test.sh</text>
-  <text x="120" y="88" text-anchor="middle" class="label">pwsh → Invoke-AtomicTest</text>
+  <!-- run-test.sh box -->
+  <rect x="40" y="44" width="200" height="72" fill="#111827" rx="6" stroke="#374151" stroke-width="1"/>
+  <text x="140" y="67" text-anchor="middle" class="title">run-test.sh</text>
+  <text x="140" y="84" text-anchor="middle" class="label">pwsh · Atomic Red Team</text>
+  <text x="140" y="101" text-anchor="middle" class="label">~/AtomicRedTeam/</text>
 
-  <!-- Arrow run-test → SSH -->
-  <line x1="200" y1="76" x2="280" y2="76" stroke="#4ade80" stroke-width="1.5" marker-end="url(#arr-green)"/>
-  <text x="238" y="70" text-anchor="middle" class="tag">SSH</text>
+  <!-- PSRemoting arrow -->
+  <line x1="244" y1="80" x2="466" y2="80" stroke="#4ade80" stroke-width="1.5" marker-end="url(#arr-green)" stroke-dasharray="5,3"/>
+  <text x="355" y="71" text-anchor="middle" class="tag">PSRemoting · SSH · root</text>
+
+  <!-- UTM VM box -->
+  <rect x="470" y="38" width="290" height="94" fill="#111827" rx="6" stroke="#4ade80" stroke-width="1"/>
+  <text x="615" y="60" text-anchor="middle" class="title" fill="#4ade80">UTM — Ubuntu 22.04 ARM64</text>
+  <text x="615" y="78" text-anchor="middle" class="label">auditd (execve) · Filebeat 8.14.3</text>
+  <text x="615" y="95" text-anchor="middle" class="label">powershell SSH subsystem</text>
+  <text x="615" y="112" text-anchor="middle" class="tag">192.168.64.2</text>
+
+  <!-- Filebeat → Elasticsearch arrow (VM down to Docker) -->
+  <path d="M 615 134 L 615 158 L 145 158 L 145 178" fill="none" stroke="#60a5fa" stroke-width="1.5" marker-end="url(#arr-blue)"/>
+  <text x="400" y="152" text-anchor="middle" class="tag">Filebeat ships logs → :9200</text>
 
   <!-- Docker box -->
-  <rect x="40" y="136" width="720" height="244" fill="#0a0a0a" rx="8" stroke="#1f2937" stroke-width="1"/>
-  <text x="58" y="157" class="tag">Docker — bridge network: elastic</text>
+  <rect x="40" y="168" width="720" height="248" fill="#0a0a0a" rx="8" stroke="#1f2937" stroke-width="1"/>
+  <text x="58" y="186" class="tag">Docker — bridge network: elastic</text>
 
-  <!-- Target container -->
-  <rect x="60" y="168" width="160" height="72" fill="#111827" rx="6" stroke="#374151" stroke-width="1"/>
-  <text x="140" y="192" text-anchor="middle" class="title" font-size="12">target</text>
-  <text x="140" y="210" text-anchor="middle" class="label">Ubuntu ARM64</text>
-  <text x="140" y="226" text-anchor="middle" class="label">attack surface</text>
+  <!-- Elasticsearch box -->
+  <rect x="58" y="196" width="175" height="82" fill="#111827" rx="6" stroke="#374151" stroke-width="1"/>
+  <text x="145" y="220" text-anchor="middle" class="title">Elasticsearch</text>
+  <text x="145" y="237" text-anchor="middle" class="label">8.14.3 · linux/arm64</text>
+  <text x="145" y="254" text-anchor="middle" class="label">:9200</text>
+  <text x="145" y="270" text-anchor="middle" class="tag">attack-detect-logs-*</text>
 
-  <!-- Filebeat -->
-  <rect x="280" y="168" width="140" height="72" fill="#111827" rx="6" stroke="#374151" stroke-width="1"/>
-  <text x="350" y="192" text-anchor="middle" class="title" font-size="12">Filebeat</text>
-  <text x="350" y="210" text-anchor="middle" class="label">8.14.3 · ARM64</text>
-  <text x="350" y="226" text-anchor="middle" class="label">watches /logs/</text>
+  <!-- Kibana box -->
+  <rect x="272" y="196" width="175" height="82" fill="#111827" rx="6" stroke="#374151" stroke-width="1"/>
+  <text x="359" y="220" text-anchor="middle" class="title">Kibana</text>
+  <text x="359" y="237" text-anchor="middle" class="label">Security SIEM · 8.14.3</text>
+  <text x="359" y="254" text-anchor="middle" class="label">:5601</text>
+  <text x="359" y="270" text-anchor="middle" class="tag">detection rules · alerts</text>
 
-  <!-- Elasticsearch -->
-  <rect x="480" y="168" width="140" height="72" fill="#111827" rx="6" stroke="#374151" stroke-width="1"/>
-  <text x="550" y="192" text-anchor="middle" class="title" font-size="12">Elasticsearch</text>
-  <text x="550" y="210" text-anchor="middle" class="label">8.14.3 · ARM64</text>
-  <text x="550" y="226" text-anchor="middle" class="label">:9200</text>
+  <!-- remote box -->
+  <rect x="600" y="196" width="145" height="82" fill="#111827" rx="6" stroke="#374151" stroke-width="1"/>
+  <text x="672" y="220" text-anchor="middle" class="title">remote</text>
+  <text x="672" y="237" text-anchor="middle" class="label">Ubuntu · SSH + rsync</text>
+  <text x="672" y="254" text-anchor="middle" class="label">:2223</text>
+  <text x="672" y="270" text-anchor="middle" class="tag">T1105 staging server</text>
 
-  <!-- Kibana -->
-  <rect x="640" y="168" width="100" height="72" fill="#111827" rx="6" stroke="#374151" stroke-width="1"/>
-  <text x="690" y="192" text-anchor="middle" class="title" font-size="12">Kibana</text>
-  <text x="690" y="210" text-anchor="middle" class="label">SIEM UI</text>
-  <text x="690" y="226" text-anchor="middle" class="label">:5601</text>
-
-  <!-- Arrows between containers -->
-  <defs>
-    <marker id="arr-green" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#4ade80"/></marker>
-    <marker id="arr-blue" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#60a5fa"/></marker>
-    <marker id="arr-orange" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#fb923c"/></marker>
-  </defs>
-
-  <!-- target → filebeat -->
-  <line x1="220" y1="204" x2="276" y2="204" stroke="#4ade80" stroke-width="1.5" marker-end="url(#arr-green)"/>
-  <text x="248" y="198" text-anchor="middle" class="tag">logs</text>
-
-  <!-- filebeat → elasticsearch -->
-  <line x1="420" y1="204" x2="476" y2="204" stroke="#60a5fa" stroke-width="1.5" marker-end="url(#arr-blue)"/>
-  <text x="448" y="198" text-anchor="middle" class="tag">ship</text>
-
-  <!-- elasticsearch → kibana -->
-  <line x1="620" y1="204" x2="636" y2="204" stroke="#fb923c" stroke-width="1.5" marker-end="url(#arr-orange)"/>
-
-  <!-- SSH arrow from run-test.sh down into target -->
-  <line x1="280" y1="76" x2="140" y2="76" stroke="none"/>
-  <path d="M 280 76 L 310 76 L 310 204 L 276 204" fill="none" stroke="#4ade80" stroke-width="1.5" stroke-dasharray="4,2" marker-end="url(#arr-green)"/>
-  <text x="316" y="140" class="tag" transform="rotate(90,316,140)">SSH</text>
+  <!-- Elasticsearch → Kibana arrow -->
+  <line x1="235" y1="237" x2="268" y2="237" stroke="#fb923c" stroke-width="1.5" marker-end="url(#arr-orange)"/>
 
   <!-- Techniques table -->
-  <rect x="60" y="260" width="680" height="104" fill="#0d1117" rx="6" stroke="#1f2937" stroke-width="1"/>
-  <text x="80" y="280" class="green" font-size="11">$</text>
-  <text x="92" y="280" class="label" font-size="11">./run-test.sh &lt;TECHNIQUE_ID&gt;</text>
+  <rect x="58" y="298" width="680" height="100" fill="#0d1117" rx="6" stroke="#1f2937" stroke-width="1"/>
+  <text x="78" y="318" class="green" font-size="11">$</text>
+  <text x="90" y="318" class="label" font-size="11">./run-test.sh &lt;TECHNIQUE&gt;</text>
 
-  <text x="80" y="300" class="label" font-size="10">T1059.004 — Unix Shell</text>
-  <text x="280" y="300" class="label" font-size="10">T1053.003 — Cron Persistence</text>
-  <text x="480" y="300" class="label" font-size="10">T1136.001 — Create Account</text>
+  <text x="78" y="340" class="label" font-size="10">T1059.004 — Unix Shell · 15/17</text>
+  <text x="305" y="340" class="label" font-size="10">T1053.003 — Cron Persistence · 4/4</text>
+  <text x="555" y="340" class="label" font-size="10">T1136.001 — Create Account · 2/5</text>
 
-  <text x="80" y="318" class="label" font-size="10">T1087.001 — Account Discovery</text>
-  <text x="280" y="318" class="label" font-size="10">T1083 — File Discovery</text>
-  <text x="480" y="318" class="label" font-size="10">T1105 — Tool Transfer</text>
+  <text x="78" y="360" class="label" font-size="10">T1087.001 — Account Discovery · 4/4</text>
+  <text x="305" y="360" class="label" font-size="10">T1083 — File Discovery · 3/3</text>
+  <text x="555" y="360" class="label" font-size="10">T1105 — Tool Transfer · 7/9</text>
 
-  <text x="80" y="344" class="green" font-size="10">output:</text>
-  <text x="130" y="344" class="label" font-size="10">logs/  ·  detections/ (Sigma)  ·  writeups/</text>
+  <text x="78" y="385" class="green" font-size="10">pipeline:</text>
+  <text x="148" y="385" class="label" font-size="10">execve syscall → auditd → Filebeat → Elasticsearch → Kibana Security</text>
 </svg>

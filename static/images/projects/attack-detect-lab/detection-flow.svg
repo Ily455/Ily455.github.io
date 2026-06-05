@@ -1,0 +1,97 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 200" width="800" height="200">
+  <defs>
+    <style>
+      text { font-family: 'Courier New', monospace; fill: #e5e7eb; }
+      .label { font-size: 10px; fill: #9ca3af; }
+      .title { font-size: 11px; font-weight: bold; fill: #f9fafb; }
+      .tag { font-size: 9px; fill: #6b7280; }
+      .num { font-size: 10px; font-weight: bold; }
+    </style>
+    <marker id="arr" markerWidth="7" markerHeight="7" refX="5" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L7,3 z" fill="#374151"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="200" fill="#0d0d0d" rx="10"/>
+
+  <!-- Step boxes: 7 steps across 800px -->
+  <!-- Step 1: run-test.sh -->
+  <rect x="12" y="60" width="96" height="72" fill="#111827" rx="5" stroke="#374151" stroke-width="1"/>
+  <text x="60" y="78" text-anchor="middle" class="num" fill="#4ade80">①</text>
+  <text x="60" y="93" text-anchor="middle" class="title" font-size="10">run-test.sh</text>
+  <text x="60" y="108" text-anchor="middle" class="tag">T1059.004</text>
+  <text x="60" y="122" text-anchor="middle" class="tag">on Mac</text>
+
+  <!-- Arrow 1→2 -->
+  <line x1="110" y1="96" x2="124" y2="96" stroke="#374151" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <!-- Step 2: PSSession -->
+  <rect x="126" y="60" width="96" height="72" fill="#111827" rx="5" stroke="#374151" stroke-width="1"/>
+  <text x="174" y="78" text-anchor="middle" class="num" fill="#4ade80">②</text>
+  <text x="174" y="93" text-anchor="middle" class="title" font-size="10">PSSession</text>
+  <text x="174" y="108" text-anchor="middle" class="tag">SSH → root</text>
+  <text x="174" y="122" text-anchor="middle" class="tag">192.168.64.2</text>
+
+  <!-- Arrow 2→3 -->
+  <line x1="224" y1="96" x2="238" y2="96" stroke="#374151" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <!-- Step 3: execve on VM -->
+  <rect x="240" y="60" width="96" height="72" fill="#111827" rx="5" stroke="#f87171" stroke-width="1"/>
+  <text x="288" y="78" text-anchor="middle" class="num" fill="#f87171">③</text>
+  <text x="288" y="93" text-anchor="middle" class="title" font-size="10">execve</text>
+  <text x="288" y="108" text-anchor="middle" class="tag">syscall</text>
+  <text x="288" y="122" text-anchor="middle" class="tag">VM kernel</text>
+
+  <!-- Arrow 3→4 -->
+  <line x1="338" y1="96" x2="352" y2="96" stroke="#374151" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <!-- Step 4: auditd -->
+  <rect x="354" y="60" width="96" height="72" fill="#111827" rx="5" stroke="#f87171" stroke-width="1"/>
+  <text x="402" y="78" text-anchor="middle" class="num" fill="#f87171">④</text>
+  <text x="402" y="93" text-anchor="middle" class="title" font-size="10">auditd</text>
+  <text x="402" y="108" text-anchor="middle" class="tag">EXECVE record</text>
+  <text x="402" y="122" text-anchor="middle" class="tag">audit.log</text>
+
+  <!-- Arrow 4→5 -->
+  <line x1="452" y1="96" x2="466" y2="96" stroke="#374151" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <!-- Step 5: Filebeat -->
+  <rect x="468" y="60" width="96" height="72" fill="#111827" rx="5" stroke="#60a5fa" stroke-width="1"/>
+  <text x="516" y="78" text-anchor="middle" class="num" fill="#60a5fa">⑤</text>
+  <text x="516" y="93" text-anchor="middle" class="title" font-size="10">Filebeat</text>
+  <text x="516" y="108" text-anchor="middle" class="tag">ships to</text>
+  <text x="516" y="122" text-anchor="middle" class="tag">:9200</text>
+
+  <!-- Arrow 5→6 -->
+  <line x1="566" y1="96" x2="580" y2="96" stroke="#374151" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <!-- Step 6: Elasticsearch -->
+  <rect x="582" y="60" width="96" height="72" fill="#111827" rx="5" stroke="#60a5fa" stroke-width="1"/>
+  <text x="630" y="78" text-anchor="middle" class="num" fill="#60a5fa">⑥</text>
+  <text x="630" y="93" text-anchor="middle" class="title" font-size="9">Elasticsearch</text>
+  <text x="630" y="108" text-anchor="middle" class="tag">indexed</text>
+  <text x="630" y="122" text-anchor="middle" class="tag">logs-*</text>
+
+  <!-- Arrow 6→7 -->
+  <line x1="680" y1="96" x2="694" y2="96" stroke="#374151" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <!-- Step 7: Kibana alert -->
+  <rect x="696" y="60" width="96" height="72" fill="#111827" rx="5" stroke="#fb923c" stroke-width="1"/>
+  <text x="744" y="78" text-anchor="middle" class="num" fill="#fb923c">⑦</text>
+  <text x="744" y="93" text-anchor="middle" class="title" font-size="9">Kibana alert</text>
+  <text x="744" y="108" text-anchor="middle" class="tag">rule match</text>
+  <text x="744" y="122" text-anchor="middle" class="tag">Security</text>
+
+  <!-- Bottom labels -->
+  <text x="60" y="155" text-anchor="middle" class="tag" fill="#4ade80">Mac</text>
+  <text x="174" y="155" text-anchor="middle" class="tag" fill="#4ade80">Mac→VM</text>
+  <text x="288" y="155" text-anchor="middle" class="tag" fill="#f87171">VM kernel</text>
+  <text x="402" y="155" text-anchor="middle" class="tag" fill="#f87171">VM</text>
+  <text x="516" y="155" text-anchor="middle" class="tag" fill="#60a5fa">VM→Docker</text>
+  <text x="630" y="155" text-anchor="middle" class="tag" fill="#60a5fa">Docker</text>
+  <text x="744" y="155" text-anchor="middle" class="tag" fill="#fb923c">Docker</text>
+
+  <!-- Title -->
+  <text x="400" y="24" text-anchor="middle" font-family="'Courier New', monospace" font-size="11" fill="#6b7280">Detection pipeline — from technique execution to alert</text>
+</svg>

@@ -8,34 +8,15 @@ tags: ["elastic", "siem", "docker", "mitre-attack", "atomic-red-team", "detectio
 
 **[→ GitHub : Ily455/attack-detect-lab](https://github.com/Ily455/attack-detect-lab)**
 
-> Projet personnel, 2026. Simulation de techniques adversariales avec Atomic Red Team contre une cible Linux, détectées avec Elastic SIEM — 6 techniques MITRE ATT&CK, preuves log auditd réelles et règles de détection Kibana.
-
----
-
-## Vue d'ensemble
-
-Le lab exécute des techniques Atomic Red Team contre une cible Linux dédiée et les détecte avec Elastic SIEM. Le stack SIEM tourne dans Docker sur un Mac. Les techniques s'exécutent sur une VM Linux séparée (UTM), qui envoie ses logs vers Elasticsearch via Filebeat.
-
-Chaque technique produit : des logs bruts depuis auditd sur la cible Linux, une règle Sigma, une requête KQL validée dans Kibana Security, et un writeup documentant les preuves et la logique de détection.
+> Projet personnel, 2026. Simulation de techniques adversariales avec Atomic Red Team contre une VM Linux, détectées avec Elastic SIEM — 6 techniques MITRE ATT&CK, preuves log auditd réelles et règles de détection Kibana.
 
 ---
 
 ## Architecture
 
-```
-┌──────────────────────────────────────────────────────────────┐
-│  macOS Host                                                  │
-│                                                              │
-│  run-test.sh                                                 │
-│    └── SSH → VM Linux (UTM)                                  │
-│               ├── Atomic Red Team exécute les techniques     │
-│               ├── auditd enregistre chaque syscall execve    │
-│               └── Filebeat ──► Elasticsearch ◄── Kibana      │
-│                                (Docker)         (Docker)     │
-└──────────────────────────────────────────────────────────────┘
-```
+![ATT&CK Detection Lab — architecture complète](/images/projects/attack-detect-lab/architecture.svg)
 
-Atomic Red Team et toute la simulation d'attaque restent sur la cible Linux. Le Mac ne fait qu'initier les tests via SSH. Le SIEM reçoit les logs mais ne touche jamais la cible directement.
+Le Mac joue le rôle de l'**attaquant** — il héberge Atomic Red Team et envoie les commandes à la VM via PSRemoting (transport SSH PowerShell). La VM est la **cible** — elle exécute les techniques, enregistre chaque syscall `execve` via auditd, et envoie les logs au SIEM via Filebeat. Le SIEM (Elasticsearch + Kibana) tourne dans Docker et ne touche jamais la cible.
 
 ---
 
@@ -46,11 +27,17 @@ Atomic Red Team et toute la simulation d'attaque restent sur la cible Linux. Le 
 | Elasticsearch | Stockage et indexation des logs | 8.14.3 |
 | Kibana | Interface SIEM, règles de détection, KQL | 8.14.3 |
 | Filebeat | Collecteur de logs (sur la VM cible) | 8.14.3 |
-| VM cible | Ubuntu 22.04 ARM64, surface d'attaque | UTM |
+| VM cible | Ubuntu 22.04 ARM64, surface d'attaque | UTM sur M3 |
 | Atomic Red Team | Simulateur de techniques MITRE ATT&CK | latest |
-| PowerShell | Runtime Atomic | 7.4.6 |
+| PowerShell | Transport PSRemoting + runtime Atomic | 7.4.6 |
 
 Les images Elastic tournent en `linux/arm64` — sans émulation.
+
+---
+
+## Pipeline de détection
+
+![Pipeline de détection — de l'exécution à l'alerte](/images/projects/attack-detect-lab/detection-flow.svg)
 
 ---
 
@@ -60,12 +47,12 @@ Les images Elastic tournent en `linux/arm64` — sans émulation.
 ./run-test.sh T1059.004
 ```
 
-1. SSH vers la VM Linux cible
-2. Exécution d'`Invoke-AtomicTest T1059.004` sur la cible
-3. auditd enregistre chaque appel `execve` — chaque commande exécutée, avec ses arguments
-4. Filebeat envoie les logs auditd vers Elasticsearch en quelques secondes
-5. Les événements apparaissent dans Kibana sous la data view `attack-detect-logs-*`
-6. `Invoke-AtomicTest T1059.004 -Cleanup` supprime les artefacts
+1. `pwsh` ouvre une PSSession (transport SSH) vers la VM en root
+2. `Invoke-AtomicTest T1059.004 -Session $s` tourne sur le Mac, les commandes s'exécutent sur la VM
+3. Le noyau Linux intercepte chaque syscall `execve` — auditd écrit un enregistrement `EXECVE` structuré
+4. Filebeat lit `/var/log/audit/audit.log` et envoie les événements vers Elasticsearch en quelques secondes
+5. Les règles de détection Kibana évaluent les événements entrants — les correspondances génèrent des alertes dans Security
+6. `Invoke-AtomicTest -Cleanup` supprime les artefacts de la VM
 
 ---
 
@@ -124,7 +111,7 @@ type=EXECVE argc=1 a0="showmount"
 
 ### T1105 — Transfert d'outils
 
-7/9 tests réussis. Un conteneur `remote` dédié (Ubuntu + SSH + rsync) a été ajouté comme serveur de staging. rsync push/pull, scp push/pull, sftp push, et curl download+execute ont tous réussi.
+7/9 tests réussis. Un conteneur `remote` dédié (Ubuntu + SSH + rsync) a été ajouté comme serveur de staging. rsync push/pull, scp push/pull, sftp push/pull, et curl download+execute ont tous réussi.
 ```
 type=EXECVE a0="curl" a1="-s" a2="<url>"
 ```

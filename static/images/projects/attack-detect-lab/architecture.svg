@@ -1,0 +1,135 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 480" width="800" height="480">
+  <defs>
+    <style>
+      text { font-family: 'Courier New', monospace; fill: #e5e7eb; }
+      .label { font-size: 11px; fill: #9ca3af; }
+      .title { font-size: 12px; font-weight: bold; fill: #f9fafb; }
+      .tag { font-size: 10px; fill: #6b7280; }
+      .zone-label { font-size: 10px; fill: #6b7280; font-weight: bold; }
+      .green { fill: #4ade80; }
+      .blue { fill: #60a5fa; }
+      .orange { fill: #fb923c; }
+      .red { fill: #f87171; }
+    </style>
+    <marker id="arr-green" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#4ade80"/>
+    </marker>
+    <marker id="arr-blue" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#60a5fa"/>
+    </marker>
+    <marker id="arr-orange" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#fb923c"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="480" fill="#0d0d0d" rx="12"/>
+
+  <!-- ── ZONE: ATTACKER (Mac) ── -->
+  <rect x="16" y="16" width="228" height="448" fill="#0a0f0a" rx="8" stroke="#1a2e1a" stroke-width="1"/>
+  <text x="130" y="38" text-anchor="middle" class="zone-label" fill="#4ade80">ATTACKER</text>
+  <text x="130" y="52" text-anchor="middle" class="tag">macOS M3 · 192.168.64.1</text>
+
+  <!-- Atomic Red Team -->
+  <rect x="32" y="64" width="196" height="56" fill="#111827" rx="6" stroke="#1f2937" stroke-width="1"/>
+  <text x="130" y="84" text-anchor="middle" class="title">Atomic Red Team</text>
+  <text x="130" y="101" text-anchor="middle" class="label">~/AtomicRedTeam/atomics/</text>
+
+  <!-- run-test.sh -->
+  <rect x="32" y="134" width="196" height="56" fill="#111827" rx="6" stroke="#374151" stroke-width="1"/>
+  <text x="130" y="154" text-anchor="middle" class="title">run-test.sh</text>
+  <text x="130" y="171" text-anchor="middle" class="label">pwsh · New-PSSession</text>
+
+  <!-- setup-and-run.sh -->
+  <rect x="32" y="204" width="196" height="56" fill="#111827" rx="6" stroke="#374151" stroke-width="1"/>
+  <text x="130" y="224" text-anchor="middle" class="title">setup-and-run.sh</text>
+  <text x="130" y="241" text-anchor="middle" class="label">full setup + 6 techniques</text>
+
+  <!-- SSH key -->
+  <rect x="32" y="274" width="196" height="44" fill="#0d1117" rx="6" stroke="#1f2937" stroke-width="1"/>
+  <text x="44" y="292" class="green" font-size="10">key</text>
+  <text x="68" y="292" class="label" font-size="10">~/.ssh/attack-detect-vm-root</text>
+  <text x="44" y="308" class="tag" font-size="10">ed25519 · root@192.168.64.2</text>
+
+  <!-- ── ZONE: TARGET VM ── -->
+  <rect x="260" y="16" width="248" height="448" fill="#0a0a0f" rx="8" stroke="#1a1a2e" stroke-width="1"/>
+  <text x="384" y="38" text-anchor="middle" class="zone-label" fill="#f87171">TARGET VM</text>
+  <text x="384" y="52" text-anchor="middle" class="tag">UTM · Ubuntu 22.04 ARM64 · 192.168.64.2</text>
+
+  <!-- auditd -->
+  <rect x="276" y="64" width="216" height="72" fill="#111827" rx="6" stroke="#1f2937" stroke-width="1"/>
+  <text x="384" y="84" text-anchor="middle" class="title" fill="#f87171">auditd</text>
+  <text x="384" y="101" text-anchor="middle" class="label">-a always,exit -F arch=b64</text>
+  <text x="384" y="118" text-anchor="middle" class="label">-S execve -k exec_commands</text>
+
+  <!-- PowerShell SSH -->
+  <rect x="276" y="150" width="216" height="56" fill="#111827" rx="6" stroke="#1f2937" stroke-width="1"/>
+  <text x="384" y="170" text-anchor="middle" class="title">PowerShell SSH</text>
+  <text x="384" y="187" text-anchor="middle" class="label">Subsystem powershell /usr/bin/pwsh</text>
+
+  <!-- Filebeat -->
+  <rect x="276" y="220" width="216" height="72" fill="#111827" rx="6" stroke="#60a5fa" stroke-width="1"/>
+  <text x="384" y="242" text-anchor="middle" class="title" fill="#60a5fa">Filebeat 8.14.3</text>
+  <text x="384" y="259" text-anchor="middle" class="label">/var/log/audit/audit.log</text>
+  <text x="384" y="276" text-anchor="middle" class="label">→ elasticsearch:9200</text>
+
+  <!-- audit.log -->
+  <rect x="276" y="306" width="216" height="100" fill="#0d1117" rx="6" stroke="#1f2937" stroke-width="1"/>
+  <text x="290" y="326" class="tag" font-size="9">type=EXECVE msg=audit(...):</text>
+  <text x="290" y="342" class="tag" font-size="9">argc=3 a0="sh" a1="-c" a2="..."</text>
+  <text x="290" y="362" class="tag" font-size="9">type=EXECVE argc=2</text>
+  <text x="290" y="378" class="tag" font-size="9">a0="crontab" a1="/tmp/evil"</text>
+  <text x="290" y="398" class="tag" font-size="9">type=EXECVE a0="curl" a1="-s"</text>
+
+  <!-- ── ZONE: SIEM (Docker) ── -->
+  <rect x="524" y="16" width="260" height="448" fill="#0a0a0a" rx="8" stroke="#1f2937" stroke-width="1"/>
+  <text x="654" y="38" text-anchor="middle" class="zone-label" fill="#60a5fa">SIEM</text>
+  <text x="654" y="52" text-anchor="middle" class="tag">Docker · bridge: elastic · linux/arm64</text>
+
+  <!-- Elasticsearch -->
+  <rect x="540" y="64" width="228" height="72" fill="#111827" rx="6" stroke="#1f2937" stroke-width="1"/>
+  <text x="654" y="86" text-anchor="middle" class="title">Elasticsearch 8.14.3</text>
+  <text x="654" y="103" text-anchor="middle" class="label">:9200</text>
+  <text x="654" y="120" text-anchor="middle" class="label">index: attack-detect-logs-*</text>
+
+  <!-- Kibana -->
+  <rect x="540" y="150" width="228" height="72" fill="#111827" rx="6" stroke="#374151" stroke-width="1"/>
+  <text x="654" y="172" text-anchor="middle" class="title">Kibana Security</text>
+  <text x="654" y="189" text-anchor="middle" class="label">:5601 · detection rules</text>
+  <text x="654" y="206" text-anchor="middle" class="label">6 rules · KQL · alerts</text>
+
+  <!-- remote container -->
+  <rect x="540" y="236" width="228" height="56" fill="#111827" rx="6" stroke="#374151" stroke-width="1"/>
+  <text x="654" y="256" text-anchor="middle" class="title">remote container</text>
+  <text x="654" y="273" text-anchor="middle" class="label">Ubuntu · SSH + rsync · :2223</text>
+
+  <!-- Alert box -->
+  <rect x="540" y="306" width="228" height="100" fill="#0d1117" rx="6" stroke="#1f2937" stroke-width="1"/>
+  <text x="554" y="326" class="orange" font-size="10">ALERT</text>
+  <text x="600" y="326" class="label" font-size="10">T1059.004 · 460 signals</text>
+  <text x="554" y="344" class="orange" font-size="10">ALERT</text>
+  <text x="600" y="344" class="label" font-size="10">T1053.003 · crontab /tmp/</text>
+  <text x="554" y="362" class="orange" font-size="10">ALERT</text>
+  <text x="600" y="362" class="label" font-size="10">T1136.001 · useradd</text>
+  <text x="554" y="380" class="orange" font-size="10">ALERT</text>
+  <text x="600" y="380" class="label" font-size="10">T1087.001 · /etc/passwd</text>
+  <text x="554" y="398" class="orange" font-size="10">ALERT</text>
+  <text x="600" y="398" class="label" font-size="10">T1083 · find / · T1105 · curl</text>
+
+  <!-- ── ARROWS BETWEEN ZONES ── -->
+
+  <!-- Mac → VM: PSRemoting -->
+  <line x1="228" y1="162" x2="256" y2="162" stroke="#4ade80" stroke-width="1.5" marker-end="url(#arr-green)" stroke-dasharray="5,3"/>
+  <text x="242" y="155" text-anchor="middle" class="tag" font-size="9">PSR</text>
+
+  <!-- VM auditd → audit.log (internal) -->
+  <line x1="384" y1="138" x2="384" y2="302" stroke="#f87171" stroke-width="1" stroke-dasharray="3,2" marker-end="url(#arr-green)"/>
+
+  <!-- VM Filebeat → Elasticsearch -->
+  <line x1="492" y1="256" x2="536" y2="100" stroke="#60a5fa" stroke-width="1.5" marker-end="url(#arr-blue)"/>
+  <text x="520" y="185" text-anchor="middle" class="tag" font-size="9" transform="rotate(-62,520,185)">ships</text>
+
+  <!-- Elasticsearch → Kibana (internal SIEM) -->
+  <line x1="654" y1="138" x2="654" y2="146" stroke="#fb923c" stroke-width="1.5" marker-end="url(#arr-orange)"/>
+
+</svg>

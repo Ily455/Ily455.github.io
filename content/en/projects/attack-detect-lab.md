@@ -8,34 +8,15 @@ tags: ["elastic", "siem", "docker", "mitre-attack", "atomic-red-team", "detectio
 
 **[→ GitHub: Ily455/attack-detect-lab](https://github.com/Ily455/attack-detect-lab)**
 
-> Personal lab project, 2026. Adversary technique simulation using Atomic Red Team against a Linux target, detected with Elastic SIEM — 6 MITRE ATT&CK techniques, real auditd log evidence, and Kibana detection rules.
-
----
-
-## Overview
-
-The lab runs Atomic Red Team techniques against a dedicated Linux target and detects them with Elastic SIEM. The SIEM stack runs in Docker on a Mac. Techniques execute on a separate Linux VM (UTM), which ships logs to Elasticsearch via Filebeat.
-
-Each completed technique produces: raw logs from auditd on the Linux target, a Sigma detection rule, a KQL query validated in Kibana Security, and a writeup documenting the evidence and detection logic.
+> Personal lab project, 2026. Adversary technique simulation using Atomic Red Team against a Linux VM, detected with Elastic SIEM — 6 MITRE ATT&CK techniques, real auditd log evidence, and Kibana detection rules.
 
 ---
 
 ## Architecture
 
-```
-┌──────────────────────────────────────────────────────────────┐
-│  macOS Host                                                  │
-│                                                              │
-│  run-test.sh                                                 │
-│    └── SSH → Linux VM (UTM)                                  │
-│               ├── Atomic Red Team executes techniques        │
-│               ├── auditd records every execve syscall        │
-│               └── Filebeat ──► Elasticsearch ◄── Kibana      │
-│                                (Docker)         (Docker)     │
-└──────────────────────────────────────────────────────────────┘
-```
+![ATT&CK Detection Lab — full architecture](/images/projects/attack-detect-lab/architecture.svg)
 
-Atomic Red Team and all attack simulation stay on the Linux target. The Mac only initiates tests over SSH. The SIEM receives logs but never touches the target directly.
+The Mac acts as the **attacker** — it runs Atomic Red Team and sends commands to the VM via PowerShell SSH remoting (PSRemoting). The VM is the **victim** — it executes the techniques, records every `execve` syscall via auditd, and ships logs to the SIEM via Filebeat. The SIEM (Elasticsearch + Kibana) runs in Docker and never touches the target.
 
 ---
 
@@ -46,11 +27,17 @@ Atomic Red Team and all attack simulation stay on the Linux target. The Mac only
 | Elasticsearch | Log storage and indexing | 8.14.3 |
 | Kibana | SIEM UI, detection rules, KQL | 8.14.3 |
 | Filebeat | Log shipper (runs on target VM) | 8.14.3 |
-| Target VM | Ubuntu 22.04 ARM64, attack surface | UTM |
+| Target VM | Ubuntu 22.04 ARM64 — attack surface | UTM on M3 |
 | Atomic Red Team | MITRE ATT&CK technique simulator | latest |
-| PowerShell | Atomic runtime | 7.4.6 |
+| PowerShell | PSRemoting transport + Atomic runtime | 7.4.6 |
 
 Elastic images run as `linux/arm64` — no emulation.
+
+---
+
+## Detection Pipeline
+
+![Detection pipeline — from execution to alert](/images/projects/attack-detect-lab/detection-flow.svg)
 
 ---
 
@@ -60,12 +47,12 @@ Elastic images run as `linux/arm64` — no emulation.
 ./run-test.sh T1059.004
 ```
 
-1. SSH into the Linux target VM
-2. Run `Invoke-AtomicTest T1059.004` on the target
-3. auditd records every `execve` syscall — every command that ran, with arguments
-4. Filebeat ships auditd logs to Elasticsearch within seconds
-5. Events appear in Kibana under the `attack-detect-logs-*` data view
-6. `Invoke-AtomicTest T1059.004 -Cleanup` removes artifacts
+1. `pwsh` opens a PSSession (SSH transport) to the VM as root
+2. `Invoke-AtomicTest T1059.004 -Session $s` runs on the Mac, commands execute on the VM
+3. The VM kernel intercepts every `execve` syscall — auditd writes a structured `EXECVE` record
+4. Filebeat reads `/var/log/audit/audit.log` and ships events to Elasticsearch within seconds
+5. Kibana detection rules evaluate incoming events — matching events generate alerts in Security
+6. `Invoke-AtomicTest -Cleanup` removes artifacts from the VM
 
 ---
 
@@ -124,7 +111,7 @@ type=EXECVE argc=1 a0="showmount"
 
 ### T1105 — Ingress Tool Transfer
 
-7/9 tests passed. A dedicated `remote` container (Ubuntu + SSH + rsync) was added as a staging server. rsync push/pull, scp push/pull, sftp push, and curl download+execute all passed.
+7/9 tests passed. A dedicated `remote` container (Ubuntu + SSH + rsync) was added as a staging server. rsync push/pull, scp push/pull, sftp push/pull, and curl download+execute all passed.
 ```
 type=EXECVE a0="curl" a1="-s" a2="<url>"
 ```
