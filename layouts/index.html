@@ -7,12 +7,12 @@
     <section class="mb-16">
         <div class="max-w-3xl ml-0 p-4 pb-2 border border-border-primary-light dark:border-border-primary-dark rounded-lg bg-bg-secondary-light dark:bg-bg-secondary-dark shadow-lg relative">
             <div class="text-left">
-                <div class="font-mono text-4xl font-bold mb-2 text-green-400 dark:text-green-400 flex items-center gap-1">
+                <div class="font-mono text-4xl font-bold mb-2 text-green-600 dark:text-green-400 flex items-center gap-1">
                     <span class="text-gray-500 select-none">$&nbsp;</span>
                     <span id="typed-command"></span><span class="text-gray-500" id="semicolon" style="display:none">;</span><span id="cursor" class="inline-block w-2 h-8 bg-green-400 ml-1 align-middle animate-blink"></span>
                 </div>
-                <p class="text-gray-400 mb-3 flex items-center text-xl">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="text-gray-400 mr-1" width="24" height="24" viewBox="-7 -2 24 24"><path fill="currentColor" d="M4 9.9A5.002 5.002 0 0 1 5 0a5 5 0 0 1 1 9.9V19a1 1 0 0 1-2 0V9.9zM5 8a3 3 0 1 0 0-6a3 3 0 0 0 0 6z"/></svg>
+                <p class="text-gray-600 dark:text-gray-400 mb-3 flex items-center text-xl">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="mr-1" width="24" height="24" viewBox="-7 -2 24 24"><path fill="currentColor" d="M4 9.9A5.002 5.002 0 0 1 5 0a5 5 0 0 1 1 9.9V19a1 1 0 0 1-2 0V9.9zM5 8a3 3 0 1 0 0-6a3 3 0 0 0 0 6z"/></svg>
                     {{ .location }}
                 </p>
                 <p class="text-xl mb-6 text-text-primary-light dark:text-text-primary-dark">{{ .description }}</p>
@@ -44,14 +44,14 @@
     {{ with (index site.Data .Language.Lang "now") }}
     {{ with .now }}
     <section class="mb-12">
-        <a href="{{ .slug }}" class="group block max-w-3xl ml-0 p-4 rounded-lg border border-gray-700 hover:border-green-400/50 bg-[#0d0d0d] hover:bg-green-400/5 transition-all duration-300">
+        <a href="{{ .slug }}" class="group block max-w-3xl ml-0 p-4 rounded-lg border border-gray-200 dark:border-gray-700 hover:border-green-400/50 bg-gray-50 dark:bg-[#0d0d0d] hover:bg-green-400/5 transition-all duration-300">
             <div class="flex items-center gap-3 mb-2">
                 <span class="w-2 h-2 rounded-full bg-green-400 animate-pulse shrink-0"></span>
-                <span class="text-green-400 font-mono text-xs uppercase tracking-widest">Now</span>
-                <span class="text-gray-600 font-mono text-xs">— {{ .status }}</span>
+                <span class="text-green-600 dark:text-green-400 font-mono text-xs uppercase tracking-widest">Now</span>
+                <span class="text-gray-500 font-mono text-xs">— {{ .status }}</span>
             </div>
-            <h3 class="text-white font-semibold text-base mb-1 group-hover:text-green-300 transition-colors">{{ .title }}</h3>
-            <p class="text-gray-400 text-sm">{{ .description }}</p>
+            <h3 class="text-gray-900 dark:text-white font-semibold text-base mb-1 group-hover:text-green-700 dark:group-hover:text-green-300 transition-colors">{{ .title }}</h3>
+            <p class="text-gray-600 dark:text-gray-400 text-sm">{{ .description }}</p>
         </a>
     </section>
     {{ end }}
@@ -88,19 +88,19 @@
     <section class="mb-20">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-3xl ml-0">
             {{ with $latestWriteup }}
-            <a href="{{ .Permalink }}" class="group block p-4 rounded-lg border border-gray-700 hover:border-green-400/50 bg-[#0d0d0d] hover:bg-green-400/5 transition-all duration-300">
-                <div class="text-green-400 font-mono text-xs mb-2 uppercase tracking-widest">{{ T "latestWriteup" }}</div>
-                <h3 class="text-white font-semibold text-base mb-1 group-hover:text-green-300 transition-colors line-clamp-2">{{ .Title }}</h3>
+            <a href="{{ .Permalink }}" class="group block p-4 rounded-lg border border-gray-200 dark:border-gray-700 hover:border-green-400/50 bg-gray-50 dark:bg-[#0d0d0d] hover:bg-green-400/5 transition-all duration-300">
+                <div class="text-green-600 dark:text-green-400 font-mono text-xs mb-2 uppercase tracking-widest">{{ T "latestWriteup" }}</div>
+                <h3 class="text-gray-900 dark:text-white font-semibold text-base mb-1 group-hover:text-green-300 transition-colors line-clamp-2">{{ .Title }}</h3>
                 <p class="text-gray-500 text-xs font-mono mb-2">{{ .Date.Format "2006-01-02" }}</p>
-                {{ with .Params.description }}<p class="text-gray-400 text-sm line-clamp-2">{{ . }}</p>{{ end }}
+                {{ with .Params.description }}<p class="text-gray-600 dark:text-gray-400 text-sm line-clamp-2">{{ . }}</p>{{ end }}
             </a>
             {{ end }}
             {{ with $latestProject }}
-            <a href="{{ .Permalink }}" class="group block p-4 rounded-lg border border-gray-700 hover:border-emerald-400/50 bg-[#0d0d0d] hover:bg-emerald-400/5 transition-all duration-300">
-                <div class="text-emerald-400 font-mono text-xs mb-2 uppercase tracking-widest">{{ T "latestProject" }}</div>
-                <h3 class="text-white font-semibold text-base mb-1 group-hover:text-emerald-300 transition-colors line-clamp-2">{{ .Title }}</h3>
+            <a href="{{ .Permalink }}" class="group block p-4 rounded-lg border border-gray-200 dark:border-gray-700 hover:border-emerald-400/50 bg-gray-50 dark:bg-[#0d0d0d] hover:bg-emerald-400/5 transition-all duration-300">
+                <div class="text-emerald-600 dark:text-emerald-400 font-mono text-xs mb-2 uppercase tracking-widest">{{ T "latestProject" }}</div>
+                <h3 class="text-gray-900 dark:text-white font-semibold text-base mb-1 group-hover:text-emerald-300 transition-colors line-clamp-2">{{ .Title }}</h3>
                 <p class="text-gray-500 text-xs font-mono mb-2">{{ .Date.Format "2006-01-02" }}</p>
-                {{ with .Params.description }}<p class="text-gray-400 text-sm line-clamp-2">{{ . }}</p>{{ end }}
+                {{ with .Params.description }}<p class="text-gray-600 dark:text-gray-400 text-sm line-clamp-2">{{ . }}</p>{{ end }}
             </a>
             {{ end }}
         </div>
@@ -118,7 +118,7 @@
         </div>
         <div class="grid grid-cols-1 gap-6 md:gap-8 max-w-3xl mx-auto">
             {{ range first 2 . }}
-            <div class="project-card relative overflow-hidden rounded-lg bg-[#121212] border border-gray-700 transition-all duration-300 group">
+            <div class="project-card relative overflow-hidden rounded-lg bg-gray-100 dark:bg-[#121212] border border-gray-200 dark:border-gray-700 transition-all duration-300 group">
                 <div class="aspect-w-16 overflow-hidden relative">
                     <div class="absolute inset-0 bg-gradient-to-br from-emerald-900/15 to-transparent z-10"></div>
                     <img src="{{ .image }}" alt="{{ .title }}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
@@ -150,7 +150,7 @@
             </div>
             {{ end }}
             <div class="flex justify-center mt-4 md:mt-8">
-                <a href="{{ "projects/" | absLangURL }}" class="text-emerald-400 hover:text-emerald-300 transition-colors duration-200 text-sm md:text-lg">{{ T "viewAll" }}</a>
+                <a href="{{ "projects/" | absLangURL }}" class="text-emerald-600 dark:text-emerald-400 hover:text-emerald-500 dark:hover:text-emerald-300 transition-colors duration-200 text-sm md:text-lg">{{ T "viewAll" }}</a>
             </div>
         </div>
     </section>

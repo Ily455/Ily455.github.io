@@ -6,7 +6,7 @@
   <!-- Intro -->
   <section class="mb-16 fade-in">
     <div class="max-w-3xl ml-0 p-6 border border-border-primary-light dark:border-border-primary-dark rounded-lg bg-bg-secondary-light dark:bg-bg-secondary-dark shadow-lg">
-     <div class="font-mono text-3xl md:text-5xl font-bold text-green-400 mb-10 flex items-center gap-2">
+     <div class="font-mono text-3xl md:text-5xl font-bold text-green-600 dark:text-green-400 mb-10 flex items-center gap-2">
     <span class="text-gray-500">$</span>
     <span id="about-cmd"></span><span id="about-cursor" class="inline-block w-2 h-8 bg-green-400 ml-1 align-middle animate-blink"></span>
 </div>
@@ -19,7 +19,7 @@
   <!-- Skills -->
   <section class="mb-16 fade-in" style="animation-delay: 0.1s">
     <h2 class="text-3xl font-bold mb-8 font-mono">
-      <span class="text-green-400">></span> {{ if $isFr }}compétences{{ else }}skills{{ end }}
+      <span class="text-green-600 dark:text-green-400">></span> {{ if $isFr }}compétences{{ else }}skills{{ end }}
     </h2>
     <div class="space-y-6 max-w-3xl">
 
@@ -111,37 +111,37 @@
   {{ with $experience }}
   <section class="mb-16 fade-in" style="animation-delay: 0.2s">
     <h2 class="text-3xl font-bold mb-8 font-mono">
-      <span class="text-green-400">></span> {{ if $isFr }}expérience{{ else }}experience{{ end }}
+      <span class="text-green-600 dark:text-green-400">></span> {{ if $isFr }}expérience{{ else }}experience{{ end }}
     </h2>
     <div class="space-y-6 max-w-3xl">
       {{ range . }}
-      <div class="relative pl-6 border-l-2 border-gray-700 hover:border-green-400 transition-colors duration-300 py-2">
+      <div class="relative pl-6 border-l-2 border-gray-200 dark:border-gray-700 hover:border-green-500 dark:hover:border-green-400 transition-colors duration-300 py-2">
         <div class="flex flex-wrap items-baseline justify-between gap-2 mb-1">
           <span class="font-semibold text-xl">{{ .role }}</span>
           <span class="text-gray-500 text-sm font-mono">{{ .period }}</span>
         </div>
         <div class="mb-2">
           {{ if .company_link }}
-          <a href="{{ .company_link }}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-green-400 hover:text-green-300 transition-colors font-medium">
+          <a href="{{ .company_link }}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-green-600 dark:text-green-400 hover:text-green-700 dark:hover:text-green-300 transition-colors font-medium">
             {{ .company }}
             <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg>
           </a>
           {{ else }}
-          <span class="text-green-400 font-medium">{{ .company }}</span>
+          <span class="text-green-600 dark:text-green-400 font-medium">{{ .company }}</span>
           {{ end }}
           {{ if .country }}<span class="text-gray-500 text-sm ml-2">— {{ .country }}</span>{{ end }}
         </div>
         {{ if .responsibilities }}
-        <ul class="text-gray-400 text-sm space-y-1 mt-2">
+        <ul class="text-gray-600 dark:text-gray-400 text-sm space-y-1 mt-2">
           {{ range .responsibilities }}
-          <li class="flex items-start gap-2"><span class="text-gray-600 mt-1">▸</span>{{ . }}</li>
+          <li class="flex items-start gap-2"><span class="text-gray-400 dark:text-gray-600 mt-1">▸</span>{{ . }}</li>
           {{ end }}
         </ul>
         {{ end }}
         {{ if .technologies }}
         <div class="flex flex-wrap gap-1 mt-3">
           {{ range .technologies }}
-          <span class="text-xs px-2 py-0.5 rounded bg-gray-800 text-gray-400 border border-gray-700">{{ . }}</span>
+          <span class="text-xs px-2 py-0.5 rounded bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 border border-gray-200 dark:border-gray-700">{{ . }}</span>
           {{ end }}
         </div>
         {{ end }}
@@ -157,16 +157,16 @@
   {{ with $certs }}
   <section class="mb-16 fade-in" style="animation-delay: 0.25s">
     <h2 class="text-3xl font-bold mb-8 font-mono">
-      <span class="text-green-400">></span> {{ if $isFr }}certifications{{ else }}certifications{{ end }}
+      <span class="text-green-600 dark:text-green-400">></span> {{ if $isFr }}certifications{{ else }}certifications{{ end }}
     </h2>
     <div class="space-y-3 max-w-3xl">
       {{ range . }}
-      <div class="flex items-start gap-3 p-3 rounded-lg border border-gray-800 hover:border-gray-600 transition-colors">
-        <span class="text-green-400 mt-0.5 font-mono text-sm">✓</span>
+      <div class="flex items-start gap-3 p-3 rounded-lg border border-gray-200 dark:border-gray-800 hover:border-gray-400 dark:hover:border-gray-600 transition-colors">
+        <span class="text-green-600 dark:text-green-400 mt-0.5 font-mono text-sm">✓</span>
         <div>
-          <span class="text-gray-200 font-medium">{{ .title }}</span>
+          <span class="text-gray-800 dark:text-gray-200 font-medium">{{ .title }}</span>
           {{ if .issuer }}<span class="text-gray-500 text-sm ml-2">— {{ .issuer }}</span>{{ end }}
-          {{ if .date }}<span class="text-gray-600 text-xs ml-2 font-mono">{{ .date }}</span>{{ end }}
+          {{ if .date }}<span class="text-gray-500 dark:text-gray-600 text-xs ml-2 font-mono">{{ .date }}</span>{{ end }}
         </div>
       </div>
       {{ end }}
@@ -177,7 +177,7 @@
   <!-- Contact -->
   <section class="fade-in" style="animation-delay: 0.4s">
     <h2 class="text-3xl font-bold mb-8 font-mono">
-      <span class="text-green-400">></span> contact
+      <span class="text-green-600 dark:text-green-400">></span> contact
     </h2>
     <div class="flex flex-wrap gap-4 max-w-3xl">
       <a href="mailto:ilyass.elannid@gmail.com" class="contact-link">
@@ -240,6 +240,11 @@
   color: #f9fafb;
   background: rgba(74, 222, 128, 0.05);
 }
+
+html:not(.dark) .skill-badge { background: rgba(0,0,0,0.04); border-color: rgba(0,0,0,0.1); color: #374151; }
+html:not(.dark) .skill-badge:hover { color: #111827; background: rgba(22,163,74,0.05); }
+html:not(.dark) .contact-link { border-color: rgba(0,0,0,0.1); color: #4b5563; }
+html:not(.dark) .contact-link:hover { color: #111827; border-color: rgba(22,163,74,0.5); }
 </style>
 
 <script>

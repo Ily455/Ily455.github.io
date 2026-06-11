@@ -2,7 +2,7 @@
 <div class="w-full md:w-4/5 lg:w-3/5 mx-auto px-14 py-12">
 
     <!-- Animated header -->
-<div class="font-mono text-3xl md:text-5xl font-bold text-green-400 mb-10 flex items-center gap-2">
+<div class="font-mono text-3xl md:text-5xl font-bold text-green-600 dark:text-green-400 mb-10 flex items-center gap-2">
     <span class="text-gray-500">$</span>
     <span id="wu-cmd"></span><span id="wu-cursor" class="inline-block w-2 h-8 bg-green-400 ml-1 align-middle animate-blink"></span>
 </div>
@@ -11,21 +11,21 @@
     {{ if $pages }}
     <div class="space-y-6 max-w-3xl">
         {{ range $pages }}
-        <div class="p-5 rounded-lg border border-gray-800 hover:border-green-400/40 transition-colors duration-300">
+        <div class="p-5 rounded-lg border border-gray-200 dark:border-gray-800 hover:border-green-400/40 transition-colors duration-300">
             <p class="text-gray-500 text-xs font-mono mb-1">{{ .Date.Format "2006-01-02" }}</p>
             <a href="{{ .Permalink }}" class="block group">
                 <div class="flex items-center gap-2 mb-2">
                     <h2 class="text-xl font-semibold text-text-primary-light dark:text-text-primary-dark group-hover:text-green-400 transition-colors duration-200">{{ .Title }}</h2>
-                    {{ if eq .Params.post_type "article" }}<span class="shrink-0 text-xs px-2 py-0.5 rounded-full border border-gray-600 text-gray-500 font-mono">article</span>{{ end }}
+                    {{ if eq .Params.post_type "article" }}<span class="shrink-0 text-xs px-2 py-0.5 rounded-full border border-gray-400 dark:border-gray-600 text-gray-500 font-mono">article</span>{{ end }}
                 </div>
             </a>
             {{ if .Description }}
-            <p class="text-gray-400 text-sm">{{ .Description }}</p>
+            <p class="text-gray-600 dark:text-gray-400 text-sm">{{ .Description }}</p>
             {{ end }}
             {{ if .Params.tags }}
             <div class="flex flex-wrap gap-1 mt-3">
                 {{ range .Params.tags }}
-                <span class="text-xs px-2 py-0.5 rounded bg-gray-800 text-gray-500 border border-gray-700">{{ . }}</span>
+                <span class="text-xs px-2 py-0.5 rounded bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-500 border border-gray-200 dark:border-gray-700">{{ . }}</span>
                 {{ end }}
             </div>
             {{ end }}
@@ -34,10 +34,10 @@
     </div>
     {{ else }}
     <div class="max-w-3xl">
-        <div class="p-6 rounded-lg border border-gray-800 font-mono text-sm">
+        <div class="p-6 rounded-lg border border-gray-200 dark:border-gray-800 font-mono text-sm">
             <p class="text-gray-500">// no entries yet</p>
-            <p class="text-gray-600 mt-2">// working on it — check back soon</p>
-            <p class="text-green-400 mt-4">→ <a href="https://github.com/Ily455" class="hover:underline">github.com/Ily455</a></p>
+            <p class="text-gray-500 dark:text-gray-600 mt-2">// working on it — check back soon</p>
+            <p class="text-green-600 dark:text-green-400 mt-4">→ <a href="https://github.com/Ily455" class="hover:underline">github.com/Ily455</a></p>
         </div>
     </div>
     {{ end }}
