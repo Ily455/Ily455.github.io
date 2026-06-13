@@ -5,8 +5,8 @@ draft: false
 layout: "about"
 ---
 
-I'm Ilyass El Annid, a cybersecurity engineer based in France. Double degree — MSc in IT Reliability & Security from Aix-Marseille University, State Engineering Degree in Cybersecurity from ENSA Oujda.
+State engineering degree from ENSA Oujda, MSc in IT Security from Aix-Marseille. Based in France.
 
-My work spans several areas: software protection (LLVM obfuscation, compiler passes, source-level transformations), blue team infrastructure (full SOC stack deployment with Elastic, Wazuh, Suricata, MISP, TheHive), digital forensics (memory analysis, malware reverse engineering), and ICS/OT security (threat modeling on critical infrastructure incidents with MITRE ATT&CK for ICS).
+I work between blue team and binary analysis. GRC side: mapped NIST CSF v2 against ISO 27002 on critical infrastructure, wrote risk assessments, built audit-ready deliverables. Technical side: MITRE ATT&CK detection labs on Linux, Elastic SIEM with custom KQL rules, malware analysis from triage to full report, memory forensics with Volatility.
 
-What keeps me going is understanding how things break — not at an abstract level, but at the instruction level, the byte level. Whether it's a firmware ZIP encryption scheme from 1994 or a centrifuge PLC getting its ladder logic rewritten, the question is always the same: how exactly did this happen, and why did the defender not see it coming.
+Engineering thesis (ENSAO) on LLVM-based obfuscation — compiler-level code protection passes, then reversing them to see what holds. M2 thesis on NIST CSF v2 vs ISO 27002.
