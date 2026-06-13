@@ -42,11 +42,19 @@
             .tech-track { width: fit-content; animation: scroll 20s linear infinite; }
             .tech-track:hover { animation-play-state: paused; }
             .tech-slide { float: left; }
+            @media (prefers-reduced-motion: reduce) {
+                *, *::before, *::after {
+                    animation-duration: 0.01ms !important;
+                    animation-iteration-count: 1 !important;
+                    transition-duration: 0.01ms !important;
+                }
+            }
         </style>
     </head>
     <body class="min-h-screen bg-bg-primary-light dark:bg-bg-primary-dark text-text-primary-light dark:text-text-primary-dark">
+        <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[9999] focus:px-4 focus:py-2 focus:bg-green-500 focus:text-black focus:rounded focus:font-mono focus:text-sm">Skip to content</a>
         {{ partial "header" . }}
-        <main>
+        <main id="main-content">
             {{ block "main" . }}{{ end }}
         </main>
         {{ partial "footer" . }}

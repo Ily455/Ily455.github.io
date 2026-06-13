@@ -59,6 +59,9 @@ defaultContentLanguageInSubdir = false
   linkedin = "https://linkedin.com/in/ilyass-elannid"
   email = "ilyass.elannid@gmail.com"
 
+[taxonomies]
+  tag = "tags"
+
 [markup]
   [markup.highlight]
     style = "monokai"
