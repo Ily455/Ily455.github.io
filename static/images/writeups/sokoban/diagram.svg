@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 400" width="820" height="400">
+  <rect width="820" height="400" fill="#0d1117"/>
+  <text x="410" y="28" font-family="monospace" font-size="14" fill="#e6edf3" text-anchor="middle" font-weight="bold">SokobanHTB — from board layout to TEA key</text>
+
+  <!-- ============ LEFT: the board ============ -->
+  <text x="124" y="58" font-family="monospace" font-size="11" fill="#8b949e" text-anchor="middle">7 x 8 board (from Ghidra array)</text>
+
+  <!-- grid background -->
+  <rect x="40" y="80" width="168" height="192" fill="#161b22" stroke="#30363d" stroke-width="1"/>
+
+  <!-- walls (#30363d) -->
+  <g fill="#30363d">
+    <rect x="64" y="80"  width="24" height="24"/><rect x="88" y="80"  width="24" height="24"/><rect x="112" y="80" width="24" height="24"/><rect x="136" y="80" width="24" height="24"/>
+    <rect x="40" y="104" width="24" height="24"/><rect x="64" y="104" width="24" height="24"/><rect x="136" y="104" width="24" height="24"/>
+    <rect x="40" y="128" width="24" height="24"/><rect x="136" y="128" width="24" height="24"/>
+    <rect x="40" y="152" width="24" height="24"/><rect x="136" y="152" width="24" height="24"/><rect x="160" y="152" width="24" height="24"/><rect x="184" y="152" width="24" height="24"/>
+    <rect x="40" y="176" width="24" height="24"/><rect x="112" y="176" width="24" height="24"/><rect x="184" y="176" width="24" height="24"/>
+    <rect x="40" y="200" width="24" height="24"/><rect x="184" y="200" width="24" height="24"/>
+    <rect x="40" y="224" width="24" height="24"/><rect x="64" y="224" width="24" height="24"/><rect x="136" y="224" width="24" height="24"/><rect x="160" y="224" width="24" height="24"/><rect x="184" y="224" width="24" height="24"/>
+    <rect x="64" y="248" width="24" height="24"/><rect x="88" y="248" width="24" height="24"/><rect x="112" y="248" width="24" height="24"/><rect x="136" y="248" width="24" height="24"/>
+  </g>
+
+  <!-- player (blue) R1c2 -->
+  <rect x="88" y="104" width="24" height="24" fill="#79c0ff33" stroke="#79c0ff" stroke-width="1"/>
+  <text x="100" y="121" font-family="monospace" font-size="12" fill="#79c0ff" text-anchor="middle">P</text>
+
+  <!-- boxes (orange) col2 R2..R4 -->
+  <g>
+    <rect x="88" y="128" width="24" height="24" fill="#ffa65733" stroke="#ffa657" stroke-width="1"/><text x="100" y="145" font-family="monospace" font-size="12" fill="#ffa657" text-anchor="middle">B</text>
+    <rect x="88" y="152" width="24" height="24" fill="#ffa65733" stroke="#ffa657" stroke-width="1"/><text x="100" y="169" font-family="monospace" font-size="12" fill="#ffa657" text-anchor="middle">B</text>
+    <rect x="88" y="176" width="24" height="24" fill="#ffa65733" stroke="#ffa657" stroke-width="1"/><text x="100" y="193" font-family="monospace" font-size="12" fill="#ffa657" text-anchor="middle">B</text>
+  </g>
+
+  <!-- X targets (green) -->
+  <g>
+    <rect x="112" y="104" width="24" height="24" fill="#3fb95033" stroke="#3fb950" stroke-width="1"/><text x="124" y="121" font-family="monospace" font-size="12" fill="#3fb950" text-anchor="middle">X</text>
+    <rect x="64" y="200" width="24" height="24" fill="#3fb95033" stroke="#3fb950" stroke-width="1"/><text x="76" y="217" font-family="monospace" font-size="12" fill="#3fb950" text-anchor="middle">X</text>
+    <rect x="160" y="200" width="24" height="24" fill="#3fb95033" stroke="#3fb950" stroke-width="1"/><text x="172" y="217" font-family="monospace" font-size="12" fill="#3fb950" text-anchor="middle">X</text>
+  </g>
+
+  <!-- legend -->
+  <text x="40" y="296" font-family="monospace" font-size="10" fill="#8b949e">#=wall  P=player  B=box  X=target</text>
+  <text x="40" y="312" font-family="monospace" font-size="10" fill="#f85149">1 box is hard-set off-grid (x=1024) → unsolvable by playing</text>
+
+  <!-- ============ RIGHT: derivation flow ============ -->
+  <g font-family="monospace" text-anchor="middle">
+    <!-- box 1 -->
+    <rect x="360" y="70" width="420" height="42" rx="4" fill="#3fb95015" stroke="#3fb950" stroke-width="1"/>
+    <text x="570" y="88" font-size="11" fill="#3fb950">X-mark targets (col,row)</text>
+    <text x="570" y="104" font-size="10" fill="#e6edf3">X1(3,1)  X2(1,5)  X3(5,5)</text>
+
+    <line x1="570" y1="112" x2="570" y2="126" stroke="#8b949e" stroke-width="1"/><polygon points="566,126 570,134 574,126" fill="#8b949e"/>
+
+    <!-- box 2 -->
+    <rect x="360" y="134" width="420" height="42" rx="4" fill="#161b22" stroke="#30363d" stroke-width="1"/>
+    <text x="570" y="152" font-size="11" fill="#e6edf3">pixel mapping</text>
+    <text x="570" y="168" font-size="10" fill="#8b949e">x = col*64 + 320   ,   y = row*64 + 90</text>
+
+    <line x1="570" y1="176" x2="570" y2="190" stroke="#8b949e" stroke-width="1"/><polygon points="566,190 570,198 574,190" fill="#8b949e"/>
+
+    <!-- box 3 -->
+    <rect x="360" y="198" width="420" height="42" rx="4" fill="#79c0ff15" stroke="#79c0ff" stroke-width="1"/>
+    <text x="570" y="216" font-size="11" fill="#79c0ff">TEA key = [ y_X1 , x_X1 , x_X2 , x_X3 ]</text>
+    <text x="570" y="232" font-size="10" fill="#e6edf3">key = [154, 512, 384, 640]</text>
+
+    <line x1="570" y1="240" x2="570" y2="254" stroke="#8b949e" stroke-width="1"/><polygon points="566,254 570,262 574,254" fill="#8b949e"/>
+
+    <!-- box 4 -->
+    <rect x="360" y="262" width="420" height="42" rx="4" fill="#ffa65715" stroke="#ffa657" stroke-width="1"/>
+    <text x="570" y="280" font-size="11" fill="#ffa657">TEA decrypt — 32 rounds</text>
+    <text x="570" y="296" font-size="10" fill="#e6edf3">delta = 0x9E3779B9   sum0 = 0xC6EF3720</text>
+
+    <line x1="570" y1="304" x2="570" y2="318" stroke="#8b949e" stroke-width="1"/><polygon points="566,318 570,326 574,318" fill="#8b949e"/>
+
+    <!-- box 5 -->
+    <rect x="360" y="326" width="420" height="40" rx="4" fill="#161b22" stroke="#e6edf3" stroke-width="1"/>
+    <text x="570" y="351" font-size="11" fill="#e6edf3">40-byte blob (5 x 8)  -->  HTB flag</text>
+  </g>
+</svg>
