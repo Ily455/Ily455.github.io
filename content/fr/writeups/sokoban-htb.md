@@ -144,7 +144,7 @@ lu (faux)  : 0xea010dd5    (0x0d)
 correct    : 0xea0109d5    (0x09)
 ```
 
-Ce seul quartet erroné faisait déchiffrer le bloc 0 en charabia alors que les blocs 1 à 4 étaient corrects. Ça nous a fait chercher une mauvaise clé et un mauvais chiffreur pendant des heures — tout le reste (clé, TEA, grille) était juste depuis le début.
+Ce seul quartet erroné faisait déchiffrer le bloc 0 en charabia alors que les blocs 1 à 4 étaient corrects. Ça m'a fait chercher une mauvaise clé et un mauvais chiffreur pendant des heures — tout le reste (clé, TEA, grille) était juste depuis le début.
 
 **Leçon :** toujours revérifier les octets codés en dur lus dans un décompilateur, surtout les critiques. Quand un seul bloc échoue mais que les autres déchiffrent proprement, soupçonner la donnée avant l'algorithme.
 

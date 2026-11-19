@@ -144,7 +144,7 @@ misread : 0xea010dd5    (0x0d)
 correct : 0xea0109d5    (0x09)
 ```
 
-That single wrong nibble made block 0 decrypt to garbage while blocks 1–4 were fine. It sent us chasing a wrong key and a wrong cipher for hours — everything else (key, TEA, grid) had been correct from the start.
+That single wrong nibble made block 0 decrypt to garbage while blocks 1–4 were fine. It sent me chasing a wrong key and a wrong cipher for hours — everything else (key, TEA, grid) had been correct from the start.
 
 **Lesson:** always double-check hardcoded bytes read from a decompiler, especially the critical ones. When a single block fails but the rest decrypt cleanly, suspect the data before the algorithm.
 
